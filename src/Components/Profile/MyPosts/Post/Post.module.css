@@ -1,0 +1,22 @@
+.item img{
+    width:300px;
+    border-radius: 50%;
+  }
+
+.item .pick{
+width:fit-content;
+margin:10px;}
+
+
+
+
+
+  .item .receivedText{
+      width:80%;
+      background-color: azure;
+      font-size:25px;
+      font-family:'Trebuchet MS', sans-serif;
+      padding:5px;
+      border-radius:20px;
+
+  }

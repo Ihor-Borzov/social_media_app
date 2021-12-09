@@ -1,0 +1,17 @@
+.nav_bar{
+    padding:10px;
+    grid-area:side_bar;
+    background-color:rgb(9, 156, 142);
+}
+
+.item{
+    margin: 5px 0px;
+    padding:5px;
+    font-size:30px;
+    background-color: cornsilk;
+    border-radius:10px;
+}
+
+.item a{
+
+}

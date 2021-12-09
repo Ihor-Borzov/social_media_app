@@ -1,0 +1,9 @@
+.header{
+    padding:10px;
+    grid-area:header;
+    background-color:tan;
+}
+
+.header img{
+    height:90%;
+}
