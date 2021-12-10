@@ -10,8 +10,14 @@
     font-size:30px;
     background-color: cornsilk;
     border-radius:10px;
+    text-decoration: none;
+    color:black;
 }
 
-.item a{
 
-}
+
+.active{
+    color:rgb(255, 145, 1);
+    text-decoration: none;
+  }
+  

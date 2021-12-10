@@ -6,6 +6,9 @@ import Nav_bar from './Components/Nav-bar/Nav_bar';
 import Profile from './Components/Profile/Profile';
 import Dialogs from './Components/Dialogs/Dialogs';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import News from './Components/News/News';
+import Music from './Components/Music/Music';
+import Settings from './Components/Settings/Settings';
 
 function App() {
   return (
@@ -19,6 +22,15 @@ function App() {
   </Routes>
   <Routes>
   <Route path="/profile" element={<Profile/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
+  </Routes> 
+  <Routes>
+  <Route path="/news" element={<News/>}/>  
+  </Routes> 
+  <Routes>
+  <Route path="/music" element={<Music/>}/>  
+  </Routes> 
+  <Routes>
+  <Route path="/settings" element={<Settings/>}/>  
   </Routes> 
 </div> 
 </BrowserRouter>
