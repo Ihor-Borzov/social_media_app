@@ -14,7 +14,7 @@ function Post (props){
 <div className={s.receivedText}>
 {props.message}                      {/* this is the way we use JavaScript in JSX language, you required to put it in curled brackets */}
 </div>
-<div><span>LIKE</span></div>
+<div><span>{"LIKES  " + props.likes}</span></div>
 
 
 
