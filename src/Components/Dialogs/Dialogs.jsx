@@ -9,9 +9,9 @@ import Message from './Message/Message';
 
 function Dialogs (props){
 
-let displayedDialogs = props.dialogs.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id}/>)
+let displayedDialogs = props.state.dialogsData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id}/>)
 
-let displayedMessages = props.messages.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
+let displayedMessages = props.state.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
 
 return(
     <div className={s.content}>

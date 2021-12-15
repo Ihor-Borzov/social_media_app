@@ -8,7 +8,7 @@ import Post from './Post/Post';
 function MyPosts (props){
 
 
-let displayedPosts = props.posts.map((postObject)=> <Post likes={postObject.likes} message={postObject.message} />)
+let displayedPosts = props.state.postsData.map((postObject)=> <Post likes={postObject.likes} message={postObject.message} />)
 
     return(
 <div className={s.myPosts}>
