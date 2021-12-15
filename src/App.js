@@ -18,8 +18,8 @@ function App() {
       <Nav_bar/>
 <div className="body_wrapper">
   <Routes>
-  <Route path="/dialogs/*" element={<Dialogs/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here */}
-  </Routes>
+  <Route path="/dialogs/*" element={<Dialogs/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
+  </Routes>                                         
   <Routes>
   <Route path="/profile" element={<Profile/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
   </Routes> 

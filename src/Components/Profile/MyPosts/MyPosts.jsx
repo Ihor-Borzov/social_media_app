@@ -6,6 +6,15 @@ import Post from './Post/Post';
 
 
 function MyPosts (){
+
+let receivedFromBackEndPosts = [
+    {likes:"10", message:"some message"},
+    {likes:"12", message:"momolongmo"},
+    {likes:"11", message:"some hurucasami"},
+]
+
+let displayedPosts = receivedFromBackEndPosts.map((postObject)=> <Post likes={postObject.likes} message={postObject.message} />)
+
     return(
 <div className={s.myPosts}>
 <div>
@@ -13,12 +22,7 @@ function MyPosts (){
     <button>Add post</button>
 </div>
 <div className={s.posts}>
-
-<Post likes="10" message=" I made this post with a help of Props: it is an attribute specified for a component in the proses of invoking component (check the code at this string)  "/ >
-<Post likes="12" message=" when you invoke a component adding a attribute (with any name you want and variable) you automatically push this attribute(as a key) and its value, in to the object PROPS"/ >
-<Post likes="9" message=" the invoked component receives the object PROPS and you can pull keys and values from this object like this: {props.message}"/>
-
-
+{displayedPosts}
 </div>
 </div>
     )
