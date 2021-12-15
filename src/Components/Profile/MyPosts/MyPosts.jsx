@@ -5,15 +5,10 @@ import Post from './Post/Post';
 
 
 
-function MyPosts (){
+function MyPosts (props){
 
-let receivedFromBackEndPosts = [
-    {likes:"10", message:"some message"},
-    {likes:"12", message:"momolongmo"},
-    {likes:"11", message:"some hurucasami"},
-]
 
-let displayedPosts = receivedFromBackEndPosts.map((postObject)=> <Post likes={postObject.likes} message={postObject.message} />)
+let displayedPosts = props.posts.map((postObject)=> <Post likes={postObject.likes} message={postObject.message} />)
 
     return(
 <div className={s.myPosts}>

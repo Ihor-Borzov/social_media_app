@@ -10,7 +10,7 @@ import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
@@ -18,9 +18,9 @@ function App() {
       <Nav_bar/>
 <div className="body_wrapper">
   <Routes>
-  <Route path="/dialogs/*" element={<Dialogs/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
+  <Route path="/dialogs/*" element={<Dialogs dialogs={props.dialogs}  messages={props.messages}/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
 
-  <Route path="/profile" element={<Profile/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
+  <Route path="/profile" element={<Profile posts={props.posts}/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
 
   <Route path="/news" element={<News/>}/>  
 
