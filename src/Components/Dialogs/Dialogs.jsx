@@ -1,25 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
+import Message from './Message/Message';
 
-
-
-function DialogItems (props){
-    let myCurrentPath = "/dialogs/"+ props.id       /* before return I can use regular javascript, and only in hte return i have to use JSX */
-return(
-<div>
-    <NavLink to ={myCurrentPath}>{props.name}</NavLink>
-    </div>
-)
-}
-
-
-function Message (props){
-    return(
-<div className={s.message}>{props.message}</div>
-    )
-
-}
 
 
 

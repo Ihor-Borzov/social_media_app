@@ -13,23 +13,19 @@ import Settings from './Components/Settings/Settings';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> and then for each variant of the path we create separate attribute <Routes> and inside this attribute we create attribute <Route> */}
+      <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
       <Header/>
       <Nav_bar/>
 <div className="body_wrapper">
   <Routes>
   <Route path="/dialogs/*" element={<Dialogs/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
-  </Routes>                                         
-  <Routes>
+
   <Route path="/profile" element={<Profile/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
-  </Routes> 
-  <Routes>
+
   <Route path="/news" element={<News/>}/>  
-  </Routes> 
-  <Routes>
+
   <Route path="/music" element={<Music/>}/>  
-  </Routes> 
-  <Routes>
+
   <Route path="/settings" element={<Settings/>}/>  
   </Routes> 
 </div> 
