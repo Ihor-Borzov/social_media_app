@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Friend from './Friend/Friend';
 import s from "./Nav_bar.module.css";
 
 
 
 
-function Nav_bar (){
+function Nav_bar (props){
+
+
+
+
+ let displayFriends = props.state.friendData.map((friendsObject) => <Friend picture={friendsObject.picture} name={friendsObject.name}    />) 
+
+
+
     return(
 <div className={s.nav_bar}>
                                                                {/* this is the way to add active className */}
@@ -15,6 +24,9 @@ function Nav_bar (){
   <div className={s.item}><Link to = "/music" className= { navData => navData.isActive ? s.activeLink : s.notActiveLink } >Music</Link></div>
   <div className={s.item}><Link to = "/settings" className= { navData => navData.isActive ? s.activeLink : s.notActiveLink } >Settings</Link></div>
 
+<div className={s.friends}>
+  {displayFriends}
+</div>
 
 
 </div>

@@ -16,7 +16,7 @@ function App(props) {
     <div className="App">
       <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
       <Header/>
-      <Nav_bar/>
+      <Nav_bar state={props.state.navBarPage}/>
 <div className="body_wrapper">
   <Routes>
   <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage} />}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
