@@ -1,21 +1,26 @@
 .nav_bar{
     padding:10px;
     grid-area:side_bar;
-    background-color:rgb(252, 252, 252);
+    background-color:#cfeef3;
     border-radius: 20px;
     box-shadow:2px 3px rgb(192, 192, 192);
+  
 }
 
 .item{
     margin: 5px 0px;
     padding:5px 5px 5px 10px;
     font-size:30px;
-    background-color: rgb(225, 255, 168);
+    background-color: rgb(255, 255, 255);
     border-radius:10px;
     box-shadow:2px 3px rgb(192, 192, 192);
     color:black;
+    border: 2px solid rgb(243, 247, 55);
 }
 
+.item:hover{
+  background-color: rgb(250, 248, 125);
+}
 
 
 .activeLink{

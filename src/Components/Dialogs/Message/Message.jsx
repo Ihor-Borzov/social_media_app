@@ -5,7 +5,14 @@ import s from './../Dialogs.module.css'
 
 function Message (props){
     return(
-<div className={s.message}>{props.message}</div>
+
+    
+<div className={s.wrapper}>
+<div className={s.your_text}>{props.message}</div>
+<div className={s.person_text}>.{props.message}</div>
+</div>
+
+
     )
 
 }

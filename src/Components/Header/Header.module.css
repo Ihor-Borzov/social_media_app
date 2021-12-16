@@ -1,7 +1,9 @@
 .header{
     padding:10px;
     grid-area:header;
-    background-color:tan;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    background-color:rgb(243, 247, 55);
+    border-radius: 20px;
 }
 
 .header img{

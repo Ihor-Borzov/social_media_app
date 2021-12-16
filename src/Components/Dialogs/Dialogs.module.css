@@ -1,4 +1,132 @@
 .content{
     display:grid;
-    grid-template-columns:2fr 10fr;
+    grid-template-columns:4fr 10fr;
+    width:70%;
+    gap:30px;
+}
+
+.dialogsItems{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 110px;
+    width:100%;
+    gap:6px;
+    padding:6px;
+}
+
+
+.messages{
+    font-family: "Trebuchet MS"; 
+    background-image: url(https://e7.pngegg.com/pngimages/758/386/png-clipart-simple-white-honeycomb-pattern-background-white-polygon.png);
+    background-position: right;
+    background-size:cover;
+   padding: 0 10px 0 10px;
+   box-shadow:2px 3px rgb(192, 192, 192);
+   border:1px solid black;
+   border-radius:15px;
+}
+
+
+/*///////////////////////////////////////// DIALOGS */
+.friend{
+    height:100px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    }
+
+.circle{
+    height:100%;
+    width:40%;
+    border-radius: 50%;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    border:1px solid rgb(192, 192, 192);
+margin-bottom:5px;
+overflow: hidden;
+background-color:white;
+}
+
+.circle img{
+    width:100%;
+}
+
+
+.friends_name{
+    text-align: left;
+    display:inline-block;
+    bottom:30%;
+    position: absolute;
+}
+
+
+
+
+/* //////////////////////////////////////////MESSAGES */
+.wrapper{
+
+}
+
+
+.your_text{
+    float:right;
+text-align:right;
+width: fit-content;
+    max-width:85%;
+    background-color: rgb(219, 219, 250);
+    border: 2px solid grey;
+margin:10px 0 10px 0;
+padding:7px 9px 7px 15px;
+border-radius: 25px;
+box-shadow:2px 3px rgb(192, 192, 192);
+margin-right:40px;
+position:relative;
+}
+
+
+
+.your_text:before{
+    content:'';
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(https://static.wikia.nocookie.net/despicableme/images/c/ca/Bob-from-the-minions-movie.jpg);
+    background-size: cover;
+    display:inline-block;
+    position:absolute;
+    right:-49px;
+    bottom:0;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    border:1px solid rgb(192, 192, 192); 
+}
+
+
+
+
+.person_text{
+    clear:right;     /*  to prevent this div overlapping .your_text  because of float*/
+    text-align:left;
+    max-width:73%;
+    width: fit-content;
+    background-color: rgb(245, 245, 245);
+    border: 2px solid grey;
+    padding:7px 15px 7px 9px;
+    border-radius: 25px;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    position:relative;
+    margin-left:40px;
+}
+
+.person_text:before{
+    content:'';
+    width:40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(https://www.illumination.com/wp-content/uploads/2019/11/DM1_Vector.png);
+    background-size: cover;
+    display:inline-block;
+    position:absolute;
+    left:-49px;
+    bottom:0;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    border:1px solid rgb(192, 192, 192);
 }

@@ -9,18 +9,20 @@ import Message from './Message/Message';
 
 function Dialogs (props){
 
-let displayedDialogs = props.state.dialogsData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id}/>)
+let displayedDialogs = props.state.navBarPage.friendData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id} picture={dialogObject.picture}/>)
 
-let displayedMessages = props.state.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
+let displayedMessages = props.state.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
 
 return(
     <div className={s.content}>
-        <div className="s.dialogsItems">
-{displayedDialogs}     {/* to Display our JSX markup from the array - just insert javascript in JSX with curley  brackets with your new array*/}
+
+        <div className={s.dialogsItems}>
+{displayedDialogs}    
         </div>
 
-        <div className="s.messages">
-{displayedMessages}
+
+        <div className={s.messages}>
+ {displayedMessages} 
         </div>
         
     </div>

@@ -5,11 +5,25 @@ import s from './../Dialogs.module.css'
 function DialogItems (props){
     let myCurrentPath = "/dialogs/"+ props.id       /* before return I can use regular javascript, and only in hte return i have to use JSX */
 return(
-<div>
-    <Link to ={myCurrentPath}>{props.name}</Link>
-    </div>
+
+    <div className={s.friend}>
+     <Link to ={myCurrentPath}><div className={s.circle}><img src={props.picture}/></div></Link>
+    <span className={s.friends_name}>{props.name}</span>
+</div>
+
+
+
+
+
+
+
 )
 }
+
+
+{/* <div>
+    <Link to ={myCurrentPath}>{props.name}</Link>
+    </div> */}
 
 
 export default DialogItems;
