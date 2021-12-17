@@ -30,6 +30,11 @@ let textushechka = React.createRef();
  */
 
 
+function send (){
+  alert(textushechka.current.value);
+}
+
+
 return(
     <div className={s.content}>
 
@@ -38,17 +43,17 @@ return(
         </div>
 
 
-        <div className={s.messages}>
+        <div className={s.messenger}>
 
 
-        <div className={s.wrapper}>         
+        <div className={s.messageHistory}>         
  {displayedMessages} 
  </div>
 
 
  <div className={s.textWrapper}>
-    <textarea ref={textushechka} className={s.userInput_text}>  </textarea>   
-     <button className={s.but} >Send</button>
+    <textarea ref={textushechka} className={s.userInput_text} >  </textarea>   
+     <button className={s.buttonSend}   onClick={send} >Send</button>
  </div> 
         </div>
         
