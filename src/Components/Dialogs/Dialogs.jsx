@@ -38,7 +38,7 @@ function send (){
 return(
     <div className={s.content}>
 
-        <div className={s.dialogsItems}>
+        <div className={s.listOfDialogs}>
 {displayedDialogs}    
         </div>
 

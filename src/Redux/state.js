@@ -1,3 +1,5 @@
+import { rerender } from "../render";
+
 let state = {
     dialogsPage: {
         dialogsData: [
@@ -37,10 +39,20 @@ friendData:[
 },
 
 
-
-
-
 }
+
+
+
+export let addRealPost = (text)=>{
+
+state.myPostsPage.postsData.push({
+    likes:5,
+    message:text
+})
+
+rerender(state);
+}
+
 
 
 

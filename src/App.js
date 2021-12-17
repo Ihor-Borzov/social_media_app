@@ -21,7 +21,7 @@ function App(props) {
   <Routes>
   <Route path="/dialogs/*" element={<Dialogs state={props.state} />}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
 
-  <Route path="/profile" element={<Profile state={props.state.myPostsPage}/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
+  <Route path="/profile" element={<Profile state={props.state.myPostsPage}  posts={props.posts}/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
 
   <Route path="/news" element={<News/>}/>  
 
