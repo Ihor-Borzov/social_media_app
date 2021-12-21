@@ -29,9 +29,14 @@ let textushechka = React.createRef();
     
  */
 
+    let updateUserInput = ()=>{
+      let text = textushechka.current.value;
+props.updateUserMessage(text);
+    }
+
 
 function send (){
-  alert(textushechka.current.value);
+props.sendUserMessage();
 }
 
 
@@ -52,7 +57,7 @@ return(
 
 
  <div className={s.textWrapper}>
-    <textarea ref={textushechka} className={s.userInput_text} >  </textarea>   
+    <textarea ref={textushechka} className={s.userInput_text} onChange={updateUserInput} value={props.state.dialogsPage.userInputMessage} >  </textarea>   
      <button className={s.buttonSend}   onClick={send} >Send</button>
  </div> 
         </div>

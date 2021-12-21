@@ -16,6 +16,8 @@ let state = {
             { id: 1, message: "koorva mach ego" },
             { id: 1, message: "Hi how are you?" },
         ],
+
+        userInputMessage:"Message"
     },
 
     myPostsPage: {
@@ -23,7 +25,10 @@ let state = {
             { likes: "10", message: "some message" },
             { likes: "12", message: "momolongmo" },
             { likes: "11", message: "some hurucasami" },
-        ]
+        ],
+
+newPostText:"kabzda kak prosto",
+
     },
 
 
@@ -37,25 +42,52 @@ friendData:[
     {id:6, name:"Mr. Perkins", picture:"https://s3.amazonaws.com/intanibase/iad_characters/966.jpg"},
 ]
 },
-
-
 }
 
 
+/* //////////////////PROFILE PAGE */
 
-export let addRealPost = (text)=>{
-
+export let addRealPost = ()=>{
 state.myPostsPage.postsData.push({
     likes:5,
-    message:text
+    message:state.myPostsPage.newPostText,
 })
-
+state.myPostsPage.newPostText = "";
 rerender(state);
 }
 
 
+export let updateNewPostText = (text)=>{
+    state.myPostsPage.newPostText = text
+    rerender(state);
+    }
+
+/* ////////////////////////*/
 
 
+
+
+/* //////////////////MESSAGES PAGE */
+   
+export let updateUserMessage = (text)=>{
+    state.dialogsPage.userInputMessage = text
+    rerender(state);
+    } 
+
+
+
+    export let sendUserMessage = ()=>{
+ state.dialogsPage.messagesData.push({
+     id:1,
+     message:state.dialogsPage.userInputMessage,
+ });
+ state.dialogsPage.userInputMessage="";
+        rerender(state);
+        } 
+
+
+
+/* /////////////////////////*/
 
 
 export default state;

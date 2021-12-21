@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
- import { addRealPost } from './Redux/state'; 
+ import { addRealPost, sendUserMessage, updateNewPostText, updateUserMessage } from './Redux/state'; 
 
 
 
@@ -21,7 +21,7 @@ import reportWebVitals from './reportWebVitals';
 export let rerender = (state)=>{
 ReactDOM.render(
     <React.StrictMode>
-      <App state={state} posts={addRealPost}/>
+      <App state={state} posts={addRealPost} updateNewPostText={updateNewPostText}   updateUserMessage={updateUserMessage}  sendUserMessage={sendUserMessage}/>
     </React.StrictMode>,
     document.getElementById('root')
   );}
