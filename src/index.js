@@ -3,24 +3,50 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state, { addRealPost } from './Redux/state';
-import { rerender } from './render';
+ import { addRealPost, sendUserMessage, updateNewPostText, updateUserMessage, subscribe } from './Redux/state'; 
+import state from './Redux/state';
+
+
+
+/* WE IMPLEMENTED "SUBSCRIBE and OBSERVER" 
+- We removed render.js file. we cut everything out from render.js and insert it to
+index.js file.
+- We imported state.js and all needed functions from it into index.js 
+- In the state.js we created an empty function "rerender". Also we created a function 
+subscribe, what receives an argument (observer). inside the function subscribe we assign empty 
+function rerender to a received argument (observer).
+- wwe import function subscribe to index.js file. then we invoke function subscribe 
+sending her a argument a function rerender from index.js
+
+This way when we start our app first time function rerender()  will take imported file
+state and render everything.
+- also state.js can call function rerender, not importing the function in to the state.js.
+because we received rerender as a callback in to the function subscribe and assign it to our local function with the same name
+(could be different, but then we have to change all our methods what end calling rerender)
+
+this way we did not import a function, but we can use it!!!
+
+*/
+
+
+
+let rerender = ()=>{
+ReactDOM.render(
+    <React.StrictMode>
+      <App state={state} posts={addRealPost} updateNewPostText={updateNewPostText}   updateUserMessage={updateUserMessage}  sendUserMessage={sendUserMessage}/>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );}
 
 
 
 
-rerender(state);
+
+rerender();          
+
+subscribe(rerender);
 
 
 
 
-
-
-
-
-
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

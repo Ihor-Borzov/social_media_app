@@ -1,4 +1,8 @@
-import { rerender } from "../render";
+
+
+let rerender =()=> {
+    
+}
 
 let state = {
     dialogsPage: {
@@ -88,6 +92,12 @@ export let updateUserMessage = (text)=>{
 
 
 /* /////////////////////////*/
+
+
+
+export let subscribe = (observer)=>{
+rerender = observer;
+}
 
 
 export default state;
