@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
  import { addRealPost, sendUserMessage, updateNewPostText, updateUserMessage, subscribe } from './Redux/state'; 
-import state from './Redux/state';
+import store from './Redux/state';
 
 
 
@@ -30,10 +30,10 @@ this way we did not import a function, but we can use it!!!
 
 
 
-let rerender = ()=>{
+let rerender = (state)=>{
 ReactDOM.render(
     <React.StrictMode>
-      <App state={state} posts={addRealPost} updateNewPostText={updateNewPostText}   updateUserMessage={updateUserMessage}  sendUserMessage={sendUserMessage}/>
+      <App state={state} addRealPost={store.addRealPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}   updateUserMessage={store.updateUserMessage.bind(store)}  sendUserMessage={store.sendUserMessage.bind(store)}/>
     </React.StrictMode>,
     document.getElementById('root')
   );}
@@ -42,9 +42,9 @@ ReactDOM.render(
 
 
 
-rerender();          
+rerender(store.getState());          
 
-subscribe(rerender);
+store.subscribe(rerender);
 
 
 

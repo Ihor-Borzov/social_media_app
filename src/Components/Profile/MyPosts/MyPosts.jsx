@@ -12,7 +12,7 @@ function MyPosts (props){
 
 let addPost = ()=>{
 let text = userPostInput.current.value;
- props.posts(); 
+ props.addRealPost(); 
  userPostInput.current.value = "";
 }
 

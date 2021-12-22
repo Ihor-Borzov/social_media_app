@@ -8,7 +8,7 @@ function Message (props){
   <div>  
 
 <div className={s.your_text}>{props.message}</div>
-<div className={s.person_text}>.{props.message}</div>
+<div className={s.person_text}>{props.message}</div>
 
 </div>
 

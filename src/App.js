@@ -12,6 +12,7 @@ import Settings from './Components/Settings/Settings';
 
 
 function App(props) {
+
   return (
     <div className="App">
       <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
@@ -21,7 +22,7 @@ function App(props) {
   <Routes>
   <Route path="/dialogs/*" element={<Dialogs state={props.state} updateUserMessage={props.updateUserMessage}  sendUserMessage={props.sendUserMessage}/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
 
-  <Route path="/profile" element={<Profile state={props.state.myPostsPage}  posts={props.posts} updateNewPostText={props.updateNewPostText} />}/>   {/*  for the clickable link check Nav_bar.jsx */}
+  <Route path="/profile" element={<Profile state={props.state.myPostsPage}  addRealPost={props.addRealPost} updateNewPostText={props.updateNewPostText} />}/>   {/*  for the clickable link check Nav_bar.jsx */}
 
   <Route path="/news" element={<News/>}/>  
 
