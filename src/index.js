@@ -33,7 +33,7 @@ this way we did not import a function, but we can use it!!!
 let rerender = (state)=>{
 ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addRealPost={store.addRealPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}   updateUserMessage={store.updateUserMessage.bind(store)}  sendUserMessage={store.sendUserMessage.bind(store)}/>
+      <App state={state} dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>,
     document.getElementById('root')
   );}

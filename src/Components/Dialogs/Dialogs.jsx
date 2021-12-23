@@ -31,12 +31,12 @@ let textushechka = React.createRef();
 
     let updateUserInput = ()=>{
       let text = textushechka.current.value;
-props.updateUserMessage(text);
+props.dispatch({type:"UPDATE-USER-MESSAGE-INPUT", newText:text});
     }
 
 
 function send (){
-props.sendUserMessage();
+props.dispatch({type:"SEND-USER-MESSAGE"});
 }
 
 

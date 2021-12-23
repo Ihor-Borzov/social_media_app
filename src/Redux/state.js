@@ -44,6 +44,7 @@ let store = {
     },
     },
 
+/* methods what do not change state */
    _callSubscriber () {   /* this is my rerender function, underScore at the start of the word means, that this variable or method can use only his owner object */ 
     },
 
@@ -51,48 +52,46 @@ getState (){
     return this._state;
 },
 
-
-  /* //////////////////PROFILE PAGE */
-
-addRealPost (){
-    this._state.myPostsPage.postsData.push({
-        likes:5,
-        message:this._state.myPostsPage.newPostText,
-    })
-    this._state.myPostsPage.newPostText = "";
-    this._callSubscriber(this._state);
-    },
-
-
- updateNewPostText (text){
-        this._state.myPostsPage.newPostText = text
-        this._callSubscriber(this._state);
-        },
-
-/* ////////////////////////*/
-/* //////////////////MESSAGES PAGE */
-
- updateUserMessage  (text){
-    this._state.dialogsPage.userInputMessage = text
-    this._callSubscriber(this._state);
-    },
-
-
- sendUserMessage  (){
-        this._state.dialogsPage.messagesData.push({
-            id:1,
-            message:this._state.dialogsPage.userInputMessage,
-        });
-        this._state.dialogsPage.userInputMessage="";
-               this._callSubscriber(this._state);
-               }, 
-/* /////////////////////////*/
-
-
- subscribe  (observer){
+subscribe  (observer){
     this._callSubscriber = observer;
+    },
+/* /////////////////////////////////// */
+
+  /* dispatch is collectible method what contains all the other methods. it receives an object "action" with main property "type:'name-of-function'"   */
+
+dispatch(action){                
+    if (action.type==="ADD-NEW-POST"){
+        this._state.myPostsPage.postsData.push({
+            likes:5,
+            message:this._state.myPostsPage.newPostText,
+        })
+        this._state.myPostsPage.newPostText = "";
+        this._callSubscriber(this._state);  
     }
 
+else if (action.type==="UPDATE-NEW-POST-TEXT"){
+    this._state.myPostsPage.newPostText = action.newText;
+    this._callSubscriber(this._state);
+}
+
+/* ////////////////////////////////////////////////////////////////////MESSAGES PAGE */
+
+else if (action.type==="UPDATE-USER-MESSAGE-INPUT"){
+    this._state.dialogsPage.userInputMessage = action.newText
+    this._callSubscriber(this._state);
+}
+
+else if (action.type==="SEND-USER-MESSAGE"){
+    this._state.dialogsPage.messagesData.push({
+        id:1,
+        message:this._state.dialogsPage.userInputMessage,
+    });
+    this._state.dialogsPage.userInputMessage="";
+           this._callSubscriber(this._state);
+}
+
+
+},/* END OF dispatch method */
 
 }   /* END OF THE STORE */
 
@@ -101,3 +100,9 @@ addRealPost (){
 
 
 export default store;
+
+
+
+
+
+

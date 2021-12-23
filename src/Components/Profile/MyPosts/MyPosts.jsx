@@ -12,8 +12,7 @@ function MyPosts (props){
 
 let addPost = ()=>{
 let text = userPostInput.current.value;
- props.addRealPost(); 
- userPostInput.current.value = "";
+ props.dispatch({type:"ADD-NEW-POST"}); 
 }
 
 
@@ -21,7 +20,7 @@ let text = userPostInput.current.value;
 
 let onPostChange = ()=>{
     let text = userPostInput.current.value;
-    props.updateNewPostText(text);
+    props.dispatch({type:"UPDATE-NEW-POST-TEXT", newText:text});    /* method dispatch is a callback. because we received it here and call it from here. it receives an object with a property "type" which describes what function should we execute, also in that object we send all other date we need */
 }
 
 

@@ -20,9 +20,9 @@ function App(props) {
       <Nav_bar state={props.state.navBarPage}/>
 <div className="body_wrapper">
   <Routes>
-  <Route path="/dialogs/*" element={<Dialogs state={props.state} updateUserMessage={props.updateUserMessage}  sendUserMessage={props.sendUserMessage}/>}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
+  <Route path="/dialogs/*" element={<Dialogs state={props.state} dispatch={props.dispatch}  />}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
 
-  <Route path="/profile" element={<Profile state={props.state.myPostsPage}  addRealPost={props.addRealPost} updateNewPostText={props.updateNewPostText} />}/>   {/*  for the clickable link check Nav_bar.jsx */}
+  <Route path="/profile" element={<Profile state={props.state.myPostsPage}  dispatch={props.dispatch} />}/>   {/*  for the clickable link check Nav_bar.jsx */}
 
   <Route path="/news" element={<News/>}/>  
 
