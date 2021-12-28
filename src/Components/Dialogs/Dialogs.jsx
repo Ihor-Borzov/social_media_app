@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/state';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
@@ -15,7 +16,7 @@ let displayedDialogs = props.state.navBarPage.friendData.map((dialogObject)=><Di
 let displayedMessages = props.state.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
 
 
-let textushechka = React.createRef();
+/*  let textushechka = React.createRef();  */    /* there is no need for reference anymore, because I use e.target*/
 
 /* onKeyUp={()=>{textAreaAdjust(textushechka)}} */
 
@@ -29,14 +30,14 @@ let textushechka = React.createRef();
     
  */
 
-    let updateUserInput = ()=>{
-      let text = textushechka.current.value;
-props.dispatch({type:"UPDATE-USER-MESSAGE-INPUT", newText:text});
+    let updateUserInput = (e)=>{
+      let text = e.target.value;
+props.dispatch(updateUserMessageInputCreator(text));
     }
 
 
 function send (){
-props.dispatch({type:"SEND-USER-MESSAGE"});
+props.dispatch(sendUserMessageCreator());
 }
 
 
@@ -57,7 +58,7 @@ return(
 
 
  <div className={s.textWrapper}>
-    <textarea ref={textushechka} className={s.userInput_text} onChange={updateUserInput} value={props.state.dialogsPage.userInputMessage} >  </textarea>   
+    <textarea /* ref={textushechka} */ className={s.userInput_text} onChange={updateUserInput} value={props.state.dialogsPage.userInputMessage} placeholder="type the message" >  </textarea>   
      <button className={s.buttonSend}   onClick={send} >Send</button>
  </div> 
         </div>

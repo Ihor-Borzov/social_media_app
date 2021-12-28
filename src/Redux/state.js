@@ -1,3 +1,11 @@
+const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
+const ADD_NEW_POST = "ADD_NEW_POST"
+const UPDATE_USER_MESSAGE_INPUT = "UPDATE_USER_MESSAGE_INPUT"
+const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
+
+
+
+
 let store = {
 
  _state : {                       
@@ -17,7 +25,7 @@ let store = {
                 { id: 1, message: "Hi how are you?" },
             ],
     
-            userInputMessage:"Message"
+            userInputMessage:""
         },
     
         myPostsPage: {
@@ -27,7 +35,7 @@ let store = {
                 { likes: "11", message: "some hurucasami" },
             ],
     
-    newPostText:"kabzda kak prosto",
+    newPostText:"",
     
         },
     
@@ -60,7 +68,7 @@ subscribe  (observer){
   /* dispatch is collectible method what contains all the other methods. it receives an object "action" with main property "type:'name-of-function'"   */
 
 dispatch(action){                
-    if (action.type==="ADD-NEW-POST"){
+    if (action.type==="ADD_NEW_POST"){
         this._state.myPostsPage.postsData.push({
             likes:5,
             message:this._state.myPostsPage.newPostText,
@@ -69,19 +77,19 @@ dispatch(action){
         this._callSubscriber(this._state);  
     }
 
-else if (action.type==="UPDATE-NEW-POST-TEXT"){
+else if (action.type==="UPDATE_NEW_POST_TEXT"){
     this._state.myPostsPage.newPostText = action.newText;
     this._callSubscriber(this._state);
 }
 
 /* ////////////////////////////////////////////////////////////////////MESSAGES PAGE */
 
-else if (action.type==="UPDATE-USER-MESSAGE-INPUT"){
+else if (action.type==="UPDATE_USER_MESSAGE_INPUT"){
     this._state.dialogsPage.userInputMessage = action.newText
     this._callSubscriber(this._state);
 }
 
-else if (action.type==="SEND-USER-MESSAGE"){
+else if (action.type==="SEND_USER_MESSAGE"){
     this._state.dialogsPage.messagesData.push({
         id:1,
         message:this._state.dialogsPage.userInputMessage,
@@ -97,6 +105,35 @@ else if (action.type==="SEND-USER-MESSAGE"){
 
 
 
+
+export const updateNewPostTextCreator = (text)=>{
+    return{
+type:UPDATE_NEW_POST_TEXT,
+newText:text
+    }
+}
+
+
+export const addNewPostCreator = ()=>{
+    return{
+type:ADD_NEW_POST,
+    }
+}
+
+/* MESSAGE PAGE */
+
+export const updateUserMessageInputCreator =(text)=>{
+    return{
+        type:UPDATE_USER_MESSAGE_INPUT,
+        newText:text
+    }
+}
+
+export const sendUserMessageCreator = ()=>{
+    return{
+type:SEND_USER_MESSAGE,
+    }
+}
 
 
 export default store;
