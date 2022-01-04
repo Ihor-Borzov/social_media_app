@@ -1,9 +1,5 @@
-const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
-const ADD_NEW_POST = "ADD_NEW_POST"
-const UPDATE_USER_MESSAGE_INPUT = "UPDATE_USER_MESSAGE_INPUT"
-const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
-
-
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
 
 
 let store = {
@@ -67,73 +63,18 @@ subscribe  (observer){
 
   /* dispatch is collectible method what contains all the other methods. it receives an object "action" with main property "type:'name-of-function'"   */
 
-dispatch(action){                
-    if (action.type==="ADD_NEW_POST"){
-        this._state.myPostsPage.postsData.push({
-            likes:5,
-            message:this._state.myPostsPage.newPostText,
-        })
-        this._state.myPostsPage.newPostText = "";
-        this._callSubscriber(this._state);  
-    }
+dispatch(action){  
+    
+    this._state.dialogsPage = dialogsReducer( this._state.dialogsPage,action);    /* import reducer, send him needed part of state and received action, and reducer will return new state, which will be automatically assigned to our main state */
+this._state.myPostsPage = profileReducer(this._state.myPostsPage, action);
 
-else if (action.type==="UPDATE_NEW_POST_TEXT"){
-    this._state.myPostsPage.newPostText = action.newText;
-    this._callSubscriber(this._state);
-}
-
-/* ////////////////////////////////////////////////////////////////////MESSAGES PAGE */
-
-else if (action.type==="UPDATE_USER_MESSAGE_INPUT"){
-    this._state.dialogsPage.userInputMessage = action.newText
-    this._callSubscriber(this._state);
-}
-
-else if (action.type==="SEND_USER_MESSAGE"){
-    this._state.dialogsPage.messagesData.push({
-        id:1,
-        message:this._state.dialogsPage.userInputMessage,
-    });
-    this._state.dialogsPage.userInputMessage="";
-           this._callSubscriber(this._state);
-}
+    this._callSubscriber(this._state);    /* at the end of dispatch we rerender the website */
 
 
 },/* END OF dispatch method */
 
 }   /* END OF THE STORE */
 
-
-
-
-export const updateNewPostTextCreator = (text)=>{
-    return{
-type:UPDATE_NEW_POST_TEXT,
-newText:text
-    }
-}
-
-
-export const addNewPostCreator = ()=>{
-    return{
-type:ADD_NEW_POST,
-    }
-}
-
-/* MESSAGE PAGE */
-
-export const updateUserMessageInputCreator =(text)=>{
-    return{
-        type:UPDATE_USER_MESSAGE_INPUT,
-        newText:text
-    }
-}
-
-export const sendUserMessageCreator = ()=>{
-    return{
-type:SEND_USER_MESSAGE,
-    }
-}
 
 
 export default store;

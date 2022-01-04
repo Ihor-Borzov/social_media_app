@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/state';
+import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/dialogs-reducer';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
