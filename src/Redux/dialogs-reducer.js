@@ -3,7 +3,34 @@ const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
 
 
 
-const dialogsReducer = (state, action)=>{
+
+let initialState = {
+    dialogsData: [
+        { id: 1, name: "Dimych" },
+        { id: 2, name: "Ahmed" },
+        { id: 3, name: "Pahsa" },
+        { id: 4, name: "Olya" },
+        { id: 5, name: "Vita" },
+        { id: 6, name: "Maksym" },
+    ],
+
+    messagesData: [
+        { id: 1, message: "hi" },
+        { id: 1, message: "koorva mach ego" },
+        { id: 1, message: "Hi how are you?" },
+    ],
+
+    userInputMessage:""
+}
+
+
+
+
+
+
+
+
+const dialogsReducer = (state = initialState, action)=>{
 
 switch(action.type){
 case UPDATE_USER_MESSAGE_INPUT:
@@ -12,7 +39,7 @@ return state;
 
 case SEND_USER_MESSAGE:
         state.messagesData.push({
-            id:1,
+            id:0,
             message:state.userInputMessage,
         });
         state.userInputMessage="";
