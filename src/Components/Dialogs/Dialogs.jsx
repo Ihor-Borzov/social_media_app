@@ -11,9 +11,9 @@ import Message from './Message/Message';
 
 function Dialogs (props){
 
-let displayedDialogs = props.state.navBarPage.friendData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id} picture={dialogObject.picture}/>)
+let displayedDialogs = props.navBarPage.friendData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id} picture={dialogObject.picture}/>)
 
-let displayedMessages = props.state.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
+let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
 
 
 /*  let textushechka = React.createRef();  */    /* there is no need for reference anymore, because I use e.target*/
@@ -30,14 +30,14 @@ let displayedMessages = props.state.dialogsPage.messagesData.map((messageObject)
     
  */
 
-    let updateUserInput = (e)=>{
+    let onUpdateUserInput = (e)=>{
       let text = e.target.value;
-props.dispatch(updateUserMessageInputCreator(text));
+props.updateUserInput(text)
     }
 
 
-function send (){
-props.dispatch(sendUserMessageCreator());
+function onSendMessage (){
+props.sendMessage();
 }
 
 
@@ -58,8 +58,8 @@ return(
 
 
  <div className={s.textWrapper}>
-    <textarea /* ref={textushechka} */ className={s.userInput_text} onChange={updateUserInput} value={props.state.dialogsPage.userInputMessage} placeholder="type the message" >  </textarea>   
-     <button className={s.buttonSend}   onClick={send} >Send</button>
+    <textarea /* ref={textushechka} */ className={s.userInput_text} onChange={onUpdateUserInput} value={props.dialogsPage.userInputMessage} placeholder="type the message" >  </textarea>   
+     <button className={s.buttonSend}   onClick={onSendMessage} >Send</button>
  </div> 
         </div>
         
