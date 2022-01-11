@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
  import { addRealPost, sendUserMessage, updateNewPostText, updateUserMessage, subscribe } from './Redux/store'; 
 /* import store from './Redux/store'; */    /*#3 comment my old state import */
 import store from './Redux/redux-store';           /*#2 create new import for new redux store */
+import StoreContext from './StoreContext';
 
 
 /* WE IMPLEMENTED "SUBSCRIBE and OBSERVER" 
@@ -33,7 +34,9 @@ this way we did not import a function, but we can use it!!!
 let rerender = (state)=>{
 ReactDOM.render(
     <React.StrictMode>
-      <App state={state} dispatch={store.dispatch.bind(store)} store={store} />
+<StoreContext.Provider value={store}>       {/* Context#2 wrap App in to StoreContext.Provider and specify for him props as value={store}, also remove all the props from <App/> */}
+      <App />
+</StoreContext.Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );}
