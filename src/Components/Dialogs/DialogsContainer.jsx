@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/dialogs-reducer';
 import StoreContext from '../../StoreContext';
 import Dialogs from './Dialogs';
@@ -8,36 +9,36 @@ import s from './Dialogs.module.css'    /* container component does not need css
 
 
 
-/* #1 create a component container, let this container receive store */
-function DialogsContainer (props){
+/* those two function have to return an object and parameters of that object will be props.
+first function by default receives state. 
+first functions object will be data from state 
+second functions object will be callback functions*/
 
+let mapStoreToProps = (state)=>{
+return{
+    dialogsPage :state.dialogsPage,
+    navBarPage : state.navBarPage,
+}
+}
 
-/* Context#3 in the componentsContainer return create StoreContext.Consumer, this way we say that a component which
- is nested inside the StoreContext.Consumer will be consuming (in our case it is <Dialogs/> ).
- inside StoreContext.Consumer we create a function which receives (store) from context and does most of the calculations.
- at the end of this function is return which will return jsx markup of the consumer component */
+/* here this function has dispatch which binded to store, so you can call dispatch an do not worry about anything */
 
-return(
-<StoreContext.Consumer>
-{ 
-(store)=>{
-
-    let stateDialogsPage = store.getState().dialogsPage;
-    let stateNavBarPage = store.getState().navBarPage;
-
-    let onUpdateUserInput = (text)=>{
-store.dispatch(updateUserMessageInputCreator(text));
+let mapDispatchToProps=(dispatch)=>{
+    return{
+        updateUserInput:(text)=>{dispatch(updateUserMessageInputCreator(text));},
+        sendMessage:()=>{dispatch(sendUserMessageCreator());},
     }
-
-function onSendMessage (){
-store.dispatch(sendUserMessageCreator());
 }
 
-return <Dialogs updateUserInput={onUpdateUserInput} sendMessage={onSendMessage} dialogsPage={stateDialogsPage} navBarPage={stateNavBarPage}/>
-}
-}
-   </StoreContext.Consumer>
-)
-}
+/* connect returns new container component 
+  How it works... 
+  function connect creates container component, inside that container component it renders presentational component
+  and sends to presentational component attributes what sits in those two objects (as keys) from functions f1 and f2
+so in the Dialogs you will get props.a props.b
+ */
+
+const DialogsContainer = connect(mapStoreToProps,mapDispatchToProps)(Dialogs)
+
+
 
 export default DialogsContainer;

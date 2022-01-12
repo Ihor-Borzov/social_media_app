@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import StoreContext from '../../StoreContext';
 import Friend from './Friend/Friend';
@@ -8,20 +9,22 @@ import s from "./Nav_bar.module.css";
 
 
 
-function Nav_barContainer (props){
+let mapStoreToProps = (state)=>{
+  return{
+    state:state.navBarPage,
+  }
+  }
+  
+  
+  let mapDispatchToProps=(dispatch)=>{
+      return{
+         
+      }
+  }
+  
+  
+  const Nav_barContainer = connect(mapStoreToProps,mapDispatchToProps)(Nav_bar);
 
 
-    return(
-<StoreContext.Consumer>
-{
-  (store)=>{
-
-return <Nav_bar state={store.getState().navBarPage}/>
-
-}
-}
-</StoreContext.Consumer>
-    )
-}
 
 export default Nav_barContainer;
