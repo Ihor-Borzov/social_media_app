@@ -28,22 +28,29 @@ let initialState = {
 
 
 
-
+/* lesson43.4 you have to change the reducers a little bit - instead of working with your native state
+ you have to duplicate your native state and work and change in the reducers duplicated state, also return from
+ your reducers should be that changed duplicated state. so connect will be able to compare those two states and if there is 
+ any difference it will rerender the page where changes happened */
 
 const dialogsReducer = (state = initialState, action)=>{
 
 switch(action.type){
-case UPDATE_USER_MESSAGE_INPUT:
-        state.userInputMessage = action.newText
-return state;
+case UPDATE_USER_MESSAGE_INPUT:{
+    let stateCopy = {...state};
+    stateCopy.userInputMessage = action.newText
+return stateCopy;
+}
 
 case SEND_USER_MESSAGE:
-        state.messagesData.push({
+    let stateCopy = {...state};
+    stateCopy.messagesData = [...state.messagesData]   /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
+    stateCopy.messagesData.push({
             id:0,
             message:state.userInputMessage,
         });
-        state.userInputMessage="";
-return state;
+        stateCopy.userInputMessage="";
+return stateCopy;
 
 default:return state;
     

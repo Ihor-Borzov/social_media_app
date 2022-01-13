@@ -13,7 +13,7 @@ function Dialogs (props){
 
 let displayedDialogs = props.navBarPage.friendData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id} picture={dialogObject.picture}/>)
 
-let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}/>)    /* this is the way we create new array with  JSX markup */
+let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}  id={messageObject.id}/>)    /* this is the way we create new array with  JSX markup */
 
 
 /*  let textushechka = React.createRef();  */    /* there is no need for reference anymore, because I use e.target*/
