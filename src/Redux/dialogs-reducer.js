@@ -36,21 +36,24 @@ let initialState = {
 const dialogsReducer = (state = initialState, action)=>{
 
 switch(action.type){
-case UPDATE_USER_MESSAGE_INPUT:{
-    let stateCopy = {...state};
-    stateCopy.userInputMessage = action.newText
-return stateCopy;
-}
+case UPDATE_USER_MESSAGE_INPUT:
+    return {...state, userInputMessage: action.newText};
+    
+/*     stateCopy.userInputMessage = action.newText
+return stateCopy; */
+
 
 case SEND_USER_MESSAGE:
-    let stateCopy = {...state};
-    stateCopy.messagesData = [...state.messagesData]   /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
+    return{...state,  messagesData:[...state.messagesData, { id:0, message:state.userInputMessage,}], userInputMessage:""};    /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
+
+   /*  stateCopy.messagesData = [...state.messagesData]   
     stateCopy.messagesData.push({
             id:0,
             message:state.userInputMessage,
         });
         stateCopy.userInputMessage="";
 return stateCopy;
+ */
 
 default:return state;
     
