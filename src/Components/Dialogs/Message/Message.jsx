@@ -7,11 +7,11 @@ function Message (props){
 
     return(
 
-  <div>  
-
-<div className={s.your_text}>{props.message}</div>
-<div className={s.person_text}>{props.message}</div>
-
+  <div className={s.wrapper}>  
+{props.id===0
+  ?<div className={s.your_text}>  {props.message}  </div> 
+  :<div className={s.person_text}>  {props.message}  </div>
+  }
 </div>
 
     )
@@ -21,3 +21,12 @@ function Message (props){
 
 
 export default Message;
+
+
+
+
+/* 
+{props.id===0
+  ?<div className={s.your_text}>{props.message}</div>
+  :<div className={s.person_text}>{props.message}</div>
+  } */

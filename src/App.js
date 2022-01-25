@@ -11,6 +11,7 @@ import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Nav_barContainer from './Components/Nav-bar/Nav_barContainer';
+import UsersContainer from './Components/Users/UsersContainer';
 
 
 function App(props) {
@@ -31,6 +32,8 @@ function App(props) {
   <Route path="/music" element={<Music/>}/>  
 
   <Route path="/settings" element={<Settings/>}/>  
+
+  <Route path="/users" element={<UsersContainer/>}/>  
   </Routes> 
 </div> 
 </BrowserRouter>

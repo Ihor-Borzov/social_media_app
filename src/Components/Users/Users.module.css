@@ -1,0 +1,144 @@
+.wrapper{
+    min-width:600px;
+    max-width:70%;
+}
+
+.ussers_container{
+    height:130px;
+    max-width:100%;
+    display:grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 100%;
+    column-gap:10px;
+margin-bottom: 20px;
+    }
+    
+    .usser_icon{
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items:flex-end;
+    }
+    
+    .wrapper__for_AspectRatio{
+    height:100%;
+    width:fit-content;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+    }
+    
+    .imgAspectRatio_wrapper{
+        width:90%;
+        padding-top:90%;                  /* this is aspect ratio 1:1 height=width */
+        position:relative;
+        border-radius: 50%;
+        box-shadow:2px 3px rgb(192, 192, 192);
+        border:1px solid rgb(192, 192, 192);
+        overflow: hidden;
+        top:0;
+        left:3%;
+       /*  margin:0 auto; */
+    }
+    
+    .img_wrapper{
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    
+    .usser_icon img{
+    width:100%;
+    }
+    
+    
+    .button_wrapper{
+        position:relative;
+        display:inline-block;
+        font-size: 17px;
+        font-weight: bold;
+        color:transparent;
+    }
+    
+    .usser_icon button{
+        width:fit-content;
+        font-size: 17px;
+        font-weight: bold;
+        background-color:#cfeef3;
+        border:none;
+        position:absolute;
+        top:6px;
+        left:0;
+        right:0;
+        margin-left:auto;
+        margin-right:auto;
+        border-radius:15px;
+        }
+    
+    
+    .usser_icon button:hover{
+        cursor:pointer;
+    }
+    
+    .usser_icon button:active{
+        font-size:15px;
+    }
+    
+    
+    
+    .user_info{
+    border:2px solid rgb(187, 187, 187);
+    border-radius: 15px;
+    padding:10px;
+    display:flex;
+    }
+    
+    .name_and_status{
+    flex:3;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    }
+    
+    .name{
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 17px;
+        color:rgb(128, 127, 127);
+    font-weight: bold;
+    }
+    
+    .status{
+    
+    }
+    
+    .country_and_city{
+        margin:left;
+        flex:1;
+        display:flex;
+        flex-direction: column;
+        justify-content:flex-start;
+        align-items: flex-end;
+        color:rgb(128, 127, 127);
+        font-size: 17px;
+        font-weight: bold;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        max-width:35%;
+    }
+    
+    .country{
+        text-align: right;
+        white-space: wrap;
+        overflow: hidden;
+         text-overflow: ellipsis;
+    }
+    
+    .city{
+        white-space: wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    
+    
+    
+    

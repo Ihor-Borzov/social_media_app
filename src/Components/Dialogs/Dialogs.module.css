@@ -27,6 +27,7 @@
    display: grid;
    grid-template-rows: 10fr 1fr;
    /* grid-template-columns:  */
+   max-height:700px;
 
 }
 
@@ -36,6 +37,7 @@
 
 .messageHistory{
     width:100%;
+    overflow:auto;
 }
 
 .textWrapper{

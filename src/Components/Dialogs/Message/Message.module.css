@@ -1,19 +1,27 @@
+.wrapper{
+    clear:both;
+    display:flex;
+    flex-direction: column;
+
+}
 
 
 
 .your_text{
-    float:right;
+align-self: flex-end;
 text-align:right;
 width: fit-content;
-    max-width:85%;
+    max-width:73%;
+    min-height:1em;
     background-color: rgb(219, 219, 250);
     border: 2px solid grey;
-margin:10px 0 10px 0;
+margin:10px 47px 10px 0;
 padding:7px 9px 7px 15px;
 border-radius: 25px;
 box-shadow:2px 3px rgb(192, 192, 192);
-margin-right:40px;
+
 position:relative;
+background-color: white;
 }
 
 

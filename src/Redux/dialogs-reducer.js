@@ -16,8 +16,9 @@ let initialState = {
 
     messagesData: [
         { id: 1, message: "hi" },
-        { id: 1, message: "koorva mach ego" },
+        { id: 0, message: "koorva mach ego" },
         { id: 1, message: "Hi how are you?" },
+        { id: 0, message: "Hi how are you?" },
     ],
 
     userInputMessage:""
