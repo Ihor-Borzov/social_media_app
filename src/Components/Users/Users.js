@@ -1,8 +1,19 @@
+import * as axios from "axios";
 import React from "react";
 import style from "./Users.module.css"
+import user from '../../assets/images/user.jpg'
 
 
 let Users = (props)=>{
+
+if (props.users.length ===6){
+axios.get("https://social-network.samuraijs.com/api/1.0/users").then(receivedResponse => {props.setUsers(receivedResponse.data.items)})
+}
+
+
+
+
+
     return(      
 <div className={style.wrapper}>
     
@@ -14,7 +25,7 @@ let Users = (props)=>{
 <div className={style.wrapper__for_AspectRatio}>
    <div className={style.imgAspectRatio_wrapper}> 
        <div className={style.img_wrapper}>  
-           <img src={u.photoUrl} alt="picture"/>
+           <img src={u.photos.large ?u.photos.large :user} alt="picture"/>   {/* if there is a photo use that photo if not use aa photo from import */}
         </div>
     </div>
     <div className={style.button_wrapper}>  ....Subscribe.... 
@@ -28,13 +39,13 @@ let Users = (props)=>{
 
 <div className={style.user_info}>
     <div className={style.name_and_status}>
-        <div className={style.name}>{u.fullName}</div>
+        <div className={style.name}>{u.name}</div>
         <div className={style.status}>{u.status}</div>
     
     </div>
     <div className={style.country_and_city}>
-        <div className={style.country}>{u.location.country}</div>
-        <div className={style.city}>{u.location.city}</div>
+        <div className={style.country}>{"u.location.country"}</div>
+        <div className={style.city}>{"u.location.city"}</div>
     </div>
 </div>
 

@@ -8,13 +8,15 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 
+/*############# EVERY LESSON SUMMARY:
+LESSON #51
+installed axios library: npm install axios --save
+import axios in to users.jsx component
+made first server request with axios.get().then()   at users.jsx component
+add a folder with a picture and imported that picture to users.jsx
+*/
 
 
-/*lesson#47.1 we removed rerenderEntireTree subscriber function on state change, 
-and we removed invoking the function rerenderEntireTree. so now we could remove actual function rerenderEntireTree
-and live only what was inside it, because only at the start this code will be rendering our app, we do not 
-need to call it again.
- */
 
 
 ReactDOM.render(
@@ -31,3 +33,13 @@ ReactDOM.render(
 
 
 reportWebVitals();
+
+
+
+
+
+/*lesson#47.1 we removed rerenderEntireTree subscriber function on state change, 
+and we removed invoking the function rerenderEntireTree. so now we could remove actual function rerenderEntireTree
+and live only what was inside it, because only at the start this code will be rendering our app, we do not 
+need to call it again.
+ */
