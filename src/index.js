@@ -9,11 +9,8 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON #51
-installed axios library: npm install axios --save
-import axios in to users.jsx component
-made first server request with axios.get().then()   at users.jsx component
-add a folder with a picture and imported that picture to users.jsx
+LESSON #53
+implemented first class component to Users.js file and component
 */
 
 
@@ -35,8 +32,13 @@ ReactDOM.render(
 reportWebVitals();
 
 
-
-
+/*
+LESSON #51
+installed axios library: npm install axios --save
+import axios in to users.jsx component
+made first server request with axios.get().then()   at users.jsx component
+add a folder with a picture and imported that picture to users.jsx
+*/
 
 /*lesson#47.1 we removed rerenderEntireTree subscriber function on state change, 
 and we removed invoking the function rerenderEntireTree. so now we could remove actual function rerenderEntireTree
