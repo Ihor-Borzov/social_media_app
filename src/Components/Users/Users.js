@@ -27,19 +27,55 @@ functionName = ()=>{}
 */
 
 class Users extends React.Component {      
+/* since we do not make a request from the constructor, and constructor only sends props to his parent constructor at React.Component, we may not write our constructor - it will do its work automatically   */
 
-constructor (props){ 
-    super(props);
-
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+componentDidMount(){
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
     .then(receivedResponse => {this.props.setUsers(receivedResponse.data.items)})
 }
 
 
+
+setCurrentPage=(page)=>{
+this.props.setCurrentPage(page);
+
+axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)   /* here we are making request passing the page we just pressed, so rerender will happen already with the proper page, we do request in this function because componentDidMount invokes only once */
+.then(receivedResponse => {this.props.setUsers(receivedResponse.data.items);   
+
+this.props.setTotalUsersCount(receivedResponse.data.totalCount/100);     /* get total count from response and dispatch it to the state  */
+});
+
+
+}
+
+
+
+
+
 render = ()=>{
+
+    let totalPagesCount= Math.ceil(this.props.totalUsersCount/this.props.pageSize);   /* here we calculate how many pages we will need, Math.ceil() rounds to the bigger integer  */ 
+
+    let pagesArray=[];
+    for(let i=1; i<=totalPagesCount;i++){
+        pagesArray.push(i);
+    }
+
+
+
+
     return(
         <div className={style.wrapper}>
-    
+<div className={style.pageNumbers}>
+
+
+{pagesArray.map((page)=>{
+    return <span onClick={(e)=>{this.setCurrentPage(page)}} className={this.props.currentPage===page ? style.activePage : style.notActivePage}>  {`${page}. `}  </span>
+})
+}
+
+
+</div>  
 {   this.props.users.map(u=>                                      /* so we start and finish our component with curly braces inside the main div wrapper  */
 
 <div key={u.id} className={style.ussers_container}>          {/* first we have to give a key attribute to user wrapper (react requires) */}

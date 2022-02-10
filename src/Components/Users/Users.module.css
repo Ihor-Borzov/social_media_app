@@ -137,8 +137,17 @@ margin-bottom: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+
+    /* //////////////////////// PAGES */
+    .activePage{
+        font-size: 25px;
+        font-weight: bold;
+    }
     
-    
+    .pageNumbers span{
+        cursor:pointer;
+    }
     
     
     
