@@ -9,6 +9,30 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON# 56
+- moved class component to the UsersContainer - now class component will be responsible only for server requests
+- created functional component, sent all the props to it, now this functional
+ component is responsible for returning jsx
+*/
+
+
+ReactDOM.render(
+    <React.StrictMode>
+<Provider store={store}>       {/* React-redux#1 wrap App in to Provider and specify for him props as value={store}, works exactly as native redux, you just creating a context*/}
+      <App />
+</Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+
+
+reportWebVitals();
+
+
+
+
+
+/*############# EVERY LESSON SUMMARY:
 LESSON #55
   -in Users.js => moved axios request from the constructor to componentDidMount(){}, removed constructor
   -users-reducer.js=> added to state variables: pageSize, totalUserCount, currentPage
@@ -28,27 +52,10 @@ only in received arguments as (page) and our currentPage is not accurate anymore
   -users-reducer.js => change SET_USERS dispatch to reassign new users each time.
   -Users.js=> setCurrentPage function => ajax server request=>  dispatch totalUserCount for state (make whole pipeline...), so each time you making 
   the request you check the  number of users from response and change your state value "totalUsersCount" through dispatch and rerender the page. 
-*/
 
 
 
 
-ReactDOM.render(
-    <React.StrictMode>
-<Provider store={store}>       {/* React-redux#1 wrap App in to Provider and specify for him props as value={store}, works exactly as native redux, you just creating a context*/}
-      <App />
-</Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-
-
-
-
-
-reportWebVitals();
-
-/*############# EVERY LESSON SUMMARY:
 LESSON #53
 implemented first class component to Users.js file and component
 */
