@@ -9,10 +9,18 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON# 56
-- moved class component to the UsersContainer - now class component will be responsible only for server requests
-- created functional component, sent all the props to it, now this functional
- component is responsible for returning jsx
+LESSON#57  adding preloader gif
+- create separate functional component Preloader.jsx which will return image.gif
+- create a variable 'isFetching' in users-reducer.js => initial state. set it to boolean true 
+- create pipeline to change isFetching from true to false and back.
+- inside the UsersContainer class in the return of function render. specify ternary expression
+isFetching? <Preloader/>:null 
+- then you have to manipulate isFetching : you have to show the preloader while
+server request is going, and finish showing it, when fetching is finished: it
+means change isFetching to true before server request and right after you got the
+response set isFetching to false
+
+
 */
 
 
@@ -33,6 +41,11 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON# 56
+- moved class component to the UsersContainer - now class component will be responsible only for server requests
+- created functional component, sent all the props to it, now this functional
+ component is responsible for returning jsx
+
 LESSON #55
   -in Users.js => moved axios request from the constructor to componentDidMount(){}, removed constructor
   -users-reducer.js=> added to state variables: pageSize, totalUserCount, currentPage
