@@ -88,19 +88,19 @@ return{...state,
 
 
 
-export let followAC =(userId)=>{
+export let follow =(userId)=>{
     return{
         type:FOLLOW, userId               /* when you do not specify the value of a property, but property name matches the receiving parameter name - then that property takes value of that parameter   */
     }
 }
 
-export let unFollowAC = (userId)=>{
+export let unfollow = (userId)=>{
     return{
         type:UNFOLLOW, userId
     }
 }
 
-export let setUsersAC = (users)=>{
+export let setUsers = (users)=>{
 return {
     type:SET_USERS, users
 }
@@ -108,20 +108,20 @@ return {
 
 
 
-export let setCurrentPageAC = (page)=>{
+export let setCurrentPage = (page)=>{
 return {
     type:SET_CURRENT_PAGE, page
 }
 }
 
 
-export let setTotalUserCountAC = (newTotalUsersCount)=>{
+export let setTotalUsersCount = (newTotalUsersCount)=>{
 return {
     type:SET_TOTAL_USER_COUNT, newTotalUsersCount
 }
 }
 
-export let toggleIsFetchingAC = (isFetching)=>{
+export let toggleIsFetching = (isFetching)=>{
     return(
         {type:TOGGLE_IS_FETCHING, isFetching}
     )

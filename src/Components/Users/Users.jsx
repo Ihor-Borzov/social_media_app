@@ -3,7 +3,6 @@ import style from "./Users.module.css"
 import user from '../../assets/images/user.jpg'
 
 let Users=(props)=>{
-    
     let totalPagesCount= Math.ceil(props.totalUsersCount/props.pageSize);   /* here we calculate how many pages we will need, Math.ceil() rounds to the bigger integer  */ 
 
     let pagesArray=[];
@@ -38,7 +37,7 @@ return(
         </div>
         <div className={style.button_wrapper}>  ....Subscribe.... 
         {u.followed
-             ? <button onClick={()=>{props.unFollow(u.id)}}>   Unfollow  </button>
+             ? <button onClick={()=>{props.unfollow(u.id)}}>   Unfollow  </button>
              : <button onClick={()=>{props.follow(u.id)}}>   follow  </button>
             }
          </div>
