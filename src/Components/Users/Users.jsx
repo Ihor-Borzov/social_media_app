@@ -1,6 +1,7 @@
 import React from 'react';
 import style from "./Users.module.css"
 import user from '../../assets/images/user.jpg'
+import { NavLink } from 'react-router-dom';
 
 let Users=(props)=>{
     let totalPagesCount= Math.ceil(props.totalUsersCount/props.pageSize);   /* here we calculate how many pages we will need, Math.ceil() rounds to the bigger integer  */ 
@@ -32,7 +33,9 @@ return(
     <div className={style.wrapper__for_AspectRatio}>
        <div className={style.imgAspectRatio_wrapper}> 
            <div className={style.img_wrapper}>  
+<NavLink to="/profile/2">
                <img src={u.photos.large ?u.photos.large :user} alt="picture"/>   {/* if there is a photo use that photo if not use aa photo from import */}
+               </NavLink>
             </div>
         </div>
         <div className={style.button_wrapper}>  ....Subscribe.... 

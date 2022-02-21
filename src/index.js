@@ -9,11 +9,15 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#58
-- we removed mapDispatchToProps function from UsersContainer.js component
-- moved all the Action Creators in the object and put it directly in to the context
- parameters on the place of mapDispatchToProps.
- - we renamed our Action Creators to be able to assign shortly in the object 
+LESSON#59
+- created  ProfileContainer component
+- implement behavior: press on one of the users and it opens a user information in the ProfileInfo component (for now I do not know how to get particular user)
+- in the ProfileContainer component happens axios get request to get a user information. implemented a pipeLine to assign a user from server
+request to a parameter in a state: userProfile
+-in the ProfileInfo.js implemented alternative return (alternative rendering component), it is like an alternative exit from the function 
+when we did not receive props yet then do not render the page!
+- created "window.store = store" the object window creates a new variable named store and assign this variable to our store. now we can get to know
+what our store is from any point of the app!    
 */
 
 
@@ -34,6 +38,12 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON#58
+- we removed mapDispatchToProps function from UsersContainer.js component
+- moved all the Action Creators in the object and put it directly in to the context
+ parameters on the place of mapDispatchToProps.
+ - we renamed our Action Creators to be able to assign shortly in the object 
+
 LESSON#57  adding preloader gif
 - create separate functional component Preloader.jsx which will return image.gif
 - create a variable 'isFetching' in users-reducer.js => initial state. set it to boolean true 

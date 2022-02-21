@@ -1,5 +1,6 @@
 const UPDATE_NEW_POST_TEXT = "UPDATE_NEW_POST_TEXT";
 const ADD_NEW_POST = "ADD_NEW_POST"
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 
 
@@ -12,6 +13,7 @@ let initialState = {
     ],
 
 newPostText:"",
+userProfile:null,
 }
 
 
@@ -34,6 +36,9 @@ case ADD_NEW_POST:
         stateCopy.newPostText = "";
 return stateCopy; */
 
+case SET_USER_PROFILE:
+    return{...state, userProfile:action.userProfile}
+
 default: return state;
 }
 }
@@ -53,6 +58,11 @@ export const addNewPostCreator = ()=>{
     return{
 type:ADD_NEW_POST,
     }
+}
+
+export const setUserProfile = (userProfile)=>{
+    return{type:SET_USER_PROFILE,
+    userProfile}
 }
 
 
