@@ -1,0 +1,99 @@
+
+
+.aboutUser{
+    background-color: white;
+    border-radius:25px;
+    box-shadow:2px 3px rgb(93, 96, 236);
+    min-height:fit-content;
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom:20px;
+}
+
+.userImgWrapper{
+aspect-ratio: 1/1;
+width:125px;
+height:125px;
+border-radius: 50%;
+box-shadow:2px 3px rgb(192, 192, 192);
+border:1px solid rgb(192, 192, 192);
+overflow:hidden;
+margin:10px;
+}
+
+.userImgWrapper img{
+    width:100%;
+}
+
+
+.fullName{
+    margin-top:20px;
+    font-size: 17px;
+    color:rgb(128, 127, 127);
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:10px 0 0 10px; 
+    font-weight: bold;
+}
+
+.location{
+    color:rgb(128, 127, 127);
+    font-size: 17px;
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:10px 0 0 10px; 
+    font-weight: bold;
+}
+
+.aboutMe{
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin:10px 0 0 10px; 
+    font-weight: bold;
+}
+
+
+.userInfo{
+max-width:60%;
+}
+
+.item_social{
+list-style-type: none;
+display:flex;
+flex-wrap: wrap;
+justify-content: flex-start;
+align-items: center;
+padding:3px;
+}
+
+.item_social li{
+width:40px;
+height:40px;
+margin:5px;
+}
+
+.item_social li a img{
+    width:100%;
+}
+
+
+.isLookingForAJob{
+    align-self: flex-end;
+    justify-self: flex-end;
+    margin:0 0 0 30px;
+}
+
+.LookingForAJobImgWrapper{
+}
+
+.LookingForAJobImgWrapper span{
+font-family:cursive;
+font-weight: bolder;
+font-size: 28px;
+font-style:italic;
+
+background: -webkit-linear-gradient(bottom, #52454A 39%, #495394 51%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
