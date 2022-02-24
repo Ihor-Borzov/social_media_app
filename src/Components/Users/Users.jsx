@@ -33,7 +33,7 @@ return(
     <div className={style.wrapper__for_AspectRatio}>
        <div className={style.imgAspectRatio_wrapper}> 
            <div className={style.img_wrapper}>  
-<NavLink to="/profile/2">
+<NavLink to={"/profile/" + u.id}>
                <img src={u.photos.large ?u.photos.large :user} alt="picture"/>   {/* if there is a photo use that photo if not use aa photo from import */}
                </NavLink>
             </div>

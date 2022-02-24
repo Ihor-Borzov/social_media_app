@@ -9,15 +9,13 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#59
-- created  ProfileContainer component
-- implement behavior: press on one of the users and it opens a user information in the ProfileInfo component (for now I do not know how to get particular user)
-- in the ProfileContainer component happens axios get request to get a user information. implemented a pipeLine to assign a user from server
-request to a parameter in a state: userProfile
--in the ProfileInfo.js implemented alternative return (alternative rendering component), it is like an alternative exit from the function 
-when we did not receive props yet then do not render the page!
-- created "window.store = store" the object window creates a new variable named store and assign this variable to our store. now we can get to know
-what our store is from any point of the app!    
+LESSON#60
+ -instead of withRouter I used useMatch (it returns the same staff like withRouter) except you have to apply that function only in function component
+ -so I had to create an function component, what will check the URL for userId (that what we specify in the arguments for the function) and then
+ render class component.
+  -first executes function connect, rendering ProfileMatchComponent and then executes function ProfileMatchComponent rendering ProfileContainer
+  - inside class ProfileContainer we check if we received something in "match"  if yes we assign our userId to it, if not - we assign our userId to Dimich
+  id number = 2.   and then do server request with proper id address
 */
 
 
@@ -38,6 +36,17 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+LESSON#59
+- created  ProfileContainer component
+- implement behavior: press on one of the users and it opens a user information in the ProfileInfo component (for now I do not know how to get particular user)
+- in the ProfileContainer component happens axios get request to get a user information. implemented a pipeLine to assign a user from server
+request to a parameter in a state: userProfile
+-in the ProfileInfo.js implemented alternative return (alternative rendering component), it is like an alternative exit from the function 
+when we did not receive props yet then do not render the page!
+- created "window.store = store" the object window creates a new variable named store and assign this variable to our store. now we can get to know
+what our store is from any point of the app!    
+
 LESSON#58
 - we removed mapDispatchToProps function from UsersContainer.js component
 - moved all the Action Creators in the object and put it directly in to the context

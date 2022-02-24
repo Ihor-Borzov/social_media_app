@@ -2,7 +2,7 @@ import React from 'react';
 import Preloader from '../../common/preloader/Preloader';
 import s from "./ProfileInfo.module.css";
 import blankUserPicture from '../../../assets/images/user.jpg'
-import { ExternalLink } from 'react-external-link';
+
 
 
 
@@ -21,7 +21,7 @@ function ProfileInfo (props){
         <div className={s.aboutUser}>
                 
         <div className={s.userImgWrapper}>
-        <img src= {props.userProfile.photos.large !=null ? props.userProfile.photos.large : blankUserPicture} style={{width:'300px'}} ></img>  
+        <img src= {props.userProfile.photos.large !=null ? props.userProfile.photos.large : blankUserPicture} ></img>  
         </div>
         
         <div className={s.userInfo}>

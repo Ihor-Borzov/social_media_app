@@ -12,7 +12,7 @@
 }
 
 .userImgWrapper{
-aspect-ratio: 1/1;
+/* aspect-ratio: 1/1; */
 width:125px;
 height:125px;
 border-radius: 50%;
