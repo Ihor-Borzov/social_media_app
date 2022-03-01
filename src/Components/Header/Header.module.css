@@ -9,3 +9,9 @@
 .header img{
     height:90%;
 }
+
+.loginBlock{
+    float:right;
+    font-size:20px;
+    color:black;
+}

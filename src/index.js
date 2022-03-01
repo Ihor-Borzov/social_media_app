@@ -9,13 +9,14 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#60
- -instead of withRouter I used useMatch (it returns the same staff like withRouter) except you have to apply that function only in function component
- -so I had to create an function component, what will check the URL for userId (that what we specify in the arguments for the function) and then
- render class component.
-  -first executes function connect, rendering ProfileMatchComponent and then executes function ProfileMatchComponent rendering ProfileContainer
-  - inside class ProfileContainer we check if we received something in "match"  if yes we assign our userId to it, if not - we assign our userId to Dimich
-  id number = 2.   and then do server request with proper id address
+LESSON#61
+ - create HeaderContainer and make axios request to authenticator end point.  
+  - to be able to authenticate you have to log in to DIMICH website: https://social-network.samuraijs.com  this way you save cookies in to your system
+  - to be able to authenticate with cookies add a second parameter to axios request {withCredentials:true}
+  - get from response 3 variables: id, email, login
+  - create the whole pipeLine to dispatch those 3 variables (create reducer, dispatch, AC, insert your reducer in to store, use it in HeaderContainer)
+  - in the authorization reducer initialState should be also isAuth variable to check if you authorized.
+  - send to the Header props and  check if you received props.login then display the name of a user. if not - just a link
 */
 
 
@@ -36,6 +37,14 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+LESSON#60
+ -instead of withRouter I used useMatch (it returns the same staff like withRouter) except you have to apply that function only in function component
+ -so I had to create an function component, what will check the URL for userId (that what we specify in the arguments for the function) and then
+ render class component.
+  -first executes function connect, rendering ProfileMatchComponent and then executes function ProfileMatchComponent rendering ProfileContainer
+  - inside class ProfileContainer we check if we received something in "match"  if yes we assign our userId to it, if not - we assign our userId to Dimich
+  id number = 2.   and then do server request with proper id address
 
 LESSON#59
 - created  ProfileContainer component

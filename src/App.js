@@ -9,6 +9,7 @@ import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Nav_barContainer from './Components/Nav-bar/Nav_barContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 import ProfileContainer from './Components/Profile/ProfileContainer';
+import HeaderContainer from './Components/Header/HeaderContainer';
 
 
 function App(props) {
@@ -16,7 +17,7 @@ function App(props) {
   return (
     <div className="App">
       <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
-      <Header/>
+      <HeaderContainer/>
       <Nav_barContainer/>
 <div className="body_wrapper">
   <Routes>                                      {/* Context#3 remove all the props from components, you do not need them anymore */}
