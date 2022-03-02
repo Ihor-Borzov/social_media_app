@@ -13,7 +13,7 @@ class UsersContainerComponent extends React.Component {
     
     componentDidMount(){
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true})
         .then(receivedResponse => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(receivedResponse.data.items)})
@@ -25,7 +25,7 @@ class UsersContainerComponent extends React.Component {
     this.props.setCurrentPage(page);
     this.props.toggleIsFetching(true);
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)   /* here we are making request passing the page we just pressed, so rerender will happen already with the proper page, we do request in this function because componentDidMount invokes only once */
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{withCredentials:true})   /* here we are making request passing the page we just pressed, so rerender will happen already with the proper page, we do request in this function because componentDidMount invokes only once */
     .then(receivedResponse => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(receivedResponse.data.items);   
@@ -38,7 +38,7 @@ class UsersContainerComponent extends React.Component {
     
         return(
 <>
-{this.props.isFetching ? <Preloader/>:null}
+{this.props.isFetching ? <Preloader/>:null}    {/* this is the way to uply Preloader while the request is performing */}
 
     <Users
     setCurrentPage={this.setCurrentPage}

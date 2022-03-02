@@ -9,15 +9,13 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#61
- - create HeaderContainer and make axios request to authenticator end point.  
-  - to be able to authenticate you have to log in to DIMICH website: https://social-network.samuraijs.com  this way you save cookies in to your system
-  - to be able to authenticate with cookies add a second parameter to axios request {withCredentials:true}
-  - get from response 3 variables: id, email, login
-  - create the whole pipeLine to dispatch those 3 variables (create reducer, dispatch, AC, insert your reducer in to store, use it in HeaderContainer)
-  - in the authorization reducer initialState should be also isAuth variable to check if you authorized.
-  - send to the Header props and  check if you received props.login then display the name of a user. if not - just a link
-*/
+LESSON#62
+ remember you have to be logged in the dimich website, to enable cookies
+ we have to send request been authorized to be able to use cookies. so send requests post to follow and delete to unfollow
+ - all the server requests, except get, required to have exes key  
+ - you have to add headers to server request. header you should write at the same object as cookie request  (our headers will be exes key)
+ - add cookies to the server requests in UsersContainer class
+ */
 
 
 ReactDOM.render(
@@ -37,6 +35,15 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+LESSON#61
+ - create HeaderContainer and make axios request to authenticator end point.  
+  - to be able to authenticate you have to log in to DIMICH website: https://social-network.samuraijs.com  this way you save cookies in to your system
+  - to be able to authenticate with cookies add a second parameter to axios request {withCredentials:true}
+  - get from response 3 variables: id, email, login
+  - create the whole pipeLine to dispatch those 3 variables (create reducer, dispatch, AC, insert your reducer in to store, use it in HeaderContainer)
+  - in the authorization reducer initialState should be also isAuth variable to check if you authorized.
+  - send to the Header props and  check if you received props.login then display the name of a user. if not - just a link
 
 LESSON#60
  -instead of withRouter I used useMatch (it returns the same staff like withRouter) except you have to apply that function only in function component
