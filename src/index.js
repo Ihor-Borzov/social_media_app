@@ -9,12 +9,16 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#62
- remember you have to be logged in the dimich website, to enable cookies
- we have to send request been authorized to be able to use cookies. so send requests post to follow and delete to unfollow
- - all the server requests, except get, required to have exes key  
- - you have to add headers to server request. header you should write at the same object as cookie request  (our headers will be exes key)
- - add cookies to the server requests in UsersContainer class
+LESSON#63
+ENCAPSULATING SERVER REQUESTS IN TO DAL - data access layer. 
+- create api folder. create api.js file in that folder
+- from UserContainer class=> method componentDidMount take axios request and move it to api.js
+- in the api.js create a function (call it getUsers) which will be returning axios request, export this function
+- import getUsers function to UsersContainer and call method then     getUsers.then
+- from the place where you invoke getUsers(parameters) send him all needed parameters 
+- instead of using url each time for axios request substitute it with axios instance
+- put getUsers in to an object usersAPI to keep everything in order 
+- CHECK HOW TO ENCAPSULATE SERVER REQUESTS IN api.js file
  */
 
 
@@ -35,6 +39,13 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+LESSON#62
+ remember you have to be logged in the dimich website, to enable cookies
+ we have to send request been authorized to be able to use cookies. so send requests post to follow and delete to unfollow
+ - all the server requests, except get, required to have exes key  
+ - you have to add headers to server request. header you should write at the same object as cookie request  (our headers will be exes key)
+ - add cookies to the server requests in UsersContainer class
 
 LESSON#61
  - create HeaderContainer and make axios request to authenticator end point.  

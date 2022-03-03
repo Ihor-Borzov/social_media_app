@@ -147,6 +147,12 @@ margin-bottom: 20px;
     
     .pageNumbers span{
         cursor:pointer;
+        display:inline-block;
+        margin:0 5px 5px 0;
+        padding:3px;
+        border-radius: 50%;
+        box-shadow:2px 3px rgb(192, 192, 192);
+        border:1px solid rgb(192, 192, 192);
     }
     
     

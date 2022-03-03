@@ -4,6 +4,7 @@ import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching,
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
+import { usersAPI } from "../../api/api";
 
 
 
@@ -13,10 +14,12 @@ class UsersContainerComponent extends React.Component {
     
     componentDidMount(){
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials:true})
-        .then(receivedResponse => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        .then(dataResponse => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(receivedResponse.data.items)})
+            this.props.setUsers(dataResponse.items)
+            this.props.setTotalUsersCount(dataResponse.totalCount/100);
+        })
     }
     
     
@@ -25,11 +28,11 @@ class UsersContainerComponent extends React.Component {
     this.props.setCurrentPage(page);
     this.props.toggleIsFetching(true);
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{withCredentials:true})   /* here we are making request passing the page we just pressed, so rerender will happen already with the proper page, we do request in this function because componentDidMount invokes only once */
-    .then(receivedResponse => {
+usersAPI.getUsers(page, this.props.pageSize)
+    .then(dataResponse => {
         this.props.toggleIsFetching(false);
-        this.props.setUsers(receivedResponse.data.items);   
-    this.props.setTotalUsersCount(receivedResponse.data.totalCount/100);     /* get total count from response and dispatch it to the state  */
+        this.props.setUsers(dataResponse.items);   
+    this.props.setTotalUsersCount(dataResponse.totalCount/100);     /* get total count from response and dispatch it to the state  */
     });
     
     }
