@@ -4,6 +4,7 @@ const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 
 
 let initialState = {
@@ -20,6 +21,7 @@ pageSize:5,
 totalUsersCount:26,
 currentPage:1,
 isFetching:false,
+following_unfollowingIds:[],
 }
 
 
@@ -70,6 +72,15 @@ return{...state,
     case TOGGLE_IS_FETCHING:
 return{...state,
     isFetching:action.isFetching,
+}
+
+
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+        
+return{...state,
+    following_unfollowingIds: action.check
+    ? [...state.following_unfollowingIds, action.id]        /* if fallowing is processing add received userID */
+    : state.following_unfollowingIds.filter((ids)=>{return(ids!=action.id)})  /* if fallowing is finished remove received userID.   we do not have to do destructurisation over her, because method filter will return a new array */
 }
 
 
@@ -124,6 +135,15 @@ return {
 export let toggleIsFetching = (isFetching)=>{
     return(
         {type:TOGGLE_IS_FETCHING, isFetching}
+    )
+}
+
+
+
+export let toggleIsFollowingProgress = (check, id)=>{
+    
+    return(
+        {type:TOGGLE_IS_FOLLOWING_PROGRESS, check, id}
     )
 }
 

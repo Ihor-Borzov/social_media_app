@@ -43,15 +43,19 @@ return(
         </div>
         <div className={style.button_wrapper}>  ....Subscribe.... 
         {u.followed
-             ? <button onClick={()=>{ 
+             ? <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})}   onClick={()=>{ 
+                props.toggleIsFollowingProgress(true, u.id)
                 usersAPI.unfollow(u.id).then((resultCode)=>{
                     if(resultCode===0){props.unfollow(u.id)}
-                })        
+                    props.toggleIsFollowingProgress(false, u.id)
+                })  
         }}>   Unfollow  </button>
 
-             : <button onClick={()=>{
+             : <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})} onClick={()=>{
+props.toggleIsFollowingProgress(true, u.id)
 usersAPI.follow(u.id).then((resultCode)=>{
     if(resultCode===0){props.follow(u.id)}
+    props.toggleIsFollowingProgress(false, u.id)
 })
 }}>   follow  </button>
             }
@@ -91,14 +95,15 @@ export default Users
 
 
 
+/* 
+
+
+setTimeout(()=>{console.log("shooopify")
+                     props.toggleIsFollowingProgress(false, u.id)},3000)
 
 
 
-
-
-
-
-
+ */
 
 
 

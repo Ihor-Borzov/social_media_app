@@ -9,16 +9,16 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#63
-ENCAPSULATING SERVER REQUESTS IN TO DAL - data access layer. 
-- create api folder. create api.js file in that folder
-- from UserContainer class=> method componentDidMount take axios request and move it to api.js
-- in the api.js create a function (call it getUsers) which will be returning axios request, export this function
-- import getUsers function to UsersContainer and call method then     getUsers.then
-- from the place where you invoke getUsers(parameters) send him all needed parameters 
-- instead of using url each time for axios request substitute it with axios instance
-- put getUsers in to an object usersAPI to keep everything in order 
-- CHECK HOW TO ENCAPSULATE SERVER REQUESTS IN api.js file
+LESSON#64 buttons follow/unfollow disabled during a server request to follow or unfollow
+- start from business logic: create an array in the initialState (following_unfollowingIds)
+- Think about a logic... you render your page : you have to check something to decide if you want to disable the button or not.
+: each time we press the button, before server request, we can set the flag property to true and add a current u.id to the 
+following_unfollowingIds in the initialState.  then the page will rerender and we can determin if we want to disable this button by checking
+if we have current u.id in the following_unfollowingIds - if it has - then disable the button.  Then in a stack que will go server request, after
+ we will receive response and in the response we will change the flag to false and will remove u.id from the following_unfollowingIds, so when
+ react will rerender the next time he will not find this u.id and will make the button available.
+   to check for matching id use method some(). to remove needed id use method filter() in the reducer
+   - create the pipeline to change the flag and add and remove users id
  */
 
 
@@ -39,6 +39,17 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+LESSON#63
+ENCAPSULATING SERVER REQUESTS IN TO DAL - data access layer. 
+- create api folder. create api.js file in that folder
+- from UserContainer class=> method componentDidMount take axios request and move it to api.js
+- in the api.js create a function (call it getUsers) which will be returning axios request, export this function
+- import getUsers function to UsersContainer and call method then     getUsers.then
+- from the place where you invoke getUsers(parameters) send him all needed parameters 
+- instead of using url each time for axios request substitute it with axios instance
+- put getUsers in to an object usersAPI to keep everything in order 
+- CHECK HOW TO ENCAPSULATE SERVER REQUESTS IN api.js file
 
 LESSON#62
  remember you have to be logged in the dimich website, to enable cookies
