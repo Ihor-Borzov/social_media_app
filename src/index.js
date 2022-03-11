@@ -9,16 +9,27 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#64 buttons follow/unfollow disabled during a server request to follow or unfollow
-- start from business logic: create an array in the initialState (following_unfollowingIds)
-- Think about a logic... you render your page : you have to check something to decide if you want to disable the button or not.
-: each time we press the button, before server request, we can set the flag property to true and add a current u.id to the 
-following_unfollowingIds in the initialState.  then the page will rerender and we can determin if we want to disable this button by checking
-if we have current u.id in the following_unfollowingIds - if it has - then disable the button.  Then in a stack que will go server request, after
- we will receive response and in the response we will change the flag to false and will remove u.id from the following_unfollowingIds, so when
- react will rerender the next time he will not find this u.id and will make the button available.
-   to check for matching id use method some(). to remove needed id use method filter() in the reducer
-   - create the pipeline to change the flag and add and remove users id
+LESSON#66      THUNK
+- create thunk function in user-reducer.js 
+- in to that thunk copy everything from the usersContainer=>componentDidMount
+ - substitute all the props to dispatch.
+ -wrap the thunk in getUsersThunkCreator - it will receive the parameters and return thunk
+ - install middleware "npm i redux-thunk"
+ import thunkMiddleware from "redux-thunk" in to redux-store.js file
+  - insert  applyMiddleware (thunkMiddleware) in redux createStore to enable to dispatch not only objects action, but also functions
+  -  import thunkCreator to the usersContainer and invoke it sending needed parameters to it
+  - in connect:
+  connect(stateDispatchToProps,{getUsersThunkCreator:(currentPage,PageSize)=>{dispatch(getUsersThunkCreator(currentPage,PageSize))}})
+  so the connect returns us a callback, when we invoke the function getUsersThunkCreator in th usersContainer we first invoke thunkCreator, it will return
+  us function and then we dispatch function, the function will get to dispatch and dispatch will see that this is the function, so he will 
+  understand that this is thunk and will invoke the function dispatching all the subfunctions,  subfunctions are action creators, so we invoke them, they return 
+  actions, actions will dispatch to reducer and change the state, component will rerender... and our thunk will continue to invoke the functions
+  down the road
+
+  - create thunk for render, follow, unfollow
+  - homework  substitute to thunk all the other axios requests
+
+
  */
 
 
@@ -39,6 +50,18 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+
+
+LESSON#64 buttons follow/unfollow disabled during a server request to follow or unfollow
+- start from business logic: create an array in the initialState (following_unfollowingIds)
+- Think about a logic... you render your page : you have to check something to decide if you want to disable the button or not.
+: each time we press the button, before server request, we can set the flag property to true and add a current u.id to the 
+following_unfollowingIds in the initialState.  then the page will rerender and we can determin if we want to disable this button by checking
+if we have current u.id in the following_unfollowingIds - if it has - then disable the button.  Then in a stack que will go server request, after
+ we will receive response and in the response we will change the flag to false and will remove u.id from the following_unfollowingIds, so when
+ react will rerender the next time he will not find this u.id and will make the button available.
+   to check for matching id use method some(). to remove needed id use method filter() in the reducer
+   - create the pipeline to change the flag and add and remove users id
 
 LESSON#63
 ENCAPSULATING SERVER REQUESTS IN TO DAL - data access layer. 

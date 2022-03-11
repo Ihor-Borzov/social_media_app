@@ -44,19 +44,13 @@ return(
         <div className={style.button_wrapper}>  ....Subscribe.... 
         {u.followed
              ? <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})}   onClick={()=>{ 
-                props.toggleIsFollowingProgress(true, u.id)
-                usersAPI.unfollow(u.id).then((resultCode)=>{
-                    if(resultCode===0){props.unfollow(u.id)}
-                    props.toggleIsFollowingProgress(false, u.id)
-                })  
+props.unfollow(u.id);
         }}>   Unfollow  </button>
 
+
+
              : <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})} onClick={()=>{
-props.toggleIsFollowingProgress(true, u.id)
-usersAPI.follow(u.id).then((resultCode)=>{
-    if(resultCode===0){props.follow(u.id)}
-    props.toggleIsFollowingProgress(false, u.id)
-})
+props.follow(u.id);
 }}>   follow  </button>
             }
          </div>

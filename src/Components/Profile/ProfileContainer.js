@@ -1,10 +1,9 @@
-import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import {setUserProfile} from '../../Redux/profile-reducer'
+import {getUserProfile} from '../../Redux/profile-reducer'
 import { useMatch } from 'react-router-dom'
-import { profileAPI } from '../../api/api'
+
 
 
 
@@ -16,12 +15,7 @@ let userId
 if(!this.props.match){userId=2}
 else {userId=this.props.match.params.userId}
 
-
-
-profileAPI.getUserProfile(userId).then((data)=>{
-    this.props.setUserProfile(data)
-})
-
+this.props.getUserProfile(userId);
 }
 
 
@@ -52,4 +46,4 @@ let ProfileMatchComponent = (props)=>{
 
 
 
-export default connect(mapStateToProps,{setUserProfile})(ProfileMatchComponent);
+export default connect(mapStateToProps,{getUserProfile})(ProfileMatchComponent);

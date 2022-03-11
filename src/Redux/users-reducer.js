@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api"
+
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
@@ -99,13 +101,13 @@ return{...state,
 
 
 
-export let follow =(userId)=>{
+export let followSuccess =(userId)=>{
     return{
         type:FOLLOW, userId               /* when you do not specify the value of a property, but property name matches the receiving parameter name - then that property takes value of that parameter   */
     }
 }
 
-export let unfollow = (userId)=>{
+export let unfollowSuccess = (userId)=>{
     return{
         type:UNFOLLOW, userId
     }
@@ -139,13 +141,65 @@ export let toggleIsFetching = (isFetching)=>{
 }
 
 
-
 export let toggleIsFollowingProgress = (check, id)=>{
     
     return(
         {type:TOGGLE_IS_FOLLOWING_PROGRESS, check, id}
     )
 }
+
+
+
+
+
+
+
+
+export const getUsers = (currentPage, pageSize)=>{
+return(
+(dispatch)=>{
+    dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+        .then(dataResponse => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(dataResponse.items))
+            dispatch(setTotalUsersCount(dataResponse.totalCount/100))
+        })
+}
+)
+}
+
+
+
+
+export const follow = (userId)=>{
+    return(
+        (dispatch)=>{
+            dispatch(toggleIsFollowingProgress(true, userId))
+            usersAPI.follow(userId).then((resultCode)=>{
+                if(resultCode===0){dispatch(followSuccess(userId))}
+                dispatch(toggleIsFollowingProgress(false, userId))
+            })
+        }
+    )
+}
+
+
+
+export const unfollow = (userId)=>{
+    return(
+        (dispatch)=>{
+            dispatch(toggleIsFollowingProgress(true, userId));
+            usersAPI.unfollow(userId).then((resultCode)=>{
+                if(resultCode===0){dispatch(unfollowSuccess(userId))}
+                dispatch(toggleIsFollowingProgress(false, userId))
+            })  
+        }
+    )
+}
+
+
+
 
 
 

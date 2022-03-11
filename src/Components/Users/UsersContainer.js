@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow, toggleIsFollowingProgress } from "../../Redux/users-reducer";
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow, toggleIsFollowingProgress, getUsers } from "../../Redux/users-reducer";
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
@@ -13,28 +13,12 @@ class UsersContainerComponent extends React.Component {
     /* since we do not make a request from the constructor, and constructor only sends props to his parent constructor at React.Component, we may not write our constructor - it will do its work automatically   */
     
     componentDidMount(){
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        .then(dataResponse => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(dataResponse.items)
-            this.props.setTotalUsersCount(dataResponse.totalCount/100);
-        })
+this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
-    
-    
     
     setCurrentPage=(page)=>{
     this.props.setCurrentPage(page);
-    this.props.toggleIsFetching(true);
-
-usersAPI.getUsers(page, this.props.pageSize)
-    .then(dataResponse => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(dataResponse.items);   
-    this.props.setTotalUsersCount(dataResponse.totalCount/100);     /* get total count from response and dispatch it to the state  */
-    });
-    
+    this.props.getUsers(page, this.props.pageSize);
     }
     
     render = ()=>{
@@ -81,6 +65,7 @@ following_unfollowingIds:state.usersPage.following_unfollowingIds,
 
 
 export default connect(mapStateToProps, { 
+    getUsers,
     follow,
     unfollow,
     setUsers,
