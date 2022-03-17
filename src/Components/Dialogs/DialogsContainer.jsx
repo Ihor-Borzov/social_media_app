@@ -18,6 +18,7 @@ let mapStoreToProps = (state)=>{
 return{
     dialogsPage :state.dialogsPage,
     navBarPage : state.navBarPage,
+    isAuth : state.auth.isAuth
 }
 }
 

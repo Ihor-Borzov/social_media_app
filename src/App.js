@@ -10,6 +10,7 @@ import Nav_barContainer from './Components/Nav-bar/Nav_barContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
+import Login from './Components/Login/Login';
 
 
 function App(props) {
@@ -32,6 +33,8 @@ function App(props) {
   <Route path="/settings/*" element={<Settings/>}/>  
 
   <Route path="/users/*" element={<UsersContainer/>}/>  
+
+  <Route path="/login/*" element={<Login/>}/>  {/* this is redirect component we do not show it at the Nav-bar */}
   </Routes> 
 </div> 
 </BrowserRouter>

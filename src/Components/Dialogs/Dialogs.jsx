@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/dialogs-reducer';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
@@ -39,6 +39,10 @@ props.updateUserInput(text)
 function onSendMessage (){
 props.sendMessage();
 }
+
+
+
+if(!props.isAuth){return(<Navigate to="/login"/>)}
 
 
 return(

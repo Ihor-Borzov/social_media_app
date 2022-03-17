@@ -30,7 +30,8 @@ return(
 
 let mapStateToProps =(state)=>{
     return{
-        userProfile : state.myPostsPage.userProfile
+        userProfile : state.myPostsPage.userProfile,
+        isAuth : state.auth.isAuth
     }
 
 }
