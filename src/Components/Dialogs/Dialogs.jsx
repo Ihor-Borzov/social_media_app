@@ -42,9 +42,6 @@ props.sendMessage();
 
 
 
-if(!props.isAuth){return(<Navigate to="/login"/>)}
-
-
 return(
     <div className={s.content}>
 
