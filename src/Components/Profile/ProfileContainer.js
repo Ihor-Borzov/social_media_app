@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
 import {getUserProfile} from '../../Redux/profile-reducer'
-import { useMatch } from 'react-router-dom'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
+import { withMatchIdUrl } from '../../HOC/withMatchIdUrl'
+import { compose } from 'redux'
 
 
 
@@ -38,17 +39,16 @@ let mapStateToProps =(state)=>{
 }
 
 
-/* #1 lesson#60 */
-let ProfileMatchComponent = (props)=>{
-    let match = useMatch("/profile/:userId");
-    return(
-        <ProfileContainer {...props} match={match} />
-    )
-}
-
-
-let AuthRedirectComponent = withAuthRedirect(ProfileMatchComponent)
+/* this is the way i did before compose  */
+// let ProfileMatchComponent = withMatchIdUrl(ProfileContainer);
+// let AuthRedirectComponent = withAuthRedirect(ProfileMatchComponent);
+// export default connect(mapStateToProps,{getUserProfile})(AuthRedirectComponent);
 
 
 
-export default connect(mapStateToProps,{getUserProfile})(AuthRedirectComponent);
+
+ export default compose(
+    connect(mapStateToProps,{getUserProfile}),
+    withAuthRedirect,
+    withMatchIdUrl
+)(ProfileContainer);

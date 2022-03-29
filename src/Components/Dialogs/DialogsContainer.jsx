@@ -1,5 +1,6 @@
 
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/dialogs-reducer';
 import Dialogs from './Dialogs';
@@ -22,12 +23,7 @@ let mapDispatchToProps=(dispatch)=>{
     }
 }
 
-/* connect returns new container component 
-  How it works... 
-  function connect creates container component, inside that container component it renders presentational component
-  and sends to presentational component attributes what sits in those two objects (as Properties) from functions f1 and f2
-so in the Dialogs you will get props.a props.b
- */
+
 
 
 /* lesson#47.2 inside connect is a local subscriber function to change the app when changed the state:
@@ -46,11 +42,12 @@ so in the Dialogs you will get props.a props.b
 
 
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
+// let AuthRedirectComponent = withAuthRedirect(Dialogs);
+// const DialogsContainer = connect(mapStoreToProps,mapDispatchToProps)(AuthRedirectComponent);
+// export default DialogsContainer;
 
 
-const DialogsContainer = connect(mapStoreToProps,mapDispatchToProps)(AuthRedirectComponent);
-
-
-
-export default DialogsContainer;
+export default compose(
+  connect(mapStoreToProps,mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs)

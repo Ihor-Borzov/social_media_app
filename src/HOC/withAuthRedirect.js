@@ -4,6 +4,7 @@ the parameter isAuth */
 import React from "react"
 import { connect } from "react-redux"
 import { Navigate } from "react-router-dom"
+import { withMatchIdUrl } from "./withMatchIdUrl"
 
 
 let mapStateToProps = (state)=>{
@@ -11,6 +12,8 @@ let mapStateToProps = (state)=>{
         isAuth:state.auth.isAuth,
     })
 }
+
+
 
 
 
