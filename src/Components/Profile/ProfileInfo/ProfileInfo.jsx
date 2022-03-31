@@ -2,6 +2,7 @@ import React from 'react';
 import Preloader from '../../common/preloader/Preloader';
 import s from "./ProfileInfo.module.css";
 import blankUserPicture from '../../../assets/images/user.jpg'
+import AboutMe from './AboutMe';
 
 
 
@@ -28,7 +29,7 @@ function ProfileInfo (props){
         
         <div className={s.fullName} > {props.userProfile.fullName} </div>
         <div className= {s.location}> {props.userProfile.lookingForAJobDescription? props.userProfile.lookingForAJobDescription :"United States of Enchanted World"}</div>
-        <div className={s.aboutMe}> {props.userProfile.aboutMe? props.userProfile.aboutMe  :"I am a cool dude from the world you never been before"}</div>
+        <div className={s.aboutMe}> <AboutMe aboutMe={props.userProfile.aboutMe}/></div>
         
         <ul className={s.item_social}>
         

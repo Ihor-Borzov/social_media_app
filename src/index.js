@@ -9,23 +9,11 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#69 HOC
-- HOC is a function, what expects an argument - component.creates the containerComponent with some functionality and the renders inner component
-tis way our inner component receives functionality been wrapped in a containerComponent with functionality.
-- HOW TO PERFORM IT?
-- create a function in a separate file. src->HOC->withAuthRedirect this function should expect a component as an argument and be exported,
-- inside the function create class component which will have needed functionality and will render received function at the end.
-- also if you need to get some state or dispatch use function connect inside the function withAuthRedirect and pass to connect your class component
-- then just return result of connect out from the function withAuthRedirect.
-- then at the file where you call this function withAuthRedirect you will receive : let WithRedirect = withAuthRedirect(Component)
-1. the class component with some props, what connect function returns: withRedirectConnectClassComponent
-2. inside that withRedirectConnectClassComponent we will get our HOCClassContainer what we wrote in  the function withAuthRedirect
-3. HOCClassContainer inside will have our component which needs to be rendered
-- then all this package (WithRedirect) we put in our main connect as a component.
-so here is the pipe line who renders whom.:
--mainConnect->withRedirectConnectClassComponent->HOCClassContainer->Component
-
-- it could be more components, the one rule : you insert your HOC in the main connect and then do the render in whatever sequence you like 
+LESSON#71  CREATING THE LOCAL STATE
+- the  local state you can create only for a class component. Because class component creates an object what can have some properties, 
+and functional component you can only invoke, execute, but can not add properties
+- to change the state you have to use a method this.SetState - this method is asynchronous (keep that in mind, they can ask you at interview)
+and this method will rerender the page after changing thew local State. 
 
  */
 
@@ -47,6 +35,24 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON#69 HOC
+- HOC is a function, what expects an argument - component.creates the containerComponent with some functionality and the renders inner component
+tis way our inner component receives functionality been wrapped in a containerComponent with functionality.
+- HOW TO PERFORM IT?
+- create a function in a separate file. src->HOC->withAuthRedirect this function should expect a component as an argument and be exported,
+- inside the function create class component which will have needed functionality and will render received function at the end.
+- also if you need to get some state or dispatch use function connect inside the function withAuthRedirect and pass to connect your class component
+- then just return result of connect out from the function withAuthRedirect.
+- then at the file where you call this function withAuthRedirect you will receive : let WithRedirect = withAuthRedirect(Component)
+1. the class component with some props, what connect function returns: withRedirectConnectClassComponent
+2. inside that withRedirectConnectClassComponent we will get our HOCClassContainer what we wrote in  the function withAuthRedirect
+3. HOCClassContainer inside will have our component which needs to be rendered
+- then all this package (WithRedirect) we put in our main connect as a component.
+so here is the pipe line who renders whom.:
+-mainConnect->withRedirectConnectClassComponent->HOCClassContainer->Component
+
+- it could be more components, the one rule : you insert your HOC in the main connect and then do the render in whatever sequence you like 
+
 
 LESSON#68   REDIRECT (NAVIGATE)
 - to redirect user from some page to another:  inside the functional component before return write a check
