@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
-import {getUserProfile} from '../../Redux/profile-reducer'
+import {getUserProfile, getStatus, updateStatus} from '../../Redux/profile-reducer'
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import { withMatchIdUrl } from '../../HOC/withMatchIdUrl'
 import { compose } from 'redux'
@@ -17,7 +17,9 @@ let userId
 if(!this.props.match){userId=2}
 else {userId=this.props.match.params.userId}
 
+
 this.props.getUserProfile(userId);
+this.props.getStatus(userId);        
 }
 
 
@@ -33,7 +35,8 @@ return(
 let mapStateToProps =(state)=>{
     return{
         userProfile : state.myPostsPage.userProfile,
-        isAuth : state.auth.isAuth
+        isAuth : state.auth.isAuth,
+        status: state.myPostsPage.status
     }
 
 }
@@ -48,7 +51,7 @@ let mapStateToProps =(state)=>{
 
 
  export default compose(
-    connect(mapStateToProps,{getUserProfile}),
+    connect(mapStateToProps,{getUserProfile, getStatus, updateStatus}),
     withAuthRedirect,
     withMatchIdUrl
 )(ProfileContainer);

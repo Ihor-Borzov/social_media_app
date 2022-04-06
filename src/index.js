@@ -9,6 +9,15 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON#73
+IMPORTANT: response from put request on profile/status does not return updated status - it just set it at the server but does not return it to you,
+in response. you have to set your global state from the argument (status) you receive to your thunk !!!
+
+- create pipeline to getStatus.; create pipeline to setStatus.
+the span in Profile status has to get value fro the global state,
+the input has to get the value from local state. when input onBlur he has to change the global state and change the status on the server
+
+
 LESSON#71  CREATING THE LOCAL STATE
 - the  local state you can create only for a class component. Because class component creates an object what can have some properties, 
 and functional component you can only invoke, execute, but can not add properties

@@ -46,11 +46,14 @@ margin:10px;
     font-weight: bold;
 }
 
-.aboutMe{
-
+.about{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin:10px 0 0 10px; 
     font-weight: bold;
+}
+
+.profileStatus{
+    margin-top:10px;
 }
 
 

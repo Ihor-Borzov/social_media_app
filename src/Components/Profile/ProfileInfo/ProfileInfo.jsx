@@ -2,7 +2,7 @@ import React from 'react';
 import Preloader from '../../common/preloader/Preloader';
 import s from "./ProfileInfo.module.css";
 import blankUserPicture from '../../../assets/images/user.jpg'
-import AboutMe from './AboutMe';
+import ProfileStatus from './ProfileStatus';
 
 
 
@@ -29,7 +29,11 @@ function ProfileInfo (props){
         
         <div className={s.fullName} > {props.userProfile.fullName} </div>
         <div className= {s.location}> {props.userProfile.lookingForAJobDescription? props.userProfile.lookingForAJobDescription :"United States of Enchanted World"}</div>
-        <div className={s.aboutMe}> <AboutMe aboutMe={props.userProfile.aboutMe}/></div>
+       
+        <div className={s.about}>
+            <div>{props.userProfile.aboutMe}</div> 
+      <div className={s.profileStatus} >  <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>    </div>
+        </div>
         
         <ul className={s.item_social}>
         
