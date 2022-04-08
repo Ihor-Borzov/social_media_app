@@ -9,20 +9,16 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
-LESSON#73
-IMPORTANT: response from put request on profile/status does not return updated status - it just set it at the server but does not return it to you,
-in response. you have to set your global state from the argument (status) you receive to your thunk !!!
-
-- create pipeline to getStatus.; create pipeline to setStatus.
-the span in Profile status has to get value fro the global state,
-the input has to get the value from local state. when input onBlur he has to change the global state and change the status on the server
-
-
-LESSON#71  CREATING THE LOCAL STATE
-- the  local state you can create only for a class component. Because class component creates an object what can have some properties, 
-and functional component you can only invoke, execute, but can not add properties
-- to change the state you have to use a method this.SetState - this method is asynchronous (keep that in mind, they can ask you at interview)
-and this method will rerender the page after changing thew local State. 
+LESSON#75   REDUX-FORM
+- npm install redux-form
+- create login page with form in a separate component
+- import redux form reducer in to our store  (import {reducer as formReducer} from 'redux-form')
+         let reducers = combineReducers({reducer1:..., form:formReducer})
+- wrap LoginForm component into Redux-form HOC
+- all the input tags change to <field></field> add to each of them attribute "component="input"" what will
+     specify what kind of tag you want to render, also add to each of them attribute "name"
+- set eventListener <form onSubmit={props.handleSubmit}>...</form>, and create a method onSubmit=(whichReceivesData)=>{},
+ in a component what renders React-form HOC  and pass this method through props to React-form HOC  
 
  */
 
@@ -44,6 +40,22 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON#73
+IMPORTANT: response from put request on profile/status does not return updated status - it just set it at the server but does not return it to you,
+in response. you have to set your global state from the argument (status) you receive to your thunk !!!
+
+- create pipeline to getStatus.; create pipeline to setStatus.
+the span in Profile status has to get value fro the global state,
+the input has to get the value from local state. when input onBlur he has to change the global state and change the status on the server
+
+
+LESSON#71  CREATING THE LOCAL STATE
+- the  local state you can create only for a class component. Because class component creates an object what can have some properties, 
+and functional component you can only invoke, execute, but can not add properties
+- to change the state you have to use a method this.SetState - this method is asynchronous (keep that in mind, they can ask you at interview)
+and this method will rerender the page after changing thew local State. 
+
+
 LESSON#69 HOC
 - HOC is a function, what expects an argument - component.creates the containerComponent with some functionality and the renders inner component
 tis way our inner component receives functionality been wrapped in a containerComponent with functionality.
