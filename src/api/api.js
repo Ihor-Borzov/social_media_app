@@ -89,8 +89,13 @@ authenticate:()=>{
         })
     )
    
-}
+},
 
+
+login:(data)=>{
+    return(
+        instance.post('auth/login/',data)
+    )}
 
 
 }
