@@ -14,7 +14,7 @@ class ProfileContainer extends React.Component{
 componentDidMount=()=>{
 
 let userId
-if(!this.props.match){userId=2}    /* my id is = 22624 */
+if(!this.props.match){userId= 22624}    /* my id is = 22624 */
 else {userId=this.props.match.params.userId}
 
 

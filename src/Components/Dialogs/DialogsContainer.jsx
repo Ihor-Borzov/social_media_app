@@ -2,12 +2,12 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
-import { sendUserMessageCreator, updateUserMessageInputCreator } from '../../Redux/dialogs-reducer';
+import { sendUserMessageCreator } from '../../Redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 
 
 
-let mapStoreToProps = (state)=>{
+let mapStateToProps = (state)=>{
 return{
     dialogsPage :state.dialogsPage,
     navBarPage : state.navBarPage,
@@ -18,8 +18,7 @@ return{
 
 let mapDispatchToProps=(dispatch)=>{
     return{
-        updateUserInput:(text)=>{dispatch(updateUserMessageInputCreator(text));},
-        sendMessage:()=>{dispatch(sendUserMessageCreator());},
+        sendMessage:(data)=>{dispatch(sendUserMessageCreator(data));},
     }
 }
 
@@ -48,6 +47,6 @@ let mapDispatchToProps=(dispatch)=>{
 
 
 export default compose(
-  connect(mapStoreToProps,mapDispatchToProps),
+  connect(mapStateToProps,mapDispatchToProps),
   withAuthRedirect
 )(Dialogs)

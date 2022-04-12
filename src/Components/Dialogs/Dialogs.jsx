@@ -1,4 +1,6 @@
 import React from 'react';
+import { Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
@@ -13,28 +15,9 @@ let displayedDialogs = props.navBarPage.friendData.map((dialogObject)=><DialogIt
 let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}  id={messageObject.id} key={messageObject.id} />)    /* this is the way we create new array with  JSX markup */
 
 
-/*  let textushechka = React.createRef();  */    /* there is no need for reference anymore, because I use e.target*/
-
-/* onKeyUp={()=>{textAreaAdjust(textushechka)}} */
-
-/* function textAreaAdjust(element) {
-    let a =   element.current.style.height
-    a = a.slice(0,-3);
-    console.log(a);
-    if (a<15){   
-      element.current.style.height = ( 2+ element.current.scrollHeight)+"px";}
-    }
-    
- */
-
-    let onUpdateUserInput = (e)=>{
-      let text = e.target.value;
-props.updateUserInput(text)
-    }
-
-
-function onSendMessage (){
-props.sendMessage();
+function onSendMessage (data){
+    alert(data.usersText)
+props.sendMessage(data.usersText);
 }
 
 
@@ -56,13 +39,35 @@ return(
 
 
  <div className={s.textWrapper}>
-    <textarea /* ref={textushechka} */ className={s.userInput_text} onChange={onUpdateUserInput} value={props.dialogsPage.userInputMessage} placeholder="type the message" >  </textarea>   
-     <button className={s.buttonSend}   onClick={onSendMessage} >Send</button>
+
+<DialogsReduxForm onSubmit={onSendMessage}/> 
+  
  </div> 
         </div>
         
     </div>
 )
 }
+
+
+
+
+const DialogsForm=(props)=>{
+
+    return(
+        <form  onSubmit={props.handleSubmit}  >
+
+<Field component="input" className={s.userInput_text}  placeholder="type the message" name="usersText"></Field>   
+     <button className={s.buttonSend} >Send</button>
+
+        </form>
+    )
+
+}
+
+
+
+const DialogsReduxForm = reduxForm({form:"dialogsForm"})(DialogsForm)
+
 
 export default Dialogs;
