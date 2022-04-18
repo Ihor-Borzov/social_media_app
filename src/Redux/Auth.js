@@ -72,6 +72,13 @@ export const loginThunk =(data)=>{
                 if (response.data.resultCode===0){
                     dispatch(loginAC(data))
                     
+                    authenticationAPI.authenticate().then((response)=>{
+                        if(response.resultCode===0){
+                            let {id, email, login} = response.data;
+                          dispatch(authorizationAC(id,email,login))
+                        }
+                    })
+
                     }
             })
         }

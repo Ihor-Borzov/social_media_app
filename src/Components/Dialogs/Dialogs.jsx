@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
+import { maxChar, required } from '../../Utilities/FormValidators/validators';
+import { Input } from '../common/FormControls/FormControls';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
@@ -50,14 +52,14 @@ return(
 }
 
 
-
+let maximumChar = maxChar(10) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 const DialogsForm=(props)=>{
 
     return(
         <form  onSubmit={props.handleSubmit}  >
 
-<Field component="input" className={s.userInput_text}  placeholder="type the message" name="usersText"></Field>   
+<Field component={Input} className={s.userInput_text}  placeholder="type the message" name="usersText"  validate={[required, maximumChar]} ></Field>   
      <button className={s.buttonSend} >Send</button>
 
         </form>

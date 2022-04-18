@@ -9,6 +9,19 @@ import { Provider } from 'react-redux';          /* react-redux#2  import contex
 
 
 /*############# EVERY LESSON SUMMARY:
+Lesson#77  Redux-Form validators:
+- to add a validator to redux-from first you have to  create a function Validator, this function receives input and returns undefined if everything
+is ok or returns a string with an error message if the value is invalid {you specify it with logic}.
+- then you can import your validators in to the file with your form and pass it as a parameter to attribute "validate={[validator,]}" to
+to corresponding field you want to validate. your form will automatically deny submitting if the input is invalid.
+- to be able to do any UI changes with the errors - you have to pass the validators not to regular attribute "component='input'" but you
+have to create your custom component and pass everything to it <Field component={MyInput} name="postText" placeholder:"message"/>
+-  MyInput will receive props which will include : input, meta, ...otherProps.   input - has validators and other functions inside itself,
+meta contains all the information about this field: touched, error ... and otherProps contains placeholder and other not very important props.
+ - all that information you have to pass to the actual tag you will be render, but you can sat css for that tag depending on the changes in 
+ your field, what validators will return. remember each time you change something redux-form rerender component.
+
+
 LESSON#75   REDUX-FORM
 - npm install redux-form
 - create login page with form in a separate component
