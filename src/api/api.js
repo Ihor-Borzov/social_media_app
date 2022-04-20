@@ -95,7 +95,15 @@ authenticate:()=>{
 login:(data)=>{
     return(
         instance.post('auth/login/',data)
-    )}
+    )},
+
+
+
+    logout:()=>{
+        return(
+            instance.delete('auth/login/')
+        )
+    }
 
 
 }

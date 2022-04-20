@@ -1,28 +1,29 @@
 import React from "react"
 import { connect } from "react-redux"
+import { Navigate } from "react-router-dom"
 import { reduxForm } from "redux-form"
 import { Field } from "redux-form"
 import {loginThunk} from "../../Redux/Auth"
 import { maxChar, required } from "../../Utilities/FormValidators/validators"
 import { Input } from "../common/FormControls/FormControls"
 
-//! HOW TO RERENDER HEADER WHEN I RERENDER MY LOGIN COMPONENT
+
 
 class Login extends React.Component{
+
 componentDidUpdate=()=>{
     //alert("updated")
 }
-    render=()=>{
 
-        let onSubmit=(data)=>{
-            this.props.loginThunk(data)
-            }
-    
+onSubmit = (data)=>{
+    this.props.loginThunk(data)
+    }
+
+    render=()=>{
         return(
     <div>
     <div>LOGIN please !</div>
-    {this.props.isAuth? <span>You are successfully logged in</span> : null}
-    <LoginReduxForm onSubmit={onSubmit}/>
+    {this.props.isAuth? <Navigate to="/profile"/> : <LoginReduxForm onSubmit={this.onSubmit}/> }
     </div>
         )
     }
@@ -58,7 +59,7 @@ let Login = (props)=>{
 let maximumChar = maxChar(20) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 let LoginForm=(props)=>{
-    alert("component rerendered")
+    
     return(
         <form onSubmit={props.handleSubmit}>
 <div><Field placeholder='email' component={Input} name="email"  validate={[required, maximumChar]}  ></Field></div>

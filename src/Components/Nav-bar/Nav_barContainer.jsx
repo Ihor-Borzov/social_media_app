@@ -5,6 +5,7 @@ import StoreContext from '../../StoreContext';
 import Friend from './Friend/Friend';
 import Nav_bar from './Nav_bar';
 import s from "./Nav_bar.module.css";
+import {logoutThunk} from "../../Redux/Auth"
 
 
 
@@ -18,7 +19,7 @@ let mapStoreToProps = (state)=>{
   
   let mapDispatchToProps=(dispatch)=>{
       return{
-         
+        
       }
   }
   

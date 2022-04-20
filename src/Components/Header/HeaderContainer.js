@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import { connect } from 'react-redux'
-import {authenticate}from "../../Redux/Auth"
+import {authenticate, logoutThunk}from "../../Redux/Auth"
 
 
 
@@ -32,4 +32,4 @@ login:state.auth.login,
 
 
 
-export default connect(mapStateToProps,{authenticate})(HeaderContainer)
+export default connect(mapStateToProps,{authenticate, logoutThunk})(HeaderContainer)
