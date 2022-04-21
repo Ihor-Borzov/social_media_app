@@ -6,6 +6,7 @@ import { Field } from "redux-form"
 import {loginThunk} from "../../Redux/Auth"
 import { maxChar, required } from "../../Utilities/FormValidators/validators"
 import { Input } from "../common/FormControls/FormControls"
+import style from '../common/FormControls/FormControls.module.css'
 
 
 
@@ -59,7 +60,7 @@ let Login = (props)=>{
 let maximumChar = maxChar(20) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 let LoginForm=(props)=>{
-    
+
     return(
         <form onSubmit={props.handleSubmit}>
 <div><Field placeholder='email' component={Input} name="email"  validate={[required, maximumChar]}  ></Field></div>
@@ -70,6 +71,7 @@ let LoginForm=(props)=>{
     remember me
     </label>
     </div>
+    {props.error && <div className={style.commonError}> {props.error}</div>}
 <button>Submit</button>          
         </form>
     )

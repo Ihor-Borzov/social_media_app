@@ -13,3 +13,8 @@
 .formControle.error span{
     color:red;
 }
+
+.commonError{
+color:red;
+padding:5px;
+}

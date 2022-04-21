@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form"
 import { authenticationAPI } from "../api/api"
 
 const SET_USERS_DATA = 'SET_USERS_DATA'
@@ -68,6 +69,7 @@ export const loginThunk =(data)=>{
                 if (response.data.resultCode===0){
                     dispatch(authenticate());      /* we call authenticate to update Header !*/
                     }
+                    else{dispatch(stopSubmit("login",{_error:response.data.messages[0]}))}
             })
         }
     )
