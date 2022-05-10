@@ -13,7 +13,7 @@ function Header (props){
 <div className={s.loginBlock}>
 {
 props.isAuth?   <div>  {props.login}   <button onClick={props.logoutThunk}>Logout</button> </div> 
-:<NavLink to={'/login'}>Login</NavLink>}
+:<NavLink to={'/login'}>Login</NavLink>}     {/* this is redirect to Login page if isAuth is false */}
 </div>
 
 

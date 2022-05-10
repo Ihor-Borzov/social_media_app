@@ -31,6 +31,33 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+LESSON#80
+issue: when you press on the button messages and then press reload : you load the header then header make auth server request, 
+you load the messages, but the server request did not get back yet (it is asynchronous), so messages redirect you to the Login page - you
+ get to the login page but then your request gets back and isAuth becams true and Login page redirects you to the Profile page. That glitch 
+ happens because of the delay of the data we receive. we rerendering pages with information, which is not full (because when we press reload
+  we make auth request, but auth request takes time to be executed, because it is server request) that is why first browser tries to render dialogs
+  then he sees that user is not authorized, because request is still going - he sends us to the login, then we receive response from server
+   isAuth becomes true and login page moves us to the profile.
+To fix that - we have to prevent anything from rendering until we doing authentication
+for that the component app will be responsible to wait and show us preloader until authentication is going - for that we have to use promises and
+method then and also set a variable "marker" which will get true when authentication is finished  with no matter user authorized or not
+(for that we have to change the marker from true to false only when all the async authentication requests finished and we received response.
+  just execute the function which changes the "marker" last in the method .then)
+
+ - change functional app.js to class component
+ - remove authorization from the HeaderContainer
+ - create app-reducer.js
+ - invoke authenticate function from auth-reducer in the thunk of app-reducer (initializeApp) : ror that we have to return our promise (in the authenticate
+   function it is the server request - so just return the whole server request)
+ - let that request to execute and then in the method .then call another function which will change your marker  in app-reducer to true .  
+ !!! remember each method then   returns a promise
+ - in the app component in componentDidMount invoke initializeApp() and in the render method set if statement which will check the marker and
+ will show the preloader in marker is false
+
+ 
+
+
 LESSON#79 how to show error from the server response
 - whenever you send server request to login - you  may succeed or fail depends of the data (login, password) you specified.
 So if you succeed the server will return resultCode === 0 but if you failed the resultCode !=0

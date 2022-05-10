@@ -46,6 +46,8 @@ export let authorizationAC=(id,email,login, isAuth)=>{return({type:SET_USERS_DAT
 export const authenticate = ()=>{
     return(
         (dispatch)=>{
+
+            return(
             authenticationAPI.authenticate().then((response)=>{
                 if(response.resultCode===0){
                     let {id, email, login} = response.data;
@@ -53,6 +55,7 @@ export const authenticate = ()=>{
                 }
                 else {dispatch(authorizationAC(null,null,null,false))}
             })
+            )  /* end of return */
         }
     )
 }

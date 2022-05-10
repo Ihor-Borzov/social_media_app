@@ -7,7 +7,7 @@ import {authenticate, logoutThunk}from "../../Redux/Auth"
 
 class HeaderContainer extends React.Component{
 componentDidMount=()=>{
-    this.props.authenticate();
+    //this.props.authenticate();
 }
 
 
@@ -32,4 +32,4 @@ login:state.auth.login,
 
 
 
-export default connect(mapStateToProps,{authenticate, logoutThunk})(HeaderContainer)
+export default connect(mapStateToProps,{logoutThunk})(HeaderContainer)
