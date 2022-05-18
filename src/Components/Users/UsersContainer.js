@@ -5,6 +5,7 @@ import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import { usersAPI } from "../../api/api";
+import { getCurrentPage, getFollow_unfollowUserIds, getIsFetching, getPageSize, getUsersCount, getUsersSelect, getUsersSuperReselector } from "../../Redux/user-selector";
 
 
 
@@ -49,12 +50,12 @@ this.props.getUsers(this.props.currentPage, this.props.pageSize);
 
 let mapStateToProps =(state)=>{
     return{
-users: state.usersPage.users,
-pageSize:state.usersPage.pageSize,
-totalUsersCount:state.usersPage.totalUsersCount,
-currentPage:state.usersPage.currentPage,
-isFetching:state.usersPage.isFetching,
-following_unfollowingIds:state.usersPage.following_unfollowingIds,
+users:getUsersSuperReselector(state),
+pageSize:getPageSize(state),
+totalUsersCount:getUsersCount(state),
+currentPage:getCurrentPage(state),
+isFetching:getIsFetching(state),
+following_unfollowingIds:getFollow_unfollowUserIds(state),
     }
 }
 

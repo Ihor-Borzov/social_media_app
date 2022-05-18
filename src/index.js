@@ -31,6 +31,15 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+Lesson#83
+Implemented library reselect
+Selector is a function what expects whole global state, takes from it some piece  and returns that particular piece of state
+We create primitive selector which does nothing but extracts needed us piece of state from global state. We call those selectors
+ - dependences - because the state they extract will be determining if we will call main reselect.
+#2 create main reselect function with the help of createSelector() method what returns selector. That method expects dependences-
+(primitive selectors) and callback with main selecting logic. the callback gets in his parameters the return from each dependence selector (which is piece of state), and calculation happens on that piece of state.
+
+
 LESSON#80
 issue: when you press on the button messages and then press reload : you load the header then header make auth server request, 
 you load the messages, but the server request did not get back yet (it is asynchronous), so messages redirect you to the Login page - you
