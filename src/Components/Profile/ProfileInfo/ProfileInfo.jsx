@@ -3,6 +3,7 @@ import Preloader from '../../common/preloader/Preloader';
 import s from "./ProfileInfo.module.css";
 import blankUserPicture from '../../../assets/images/user.jpg'
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusHooks from './ProfileStatusHooks';
 
 
 
@@ -32,7 +33,7 @@ function ProfileInfo (props){
        
         <div className={s.about}>
             <div>{props.userProfile.aboutMe}</div> 
-      <div className={s.profileStatus} >  <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>    </div>
+      <div className={s.profileStatus} >  <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus}/>    </div>
         </div>
         
         <ul className={s.item_social}>
