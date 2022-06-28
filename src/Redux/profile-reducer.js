@@ -3,15 +3,16 @@ import { profileAPI } from "../api/api";
 const ADD_NEW_POST = "ADD_NEW_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const REMOVE_POST = "REMOVE_POST"
 
 
 
 /*#6 create an object to assign launch characteristics for the main state.  this is the way we set up our state when we first time start the app */
 let initialState = {
     postsData: [
-        { likes: "10", message: "some message" },
-        { likes: "12", message: "momolongmo" },
-        { likes: "11", message: "some hurucasami" },
+        {id:0, likes: "10", message: "some message" },
+        { id:1, likes: "12", message: "momolongmo" },
+        {id:2, likes: "11", message: "some hurucasami" },
     ],
 
 
@@ -25,7 +26,7 @@ const profileReducer =(state = initialState, action)=>{
 switch(action.type){
 
 case ADD_NEW_POST:
-    return {...state,   postsData:[...state.postsData, {likes:5,message:action.text }]};
+    return {...state,   postsData:[...state.postsData, { id:state.postsData.length, likes:5,message:action.text }]};
 /*     stateCopy.postsData = [...state.postsData];
     stateCopy.postsData.push({
             likes:5,
@@ -33,6 +34,12 @@ case ADD_NEW_POST:
         })
         stateCopy.newPostText = "";
 return stateCopy; */
+
+
+case REMOVE_POST:
+    return{
+        ...state, postsData:state.postsData.filter(p=>p.id!=action.id)
+    }
 
 case SET_USER_PROFILE:
     return{...state, userProfile:action.userProfile}
@@ -58,6 +65,13 @@ text
     }
 }
 
+export const removePost = (id)=>{
+    return{
+        type:REMOVE_POST,
+        id
+    }
+}
+
 export const setUserProfile = (userProfile)=>{
     return{type:SET_USER_PROFILE,
     userProfile}
@@ -70,6 +84,8 @@ export const setStatus = (status)=>{
     }
 }
 
+
+ 
 
 
 
