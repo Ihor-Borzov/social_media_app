@@ -4,6 +4,8 @@ import user from '../../assets/images/user.jpg'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { usersAPI } from '../../api/api';
+import Paginator from './Paginator';
+import User from './User';
 
 
 let Users=(props)=>{
@@ -18,86 +20,30 @@ let Users=(props)=>{
 return(
 
     <div className={style.wrapper}>
-    <div className={style.pageNumbers}>
-    
-    
-    {pagesArray.map((page)=>{
-        return <span onClick={(e)=>{props.setCurrentPage(page)}} className={props.currentPage===page ? style.activePage : style.notActivePage}>  {`${page}. `}  </span>
-    })
-    }
-    
-    
-    </div>  
-    {   props.users.map(u=>                                      /* so we start and finish our component with curly braces inside the main div wrapper  */
-    
-    <div key={u.id} className={style.ussers_container}>          {/* first we have to give a key attribute to user wrapper (react requires) */}
-    
-    <div className={style.usser_icon}>
-    <div className={style.wrapper__for_AspectRatio}>
-       <div className={style.imgAspectRatio_wrapper}> 
-           <div className={style.img_wrapper}>  
-<NavLink to={"/profile/" + u.id}>
-               <img src={u.photos.large ?u.photos.large :user} alt="picture"/>   {/* if there is a photo use that photo if not use aa photo from import */}
-               </NavLink>
-            </div>
-        </div>
-        <div className={style.button_wrapper}>  ....Subscribe.... 
-        {u.followed
-             ? <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})}   onClick={()=>{ 
-props.unfollow(u.id);
-        }}>   Unfollow  </button>
+
+        <Paginator totalUsersCount = {props.totalUsersCount}
+         pageSize = {props.pageSize} setCurrentPage = {props.setCurrentPage}
+          currentPage = {props.currentPage}/>
 
 
+    {   props.users.map(u=> {return(<User key = {u.id} user = {u}
+    following_unfollowingIds = {props.following_unfollowingIds}    unfollow = {props.unfollow}   follow = {props.follow}
+    />)})} 
 
-             : <button disabled={props.following_unfollowingIds.some((id)=>{return(id===u.id)})} onClick={()=>{
-props.follow(u.id);
-}}>   follow  </button>
-            }
-         </div>
-    </div>
-    </div>
-    
-    <div className={style.user_info}>
-        <div className={style.name_and_status}>
-            <div className={style.name}>{u.name}</div>
-            <div className={style.status}>{u.status? u.status: "I am lazy and do not have a status"}</div>
-        
-        </div>
-        <div className={style.country_and_city}>
-            <div className={style.country}>{"u.location.country"}</div>
-            <div className={style.city}>{"u.location.city"}</div>
-        </div>
-    </div>
-    
-    </div>
-    
-    ) }
-    </div>
-       
+    </div>   
 )
-
 }
 
 
 export default Users
 
 
+// the specific button renders on the base of the property u.followed (aether it is follow or unfollow ) then when we press the button
+// this particular user id gets in to followingInProgress array in state then sends server request to subscribe or unsubscribe. While server
+// request is in progress we rerender our users - and we check each (follow/unfollow) button if it is in followingInProgress array - 
+//if it means that request is still in process and button gets disabled. When server request resolved it changes user property followed 
+// and removes user.id from the followingInProgress array - so the button changes to opposite and becomes enabled
 
-
-
-
-
-
-
-/* 
-
-
-setTimeout(()=>{console.log("shooopify")
-                     props.toggleIsFollowingProgress(false, u.id)},3000)
-
-
-
- */
 
 
 

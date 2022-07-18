@@ -1,0 +1,14 @@
+usersContainer:
+at Users container in comDidMount we send request to server to get 5 users with current page 1.
+
+whenever we press the page number we dispatch the current number of the page and make the request to the server according to current (pressed) page.
+
+User.jsx:
+at Users.jsx we map through all our users and render each of them in the component User.jsx. 
+ The follow - unfollow functionality :
+if user.followed - we show button unsubscribe, else we show button subscribe.
+When we press follow/unfollow we dispatch user.id and flag(true) to special array which tracs following/unfollowing in process - "following_unfollowingIds"  if the flag passed with id is true - means the promise is pending and this id we will push to the array,  when the promise resolved we change the flag (false) and remove current user from "following_unfollowingIds"  array with the help of method filter.  "following_unfollowingIds" - at the User.jsx we will check if current users id is in this array - if yes  - we will disable button with the help of method "some", if no - the button will be enabled
+
+The Profile component renders individual user based on url.
+I created a HOC which utilizes react-router-dom hook (I Needed a HOC - because my target component was container component and I can not use hook in the container component - So I created HOC, based on functional component, this HOC just searches for url match, creats an object, what contains needed data (if the match was found we have that object if match did not found then the object is null) and anyway renders target component ).
+The target component receives the  object and in the componentDidMount checks if the object is empty the component will (make the server request to get authorized user data) and render authorized user profile, if there is data in that object - then the component will request from server data about users id

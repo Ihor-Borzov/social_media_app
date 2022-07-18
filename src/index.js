@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './Redux/redux-store';           /* create new import for new redux store - here is my new store */
+import store from './Redux/redux-store';           
 import { Provider } from 'react-redux';          /* react-redux#2  import context from react-redux */
 
 
-
-/*############# EVERY LESSON SUMMARY:
-
-
- */
 
 
 ReactDOM.render(

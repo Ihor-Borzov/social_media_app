@@ -12,7 +12,7 @@ import { compose } from 'redux'
 class ProfileContainer extends React.Component{
 
 componentDidMount=()=>{
-
+debugger
 let userId
 if(!this.props.match){
     userId= this.props.authorizedId}    /* my id is = 22624 */

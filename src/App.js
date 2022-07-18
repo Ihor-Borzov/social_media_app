@@ -34,7 +34,7 @@ return <Preloader/>
         <HeaderContainer/>
         <Nav_barContainer/>
   <div className="body_wrapper">
-    <Routes>                                      {/* Context#3 remove all the props from components, you do not need them anymore */}
+     <Routes>                                    {/* Context#3 remove all the props from components, you do not need them anymore */}
     <Route path="/dialogs/*" element={<DialogsContainer />}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
   
     <Route path="/profile/*" element={<ProfileContainer/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
@@ -48,7 +48,7 @@ return <Preloader/>
     <Route path="/users/*" element={<UsersContainer/>}/>  
   
     <Route path="/login/*" element={<LoginConnect/>}/>  {/* this is redirect component we do not show it at the Nav-bar */}
-    </Routes> 
+ </Routes> 
   </div> 
   </BrowserRouter>
       </div>

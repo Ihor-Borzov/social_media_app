@@ -17,7 +17,7 @@ getUsers:(currentPage=1, pageSize=5)=>{
     return(
     instance.get(`users?page=${currentPage}&count=${pageSize}`)
     .then((response) => {
-        return(     /* //!and this is the way we create promises, read about how it works... */
+        return(     
 response.data
         )
     })
