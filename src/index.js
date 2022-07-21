@@ -1,20 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import BaseAppComponent from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './Redux/redux-store';           
-import { Provider } from 'react-redux';          /* react-redux#2  import context from react-redux */
-
 
 
 
 ReactDOM.render(
-    <React.StrictMode>
-<Provider store={store}>       {/* React-redux#1 wrap App in to Provider and specify for him props as value={store}, works exactly as native redux, you just creating a context*/}
-      <App />
-</Provider>
-    </React.StrictMode>,
+  <BaseAppComponent/>,
     document.getElementById('root')
   );
 
@@ -26,6 +19,23 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+Lesson#92
+Component testing:
+- I had to move Provider and React.StrictMode to the BaseAppComponent in case to be able to test components,
+ because I need ReactDOM.render() function to expect only one component, not the whole bunch of components. So I have to create that start 
+ component which will have Provider with the store and Browser Router... and everything what needs to run the app. And now I am able to pass
+ just one start component BaseAppComponent when I will need to test the whale app.
+
+  ReactDOM.render(
+    <React.StrictMode>
+<Provider store={store}>       
+<App />
+</Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+
+
 Lesson#83
 Implemented library reselect
 Selector is a function what expects whole global state, takes from it some piece  and returns that particular piece of state
