@@ -32,6 +32,7 @@ this.props.getUsers(this.props.currentPage, this.props.pageSize);
     setCurrentPage={this.setCurrentPage}
     totalUsersCount={this.props.totalUsersCount}
     pageSize={this.props.pageSize}
+    portionSize={this.props.portionSize}
     users={this.props.users}
     currentPage={this.props.currentPage}
     follow = {this.props.follow}
@@ -56,6 +57,7 @@ totalUsersCount:getUsersCount(state),
 currentPage:getCurrentPage(state),
 isFetching:getIsFetching(state),
 following_unfollowingIds:getFollow_unfollowUserIds(state),
+portionSize : state.usersPage.portionSize
     }
 }
 

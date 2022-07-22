@@ -20,6 +20,7 @@ users:[
 ],
 
 pageSize:5,
+portionSize:10,
 totalUsersCount:26,
 currentPage:1,
 isFetching:false,
@@ -163,7 +164,7 @@ return(
         .then(dataResponse => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(dataResponse.items))
-            dispatch(setTotalUsersCount(dataResponse.totalCount/100))
+            dispatch(setTotalUsersCount(dataResponse.totalCount))
         })
 }
 )

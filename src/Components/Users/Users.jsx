@@ -22,6 +22,7 @@ return(
     <div className={style.wrapper}>
 
         <Paginator totalUsersCount = {props.totalUsersCount}
+        portionSize = {props.portionSize}
          pageSize = {props.pageSize} setCurrentPage = {props.setCurrentPage}
           currentPage = {props.currentPage}/>
 
