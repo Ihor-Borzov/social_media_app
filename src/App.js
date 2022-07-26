@@ -5,10 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
-import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import Nav_barContainer from './Components/Nav-bar/Nav_barContainer';
 import UsersContainer from './Components/Users/UsersContainer';
-import ProfileContainer from './Components/Profile/ProfileContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
 import Login, { LoginConnect } from './Components/Login/Login';
 import { connect, Provider } from 'react-redux';
@@ -16,6 +14,10 @@ import { initializeApp } from './Redux/app-reduces';
 import Preloader from './Components/common/preloader/Preloader';
 import store from './Redux/redux-store';
 
+//import ProfileContainer from './Components/Profile/ProfileContainer';
+//import DialogsContainer from './Components/Dialogs/DialogsContainer';
+const ProfileContainer = React.lazy(()=> import("./Components/Profile/ProfileContainer"))  // the way to import components lazily
+const DialogsContainer = React.lazy(()=> import("./Components/Dialogs/DialogsContainer"))
 
 class App extends React.Component {
 
@@ -35,11 +37,21 @@ return <Preloader/>
         <HeaderContainer/>
         <Nav_barContainer/>
   <div className="body_wrapper">
-     <Routes>                                    {/* Context#3 remove all the props from components, you do not need them anymore */}
-    <Route path="/dialogs/*" element={<DialogsContainer />}/>   {/* the path automatically connects to the link (it does not matter where the link is, what matters is the same value(name) in the link attribute 'href' and Route attribute 'path' ) which has the same href as path here, remember to insert start at the end to enable child routs */}
+     <Routes>   
+                                      
+    <Route path="/dialogs/*" element={
+    <React.Suspense fallback = {<div>{"React.lazy is working"}</div>}> 
+    <DialogsContainer />
+    </React.Suspense>
+    }/>   
   
-    <Route path="/profile/*" element={<ProfileContainer/>}/>   {/*  for the clickable link check Nav_bar.jsx */}
-  
+    <Route path="/profile/*" element={
+    <React.Suspense fallback = {<div>{"React.lazy is working"}</div>}> 
+    <ProfileContainer/>
+    </React.Suspense>
+    }/>   
+
+
     <Route path="/news/*" element={<News/>}/>  
   
     <Route path="/music/*" element={<Music/>}/>  
