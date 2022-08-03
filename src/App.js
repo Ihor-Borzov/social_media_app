@@ -5,7 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
-import Nav_barContainer from './Components/Nav-bar/Nav_barContainer';
+import NavBar from './Components/Nav-bar/Nav_bar.jsx';
+
 import UsersContainer from './Components/Users/UsersContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
 import Login, { LoginConnect } from './Components/Login/Login';
@@ -35,7 +36,7 @@ return <Preloader/>
       <div className="App">
         <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
         <HeaderContainer/>
-        <Nav_barContainer/>
+        <NavBar/>
   <div className="body_wrapper">
      <Routes>   
                                       

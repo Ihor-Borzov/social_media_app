@@ -5,7 +5,7 @@ import axios from "axios"
 const instance = axios.create ({
 baseURL:"https://social-network.samuraijs.com/api/1.0/",         /* inside we specify our baseURL */
 withCredentials:true,                                            /* cookie sender request (we have to specify it manually, because of multi domain requests )*/
-headers:{"API-KEY":"f36a6a26-6367-4d7a-9af1-d75a40668f7f"}        /* the access key you required to write in every request you make (except get request - you do not required for get request) */
+headers:{"API-KEY":"f6711121-e528-4f72-b6ce-39150dd4eb42"}        /* the access key you required to write in every request you make (except get request - you do not required for get request) */
 })
 
 

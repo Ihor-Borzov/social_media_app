@@ -5,22 +5,35 @@ import {getUserProfile, getStatus, updateStatus} from '../../Redux/profile-reduc
 import { withAuthRedirect } from '../../HOC/withAuthRedirect'
 import { withMatchIdUrl } from '../../HOC/withMatchIdUrl'
 import { compose } from 'redux'
+import { Navigate } from 'react-router-dom'
 
 
 
 
 class ProfileContainer extends React.Component{
 
+    refreshProfile=()=>{
+        let userId
+        if(!this.props.match){
+            userId= this.props.authorizedId}    /* my id is = 22624 */
+        else {userId=this.props.match.params.userId}
+             
+        this.props.getUserProfile(userId);
+        this.props.getStatus(userId); 
+    }
+
 componentDidMount=()=>{
-debugger
-let userId
-if(!this.props.match){
-    userId= this.props.authorizedId}    /* my id is = 22624 */
-else {userId=this.props.match.params.userId}
+       this.refreshProfile();
+}
 
 
-this.props.getUserProfile(userId);
-this.props.getStatus(userId);        
+componentDidUpdate=(prevProps, prevState,snapshot)=>{
+
+    if(this.props.match){
+        if(this.props.match.params.userId != prevProps.match.params.userId){
+            this.refreshProfile();
+        }
+    }
 }
 
 
@@ -57,6 +70,6 @@ let mapStateToProps =(state)=>{
 
  export default compose(
     connect(mapStateToProps,{getUserProfile, getStatus, updateStatus}),
-   // withAuthRedirect,
+   withAuthRedirect,
     withMatchIdUrl
 )(ProfileContainer);
