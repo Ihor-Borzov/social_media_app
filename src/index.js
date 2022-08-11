@@ -19,6 +19,12 @@ reportWebVitals();
 
 
 /*############# EVERY LESSON SUMMARY:
+Lesson#96
+Uploading the picture to the App
+ - First thing is write the logic which will check if you are the owner of the page ( if you are the owner  => show the button to 
+change the profile picture). To upload the file there is a special <input type={"file"}><input>.  then write the pipeline: (thunk => 
+  api => action creator => case in reducer => callback to the component to call thunk ) 
+
 Lesson#92
 Component testing:
 - I had to move Provider and React.StrictMode to the BaseAppComponent in case to be able to test components,

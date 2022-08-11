@@ -9,7 +9,6 @@ import s from "./Nav_bar.module.css";
 
 function Nav_bar (props){
  let displayFriends = props.state.friendData.map((friendsObject) => <Friend picture={friendsObject.picture} key={friendsObject.id} name={friendsObject.name}    />) 
-
     return(
 <div className={s.nav_bar}>
                                                                {/* this is the way to add active className */}

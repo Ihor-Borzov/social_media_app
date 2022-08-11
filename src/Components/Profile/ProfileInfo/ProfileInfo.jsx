@@ -4,12 +4,44 @@ import s from "./ProfileInfo.module.css";
 import blankUserPicture from '../../../assets/images/user.jpg'
 import ProfileStatus from './ProfileStatus';
 import ProfileStatusHooks from './ProfileStatusHooks';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 
 
 
 function ProfileInfo (props){
+
+let [isHovering, setIsHovering] = useState(false)
+ let imageDomElement = React.createRef()
+
+
+let removeOnMouseOut =()=>{
+    console.log("remove listener")
+imageDomElement.current.removeEventListener('mouseout', handleMouseOut)
+} 
+
+
+let handleMouseOut = ()=>{
+    setTimeout(()=>{
+        console.log("mouse out")
+        setIsHovering(false)
+    },3000)
+    
+}
+
+   let handleMouseOver = ()=>{
+    setIsHovering(true);
+    }
+
+
+  let changeUsersPhoto = (e) =>{
+        if(e.target.files.length){
+            props.savePhoto(e.target.files[0]);
+        }
+    }
+
 
     if (!props.userProfile){
         return(
@@ -22,10 +54,24 @@ function ProfileInfo (props){
 
         <div className={s.aboutUser}>
                 
-        <div className={s.userImgWrapper}>
-        <img src= {props.userProfile.photos.large !=null ? props.userProfile.photos.large : blankUserPicture} ></img>  
-        </div>
+        <div className={s.userImgWrapper}  onMouseOver={handleMouseOver}  onMouseOut = {handleMouseOut}   ref = {imageDomElement} >
+{props.isFetching ? <Preloader/> : <img src= {props.userProfile.photos.large !=null ? props.userProfile.photos.large : blankUserPicture} ></img> }
+       
+
+        {  isHovering &&  props.isOwner && 
+        <label className={s.photoUpload}     >
+        <input className={s.inputFile} type = {"file"}   onChange={(e)=>{changeUsersPhoto(e)}}   onClick = {removeOnMouseOut}   ></input>
+        </label>
+        }
+
+
+
+         </div>
+
+
         
+
+
         <div className={s.userInfo}>
         
         <div className={s.fullName} > {props.userProfile.fullName} </div>

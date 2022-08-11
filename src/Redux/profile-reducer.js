@@ -4,6 +4,8 @@ const ADD_NEW_POST = "ADD_NEW_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 const REMOVE_POST = "REMOVE_POST"
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
+const FETCHING_USER_PICTURE = "FETCHING_USER_PICTURE"
 
 
 
@@ -18,6 +20,7 @@ let initialState = {
 
 userProfile:null,
 status:"",
+isFetching:false
 }
 
 
@@ -48,6 +51,18 @@ case SET_USER_PROFILE:
         return{
             ...state,
             status:action.status
+        }
+
+    case SAVE_PHOTO_SUCCESS:
+        return{
+            ...state,
+           userProfile : {...state.userProfile, photos : action.photos}
+        }
+
+    case FETCHING_USER_PICTURE:
+        return{
+            ...state,
+            isFetching : action.fetch
         }
 
 default: return state;
@@ -81,6 +96,23 @@ export const setStatus = (status)=>{
     return{
         type:SET_STATUS,
         status
+    }
+}
+
+
+
+export const savePhotoSuccess = (photos)=>{
+    return{
+        type:SAVE_PHOTO_SUCCESS,
+        photos
+    }
+}
+
+
+export const isFetchingAC = (fetch)=>{
+    return{
+        type:FETCHING_USER_PICTURE,
+        fetch
     }
 }
 
@@ -124,6 +156,19 @@ if(response.data.resultCode===0){dispatch(setStatus(status))}
     }
 )
 }
+
+
+export const savePhoto = (file)=>{
+    return( async (dispatch)=>{
+        dispatch(isFetchingAC(true))
+           let response = await profileAPI.savePhoto(file);
+           if(response.data.resultCode === 0) {
+            dispatch(isFetchingAC(false))
+            dispatch (savePhotoSuccess(response.data.data.photos))
+           }
+        }
+    )
+    }
 
 
 export default profileReducer;

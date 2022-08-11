@@ -73,7 +73,16 @@ getStatus:(userId)=>{
 },
 
 setStatus:(status)=>{
-    return(  instance.put('profile/status/',{status}))   //remember put and post have payload you can send to server - it is an object 
+    return(  instance.put('profile/status',{status}))   //remember put and post have payload you can send to server - it is an object 
+},
+
+
+//! read about "Content-Type":'multipart/form-data'  and how to send a file to the server
+savePhoto:(photo)=>{
+const formData = new FormData();
+formData.append("image", photo)     //this is the way we create a special object, before sending the photo file to the server 
+
+    return(  instance.put('profile/photo', formData, {headers:{"Content-Type":'multipart/form-data'}}))   
 }
 }
 

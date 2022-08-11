@@ -6,7 +6,7 @@ import MyPosts from './MyPosts';
 
 
 
-let mapStoreToProps = (state)=>{
+let mapStateToProps = (state)=>{
     return{
         state :state.myPostsPage,
     }
@@ -21,7 +21,7 @@ let mapStoreToProps = (state)=>{
     }
     
     
-    const MyPostsContainer = connect(mapStoreToProps,mapDispatchToProps)(MyPosts);
+    const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts);
     
 
 export default MyPostsContainer;
