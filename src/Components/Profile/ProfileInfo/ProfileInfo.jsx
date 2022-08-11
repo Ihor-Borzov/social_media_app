@@ -58,7 +58,7 @@ let handleMouseOut = ()=>{
 {props.isFetching ? <Preloader/> : <img src= {props.userProfile.photos.large !=null ? props.userProfile.photos.large : blankUserPicture} ></img> }
        
 
-        {  isHovering &&  props.isOwner && 
+        {  /* isHovering && */  props.isOwner && 
         <label className={s.photoUpload}     >
         <input className={s.inputFile} type = {"file"}   onChange={(e)=>{changeUsersPhoto(e)}}   onClick = {removeOnMouseOut}   ></input>
         </label>

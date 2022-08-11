@@ -26,7 +26,7 @@ class ProfileContainer extends React.Component{
     }
 
 componentDidMount=()=>{
-    console.log("mount is working")
+
        this.refreshProfile();
 }
 
@@ -52,7 +52,7 @@ componentDidUpdate=(prevProps, prevState,snapshot)=>{
 
 
 return(
-<Profile {...this.props}   isOwner = { this.state.userId === this.props.authorizedId}   />
+<Profile {...this.props}   isOwner = { this.state.userId == this.props.authorizedId}   />
 )
     }
 }
