@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
 
 const ADD_NEW_POST = "ADD_NEW_POST"
@@ -165,6 +166,24 @@ export const savePhoto = (file)=>{
            if(response.data.resultCode === 0) {
             dispatch(isFetchingAC(false))
             dispatch (savePhotoSuccess(response.data.data.photos))
+           }
+        }
+    )
+    }
+
+
+
+export const saveProfile = (profileData)=>{
+    return( async (dispatch, getState)=>{
+        let userId = getState().auth.id                                  //! this is the way to get state from another reducer
+        
+           let response = await profileAPI.saveProfile(profileData);
+           if(response.data.resultCode === 0) {
+           dispatch (getUserProfile(userId))                                //! this is the way to call a thunk from a thunk in the same reducer
+           }
+           else{
+            dispatch(stopSubmit("profileDataA",{_error: response.data.messages[0]}));
+            return( Promise.reject(response.data.messages[0]))
            }
         }
     )

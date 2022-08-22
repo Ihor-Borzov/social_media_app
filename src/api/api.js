@@ -83,7 +83,19 @@ const formData = new FormData();
 formData.append("image", photo)     //this is the way we create a special object, before sending the photo file to the server 
 
     return(  instance.put('profile/photo', formData, {headers:{"Content-Type":'multipart/form-data'}}))   
+},
+
+
+saveProfile : (profileData)=>{
+    return(instance.put('profile', profileData))
 }
+
+
+
+
+
+
+
 }
 
 
