@@ -118,6 +118,12 @@ login:(data)=>{
         instance.post('auth/login/',data)
     )},
 
+    getCaptchaUrl:()=>{
+        return(
+            instance.get('/security/get-captcha-url')
+        )
+    },
+
 
 
     logout:()=>{

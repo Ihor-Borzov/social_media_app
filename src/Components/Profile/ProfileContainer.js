@@ -46,7 +46,11 @@ componentDidUpdate=(prevProps, prevState,snapshot)=>{
 
     render=()=>{
 
-{if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}}
+{if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}
+
+//else if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return(<App.js/>)}
+
+}
 
 
 

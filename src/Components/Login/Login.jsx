@@ -5,7 +5,7 @@ import { reduxForm } from "redux-form"
 import { Field } from "redux-form"
 import {loginThunk} from "../../Redux/Auth"
 import { maxChar, required } from "../../Utilities/FormValidators/validators"
-import { Input } from "../common/FormControls/FormControls"
+import { createField, Input } from "../common/FormControls/FormControls"
 import style from '../common/FormControls/FormControls.module.css'
 
 
@@ -24,37 +24,13 @@ onSubmit = (data)=>{
         return(
     <div>
     <div>LOGIN please !</div>
-    {this.props.isAuth? <Navigate to="/profile"/> : <LoginReduxForm onSubmit={this.onSubmit}/> }
+    {this.props.isAuth? <Navigate to={"/profile/"+ this.props.authorizedId}/> : <LoginReduxForm onSubmit={this.onSubmit} captchaUrl={this.props.captchaUrl} /> }
     </div>
         )
     }
 }
 
 
-
-
-
-
-
-
-
-
-/* I DO NOT KNOW WHY, BUT FUNCTIONAL COMPONENT DID NOT WANT TO UPDATE AFTER LOGINISATION  */
-/* 
-let Login = (props)=>{
-    let onSubmit=(data)=>{
-        props.loginThunk(data)
-        }
-
-    return(
-<div>
-<div>LOGIN please !</div>
-{props.isAuth? <span>You are successfully logged in</span> : null}
-<LoginReduxForm onSubmit={onSubmit}/>
-</div>
-    )
-}
- */
 
 
 let maximumChar = maxChar(20) /* this is our flexible validator with closure, for now we have to invoke it this way */
@@ -73,6 +49,11 @@ let LoginForm=(props)=>{
     </div>
     {props.error && <div className={style.commonError}> {props.error}</div>}
 <button>Submit</button>          
+
+{props.captchaUrl && <div>
+     <img src={props.captchaUrl}></img> 
+     {createField("symbols from image", "captcha", [required], Input)}
+     </div>}
         </form>
     )
 }
@@ -81,7 +62,9 @@ let LoginForm=(props)=>{
 
 let mapStateToProps = (state)=>{
     return({
-isAuth:state.auth.isAuth
+isAuth:state.auth.isAuth,
+captchaUrl:state.auth.captchaUrl,
+authorizedId:state.auth.id
     })
 }
 
@@ -89,4 +72,4 @@ const LoginReduxForm = reduxForm({form:"login"})(LoginForm);
 
 export const LoginConnect = connect(mapStateToProps, {loginThunk})(Login)
 
-export default Login
+export default LoginConnect
