@@ -2,11 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { createField, Input, TextArea } from '../../common/FormControls/FormControls';
 import { SocialMediaLinksThumbnails } from './ProfileData';
-import s from "./ProfileInfo.module.css";
-
-
-
-
+import s from "./ProfileDataForm.module.css";
 
 
 
@@ -26,16 +22,15 @@ export const ProfileDataForm = (props) => {
 
             <div> My professional skills: {createField("About me", "lookingForAJobDescription", [], TextArea)} </div>
 
-            <ul className={s.item_social}><b>Contacts : </b>
+            <ul className={s.contacts}><b>Contacts : </b>
                 {Object.keys(props.userProfile.contacts).map((key) => {
                     if (SocialMediaLinksThumbnails[key]) {  //! this is the way to render only links I want. (if that property exists in the SocialMediaLinksThumbnails => i render it, if not => then I do not)
                         return (
-                            <div key={key} >{createField(`${key}`, `contacts.${key}`, [], Input)}
+                            <div className={s.contact_item} key={key} >{createField(`${key}`, `contacts.${key}`, [], Input)}
                             </div>)
 
                     }
-
-
+                    return null
                 })}
             </ul>
 

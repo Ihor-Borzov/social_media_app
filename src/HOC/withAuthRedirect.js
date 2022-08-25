@@ -4,12 +4,11 @@ the parameter isAuth */
 import React from "react"
 import { connect } from "react-redux"
 import { Navigate } from "react-router-dom"
-import { withMatchIdUrl } from "./withMatchIdUrl"
 
 
-let mapStateToProps = (state)=>{
-    return({
-        isAuth:state.auth.isAuth,
+let mapStateToProps = (state) => {
+    return ({
+        isAuth: state.auth.isAuth,
     })
 }
 
@@ -17,17 +16,17 @@ let mapStateToProps = (state)=>{
 
 
 
-export const withAuthRedirect =(Component)=>{
+export const withAuthRedirect = (Component) => {
 
-class RedirectComponent extends React.Component {
-render = ()=>{
-if(this.props.isAuth){return (<Component  {...this.props} />)}
-return(<Navigate to="/login"/>);
-}
-}
+    class RedirectComponent extends React.Component {
+        render = () => {
+            if (this.props.isAuth) { return (<Component  {...this.props} />) }
+            return (<Navigate to="/login" />);
+        }
+    }
 
-let connectedRedirectComponent = connect(mapStateToProps)(RedirectComponent);
+    let connectedRedirectComponent = connect(mapStateToProps)(RedirectComponent);
 
-return  connectedRedirectComponent;
+    return connectedRedirectComponent;
 
 }

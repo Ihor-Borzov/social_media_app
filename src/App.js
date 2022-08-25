@@ -1,18 +1,17 @@
 import React from 'react';
-import './App.css';
-import Header from './Components/Header/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import News from './Components/News/News';
+import './App.css';
 import Music from './Components/Music/Music';
-import Settings from './Components/Settings/Settings';
 import NavBar from './Components/Nav-bar/Nav_bar.jsx';
+import News from './Components/News/News';
+import Settings from './Components/Settings/Settings';
 
-import UsersContainer from './Components/Users/UsersContainer';
-import HeaderContainer from './Components/Header/HeaderContainer';
-import Login, { LoginConnect } from './Components/Login/Login';
 import { connect, Provider } from 'react-redux';
-import { initializeApp } from './Redux/app-reduces';
 import Preloader from './Components/common/preloader/Preloader';
+import HeaderContainer from './Components/Header/HeaderContainer';
+import { LoginConnect } from './Components/Login/Login';
+import UsersContainer from './Components/Users/UsersContainer';
+import { initializeApp } from './Redux/app-reduces';
 import store from './Redux/redux-store';
 
 //import ProfileContainer from './Components/Profile/ProfileContainer';

@@ -38,8 +38,24 @@ text-decoration: none;
   display:grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 140px;
-  width:65%;
+  max-height:400px;
+  overflow-y:hidden;
+  width:70%;
   gap:6px;
   padding:6px;
   margin:0 auto;
+}
+
+.friends:hover{       /* to make :hover work i had to specify it right after the word .friends:hover   but it did not work properly when I had a space between them  .friends :hover */
+  overflow-y: scroll;
+}
+
+
+
+
+
+.BestFriends{
+  text-align: center;
+font-size:25px;
+color:lightslategrey
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import preloadGif from '../../assets/images/loader.gif'                                               //../../assets/images/loader.gif'
 import style from "./Users.module.css"
 
 
-let Paginator=({portionSize,totalUsersCount, pageSize, setCurrentPage, currentPage})=>{
+let Paginator=({portionSize,totalUsersCount, pageSize, setCurrentPage, currentPage, isFetching})=>{
 
     let totalPagesCount= Math.ceil(totalUsersCount/pageSize);
     let totalPortionsCount = Math.ceil(totalPagesCount/portionSize);
@@ -31,7 +32,8 @@ return(
 {pagesArray.filter((page)=>{return(page>=leftPortionPageNumber && page<=rightPortionPageNumber)}).map(
     (page)=>{return <span
          onClick={(e)=>{setCurrentPage(page)}} 
-        className={currentPage===page ? style.activePage : style.notActivePage}>  {`${page}. `} 
+        className={currentPage===page ? style.activePage : style.notActivePage}> 
+        {isFetching && currentPage===page? <img src={preloadGif} alt="preloader" ></img> : page + " ."}
          </span>
     })
     }

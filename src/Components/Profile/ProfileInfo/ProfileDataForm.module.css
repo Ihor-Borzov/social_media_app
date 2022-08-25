@@ -1,0 +1,19 @@
+form{
+    background-color: floralwhite;
+    display:block;
+padding:15px;
+}
+
+form div{
+    margin-bottom: 10px;
+}
+
+
+.contacts{
+    padding-inline-start:0;
+}
+
+.contact_item{
+    display:block;
+}
+

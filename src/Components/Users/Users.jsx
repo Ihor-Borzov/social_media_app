@@ -1,11 +1,7 @@
 import React from 'react';
-import style from "./Users.module.css"
-import user from '../../assets/images/user.jpg'
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import { usersAPI } from '../../api/api';
 import Paginator from './Paginator';
 import User from './User';
+import style from "./Users.module.css";
 
 
 let Users=(props)=>{
@@ -24,7 +20,9 @@ return(
         <Paginator totalUsersCount = {props.totalUsersCount}
         portionSize = {props.portionSize}
          pageSize = {props.pageSize} setCurrentPage = {props.setCurrentPage}
-          currentPage = {props.currentPage}/>
+          currentPage = {props.currentPage}
+          isFetching = {props.isFetching}
+          />
 
 
     {   props.users.map(u=> {return(<User key = {u.id} user = {u}

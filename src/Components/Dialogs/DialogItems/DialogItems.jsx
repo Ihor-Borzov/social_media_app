@@ -7,23 +7,12 @@ function DialogItems (props){
 return(
 
     <div className={s.friend}>
-     <Link to ={myCurrentPath}><div className={s.circle}><img src={props.picture}/></div></Link>
+     <Link to ={myCurrentPath}><div className={s.circle}><img src={props.picture} alt ="user avatar"/></div></Link>
     <span className={s.friends_name}>{props.name}</span>
 </div>
-
-
-
-
-
-
-
 )
 }
 
-
-{/* <div>
-    <Link to ={myCurrentPath}>{props.name}</Link>
-    </div> */}
 
 
 export default DialogItems;

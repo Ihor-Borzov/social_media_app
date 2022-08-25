@@ -143,6 +143,12 @@ margin-bottom: 20px;
     .activePage{
         font-size: 25px;
         font-weight: bold;
+        display:inline-block;
+
+    }
+
+    .activePage img{
+        max-width:30px;
     }
     
     .pageNumbers span{

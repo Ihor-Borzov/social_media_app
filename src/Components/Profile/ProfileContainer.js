@@ -1,62 +1,44 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Profile from './Profile'
-import {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile} from '../../Redux/profile-reducer'
-import { withAuthRedirect } from '../../HOC/withAuthRedirect'
-import { withMatchIdUrl } from '../../HOC/withMatchIdUrl'
-import { compose } from 'redux'
 import { Navigate } from 'react-router-dom'
+import { compose } from 'redux'
+import { withMatchIdUrl } from '../../HOC/withMatchIdUrl'
+import { getStatus, getUserProfile, savePhoto, saveProfile, updateStatus } from '../../Redux/profile-reducer'
+import Profile from './Profile'
 
 
 
 
 class ProfileContainer extends React.Component{
 
-    state = {
-        userId:"",
-    }
 
-    refreshProfile=()=>{
-        if(!this.props.match){
-            this.state.userId= this.props.authorizedId}    /* my id is = 22624 */
-        else { this.state.userId=this.props.match.params.userId}
-             
-        this.props.getUserProfile( this.state.userId);
-        this.props.getStatus( this.state.userId); 
-    }
+refreshProfile=()=>{
+    this.props.getUserProfile(this.props.match.params.userId);
+    this.props.getStatus(this.props.match.params.userId); 
+}
+
 
 componentDidMount=()=>{
-
        this.refreshProfile();
 }
 
 
 componentDidUpdate=(prevProps, prevState,snapshot)=>{
     if(this.props.match){   // if user url exists => rerender might happen
-        if(this.props.match.params.userId != prevProps.match.params.userId){
+        if(this.props.match.params.userId !== prevProps.match.params.userId){
             this.refreshProfile();
         }
     }
-
-
-
 }
 
 
 
     render=()=>{
-
-{if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}
-
-//else if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return(<App.js/>)}
-
-}
-
-
+{if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}}
 
 
 return(
-<Profile {...this.props}   isOwner = { this.state.userId == this.props.authorizedId}   />
+<Profile {...this.props}   isOwner = { +this.props.match.params.userId === this.props.authorizedId}   />
 )
     }
 }
@@ -88,3 +70,58 @@ let mapStateToProps =(state)=>{
   // withAuthRedirect,
     withMatchIdUrl
 )(ProfileContainer);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//25361
+//25497
+
+
+
+
+// class ProfileContainer extends React.Component{
+
+//     state = {
+//         userId:"",
+//     }
+
+//     refreshProfile=()=>{
+//         if(!this.props.match){
+//             this.state.userId= this.props.authorizedId}    /* my id is = 22624 */
+//         else { this.state.userId=this.props.match.params.userId}
+             
+//         this.props.getUserProfile( this.state.userId);
+//         this.props.getStatus( this.state.userId); 
+//     }
+
+// componentDidMount=()=>{
+//        this.refreshProfile();
+// }
+
+
+// componentDidUpdate=(prevProps, prevState,snapshot)=>{
+//     if(this.props.match){   // if user url exists => rerender might happen
+//         if(this.props.match.params.userId !== prevProps.match.params.userId){
+//             this.refreshProfile();
+//         }
+//     }
+
+
+
+// }

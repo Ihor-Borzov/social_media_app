@@ -37,6 +37,7 @@ function ProfileData(props) {
                         return (
                             <Contact key={key} contactTitle={key} contactValue={props.userProfile.contacts[key]} />)
                     }
+                    return null
                 })}
             </ul>
         </div>
@@ -53,8 +54,8 @@ export const Contact = ({ contactValue, contactTitle }) => {
 
     return (
         <li>
-            <a href={contactValue} target="_blank" >
-                <img src={SocialMediaLinksThumbnails[contactTitle]} />
+            <a href={contactValue} target="_blank" rel="noreferrer">
+                <img src={SocialMediaLinksThumbnails[contactTitle]}  alt="social media links" />
             </a>
         </li>
     )

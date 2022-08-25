@@ -6,13 +6,13 @@ import s from "./Friend.module.css";
 
 
 
-function Friend(props){
+function Friend(props) {
 
-    return(
+    return (
         <div className={s.friend}>
-        <div className={s.circle}><img src={props.picture}/></div>
-        <span className={s.friends_name}>{props.name}</span>
-    </div>
+            <div className={s.circle}><img src={props.picture} alt="Friend's avatar" /></div>
+            <span className={s.friends_name}>{props.name}</span>
+        </div>
     )
 }
 
