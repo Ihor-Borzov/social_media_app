@@ -133,6 +133,7 @@ export const getUserProfile = (userId) => {
 
 
 export const getStatus = (userId) => {
+    console.log("get status")
     return (
         (dispatch) => {
             profileAPI.getStatus(userId).then((response) => {

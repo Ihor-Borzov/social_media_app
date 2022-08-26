@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Music from './Components/Music/Music';
 import NavBar from './Components/Nav-bar/Nav_bar.jsx';
@@ -52,6 +52,8 @@ return <Preloader/>
     }/>   
 
 
+    <Route exact path="/" element={<Navigate to="/profile/*" />}/>    //this is the way to render profile if your url is empty
+
     <Route path="/news/*" element={<News/>}/>  
   
     <Route path="/music/*" element={<Music/>}/>  
@@ -61,6 +63,9 @@ return <Preloader/>
     <Route path="/users/*" element={<UsersContainer/>}/>  
   
     <Route path="/login/*" element={<LoginConnect/>}/>  {/* this is redirect component we do not show it at the Nav-bar */}
+ 
+    <Route path="*" element={<div>404 NOT FOUND</div>}/>  // this is the way to render something, when the current url does not match any path
+ 
  </Routes> 
   </div> 
   </BrowserRouter>

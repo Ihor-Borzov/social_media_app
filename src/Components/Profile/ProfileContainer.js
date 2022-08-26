@@ -13,8 +13,11 @@ class ProfileContainer extends React.Component{
 
 
 refreshProfile=()=>{
-    this.props.getUserProfile(this.props.match.params.userId);
-    this.props.getStatus(this.props.match.params.userId); 
+    let userId
+    if( !this.props.match.params.userId || isNaN(this.props.match.params.userId)){userId = this.props.authorizedId}
+    else {userId = this.props.match.params.userId}
+    this.props.getUserProfile(userId);
+    this.props.getStatus(userId); 
 }
 
 
@@ -92,36 +95,16 @@ let mapStateToProps =(state)=>{
 //25361
 //25497
 
-
-
-
-// class ProfileContainer extends React.Component{
-
-//     state = {
-//         userId:"",
-//     }
-
-//     refreshProfile=()=>{
-//         if(!this.props.match){
-//             this.state.userId= this.props.authorizedId}    /* my id is = 22624 */
-//         else { this.state.userId=this.props.match.params.userId}
-             
-//         this.props.getUserProfile( this.state.userId);
-//         this.props.getStatus( this.state.userId); 
-//     }
-
-// componentDidMount=()=>{
-//        this.refreshProfile();
+// state = {
+//     userId : null,
 // }
 
+// refreshProfile=()=>{
+//     if( !this.props.match.params.userId || isNaN(this.props.match.params.userId))
+//     {this.setState({userId:this.props.authorizedId})}
+//     else 
+//     {this.setState({userId:this.props.match.params.userId})}
 
-// componentDidUpdate=(prevProps, prevState,snapshot)=>{
-//     if(this.props.match){   // if user url exists => rerender might happen
-//         if(this.props.match.params.userId !== prevProps.match.params.userId){
-//             this.refreshProfile();
-//         }
-//     }
-
-
-
+//     this.props.getUserProfile(this.userId);
+//     this.props.getStatus(this.userId); 
 // }
