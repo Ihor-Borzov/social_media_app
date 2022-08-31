@@ -11,37 +11,32 @@ import Profile from './Profile'
 
 class ProfileContainer extends React.Component{
 
-refreshProfile=()=>{
-    let userId
-    if( !this.props.match.params.userId || isNaN(this.props.match.params.userId)){userId = this.props.authorizedId}
-    else {userId = this.props.match.params.userId}
+/* state={
+    userId:null,
+} */
+
+
+
+
+
+    refreshProfile=()=>{
+let userId 
+    if( !this.props.match || isNaN(this.props.match.params.userId)){
+        userId = this.props.authorizedId? this.props.authorizedId: null}
+    else { userId=this.props.match.params.userId}
+
+    if(userId){ 
     this.props.getUserProfile(userId);
     this.props.getStatus(userId); 
+    }
+console.log (this.props.match)
+    //return (<Navigate to="/login"/>)
 }
 
 
 
 
-// state = {
-//     userId :23
-// }
 
-
-
-// refreshProfile=()=>{
-//     if( !this.props.match.params.userId || isNaN(this.props.match.params.userId))
-//     {console.log("empty url fires")
-//         this.setState({userId: 1   /* this.props.authorizedId */})
-//         console.log(this.userId)
-//     }
-//     else 
-//     {{console.log("good url fires")
-//         this.setState({userId:this.props.match.params.userId})}
-
-//     this.props.getUserProfile(this.userId);
-//     this.props.getStatus(this.userId); 
-// }
-// }
 
 
 
@@ -64,12 +59,13 @@ componentDidUpdate=(prevProps, prevState,snapshot)=>{
 
 
     render=()=>{
-if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}
+if(this.props.authorizedId === null &&  this.props.match.params.userId === "null" ||
+ isNaN(this.props.match.params.userId)){return (<Navigate to="/login"/>)}
 
 
 return(
    
-<Profile {...this.props}   isOwner = { +this.props.match.params.userId === this.props.authorizedId}   />
+<Profile {...this.props}    isOwner = { +this.props.match.params.userId === this.props.authorizedId}  />
 )
     }
 }
