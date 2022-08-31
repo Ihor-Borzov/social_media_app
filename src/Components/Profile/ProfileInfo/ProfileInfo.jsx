@@ -11,8 +11,8 @@ import ProfileStatusHooks from './ProfileStatusHooks';
 
 
 function ProfileInfo(props) {
-//debugger
-    let [isHovering, setIsHovering] = useState(false)
+
+     let [isHovering, setIsHovering] = useState(false) 
     let [editMode, setEditMode] = useState(false)
     let imageDomElement = React.createRef()
 
@@ -31,9 +31,9 @@ function ProfileInfo(props) {
 
     }
 
-    let handleMouseOver = () => {
+     let handleMouseOver = () => {
         setIsHovering(true);
-    }
+    } 
 
 
     let changeUsersPhoto = (e) => {
@@ -59,6 +59,9 @@ function ProfileInfo(props) {
     return (
 
         <div className={s.aboutUser}>
+
+
+            {props.errorFlag && <div>Some error is occured</div>}
 
             <div className={s.userImgWrapper} /* onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} */ ref={imageDomElement} >
                 {props.isFetching ? <Preloader /> 

@@ -12,6 +12,7 @@ import HeaderContainer from './Components/Header/HeaderContainer';
 import { LoginConnect } from './Components/Login/Login';
 import UsersContainer from './Components/Users/UsersContainer';
 import { initializeApp } from './Redux/app-reduces';
+import { showGlobalError } from './Redux/profile-reducer';
 import store from './Redux/redux-store';
 
 //import ProfileContainer from './Components/Profile/ProfileContainer';
@@ -21,8 +22,18 @@ const DialogsContainer = React.lazy(()=> import("./Components/Dialogs/DialogsCon
 
 class App extends React.Component {
 
+  catchAllUnhandledErrors = (reason, promise)=>{
+//console.log("the alert in App.js"+reason)
+this.props.showGlobalError()
+  }
+
 componentDidMount = ()=>{
   this.props.initializeApp();
+  window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors) // handle any rejection from the server
+}
+
+componentWillUnmount = () =>{
+  window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
 }
 
   render=()=>{
@@ -52,7 +63,7 @@ return <Preloader/>
     }/>   
 
 
-    <Route exact path="/" element={<Navigate to="/profile/*" />}/>    //this is the way to render profile if your url is empty
+    <Route exact path="/" element={<Navigate to="/profile/*" />}/>    {/* this is the way to render profile if your url is empty */}
 
     <Route path="/news/*" element={<News/>}/>  
   
@@ -64,7 +75,7 @@ return <Preloader/>
   
     <Route path="/login/*" element={<LoginConnect/>}/>  {/* this is redirect component we do not show it at the Nav-bar */}
  
-    <Route path="*" element={<div>404 NOT FOUND</div>}/>  // this is the way to render something, when the current url does not match any path
+    <Route path="*" element={<div>404 NOT FOUND</div>}/>   {/* this is the way to render something, when the current url does not match any path */}
  
  </Routes> 
   </div> 
@@ -97,7 +108,7 @@ export let mapStateToProps = (state)=>{
 }
 
 
-let ConnectAppContainer = connect(mapStateToProps,{initializeApp})(App);
+let ConnectAppContainer = connect(mapStateToProps,{initializeApp, showGlobalError})(App);
 
 
 

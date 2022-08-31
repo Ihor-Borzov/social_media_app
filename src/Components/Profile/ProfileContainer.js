@@ -11,7 +11,6 @@ import Profile from './Profile'
 
 class ProfileContainer extends React.Component{
 
-
 refreshProfile=()=>{
     let userId
     if( !this.props.match.params.userId || isNaN(this.props.match.params.userId)){userId = this.props.authorizedId}
@@ -19,6 +18,34 @@ refreshProfile=()=>{
     this.props.getUserProfile(userId);
     this.props.getStatus(userId); 
 }
+
+
+
+
+// state = {
+//     userId :23
+// }
+
+
+
+// refreshProfile=()=>{
+//     if( !this.props.match.params.userId || isNaN(this.props.match.params.userId))
+//     {console.log("empty url fires")
+//         this.setState({userId: 1   /* this.props.authorizedId */})
+//         console.log(this.userId)
+//     }
+//     else 
+//     {{console.log("good url fires")
+//         this.setState({userId:this.props.match.params.userId})}
+
+//     this.props.getUserProfile(this.userId);
+//     this.props.getStatus(this.userId); 
+// }
+// }
+
+
+
+
 
 
 componentDidMount=()=>{
@@ -37,10 +64,11 @@ componentDidUpdate=(prevProps, prevState,snapshot)=>{
 
 
     render=()=>{
-{if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}}
+if(this.props.authorizedId === null &&  this.props.match.params.userId === "null"){return (<Navigate to="/login"/>)}
 
 
 return(
+   
 <Profile {...this.props}   isOwner = { +this.props.match.params.userId === this.props.authorizedId}   />
 )
     }
@@ -53,8 +81,8 @@ let mapStateToProps =(state)=>{
         isAuth : state.auth.isAuth,
         status: state.myPostsPage.status,
         authorizedId:state.auth.id,
-        isFetching: state.myPostsPage.isFetching
-        
+        isFetching: state.myPostsPage.isFetching,
+        errorFlag:state.myPostsPage.errorFlag
     }
 
 }

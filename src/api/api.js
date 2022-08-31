@@ -73,7 +73,7 @@ getStatus:(userId)=>{
 },
 
 setStatus:(status)=>{
-    return(  instance.put('profile/status',{status}))   //remember put and post have payload you can send to server - it is an object 
+    return(  instance.put('profile/status', {status} ))   //remember put and post have payload you can send to server - it is an object 
 },
 
 

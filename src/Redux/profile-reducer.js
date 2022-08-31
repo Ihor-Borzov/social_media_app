@@ -7,6 +7,8 @@ const SET_STATUS = "SET_STATUS"
 const REMOVE_POST = "REMOVE_POST"
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 const FETCHING_USER_PICTURE = "FETCHING_USER_PICTURE"
+const SET_GLOBAL_ERROR = "SET_GLOBAL_ERROR"
+
 
 
 
@@ -21,7 +23,8 @@ let initialState = {
 
     userProfile: null,
     status: "",
-    isFetching: false
+    isFetching: false,
+    errorFlag:false,
 }
 
 
@@ -56,6 +59,12 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.fetch
+            }
+
+        case SET_GLOBAL_ERROR:
+            return {
+                ...state,
+                errorFlag:!state.errorFlag
             }
 
         default: return state;
@@ -111,6 +120,12 @@ export const isFetchingAC = (fetch) => {
 }
 
 
+export const setGlobalError = ()=>{
+    return{
+        type:SET_GLOBAL_ERROR
+    }
+}
+
 
 
 
@@ -118,6 +133,16 @@ export const isFetchingAC = (fetch) => {
 
 
 /* thunk */
+
+
+export const showGlobalError = ()=>{
+    return (dispatch)=>{
+        dispatch(setGlobalError());
+        setTimeout(()=>{
+            dispatch(setGlobalError())
+        },3000)
+    }
+}
 
 export const getUserProfile = (userId) => {
     return (
@@ -146,10 +171,13 @@ export const getStatus = (userId) => {
 
 export const updateStatus = (status) => {
     return (
-        (dispatch) => {
-            profileAPI.setStatus(status).then((response) => {
+       async (dispatch) => {
+        try{
+            let response = await profileAPI.setStatus(status)
                 if (response.data.resultCode === 0) { dispatch(setStatus(status)) }
-            })
+        }
+         
+catch(error){alert(error)}
         }
     )
 }
