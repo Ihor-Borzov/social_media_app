@@ -13,7 +13,6 @@ function MyPosts(props) {
     let displayedPosts = props.state.postsData.map((postObject) => <Post likes={postObject.likes} key={postObject.likes} message={postObject.message} />)
 
     let onAddPost = (data) => {
-        alert(data.myPostText)
         props.addPost(data.myPostText);
     }
 
@@ -39,7 +38,7 @@ const MyPostsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>  <Field name="myPostText" component={TextArea} validate={[required, maximumChar]}
-             placeholder="you comment here"></Field>   </div>
+             placeholder="your comment here"></Field>   </div>
             <button>Add post</button>
         </form>
     )

@@ -61,7 +61,7 @@ function ProfileInfo(props) {
         <div className={s.aboutUser}>
 
 
-            {props.errorFlag && <div>Some error is occured</div>}
+            { props.errorFlag  && <div className={s.error}>An error occurred in data fetching</div>}
 
             <div className={s.userImgWrapper} /* onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} */ ref={imageDomElement} >
                 {props.isFetching ? <Preloader /> 

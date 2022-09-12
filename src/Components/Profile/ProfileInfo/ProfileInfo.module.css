@@ -110,7 +110,12 @@ margin:5px;
 
 
 
-form{
-    border: 2px solid blue;
+.error{
+    width:90%;
+    text-align: center;
+    background-color: darkorange;
+margin:0 auto;
+border-radius: 25px;
+font-size: larger;
 }
 

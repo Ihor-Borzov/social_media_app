@@ -43,9 +43,10 @@ return <Preloader/>
 
 
     return (
+      <div className="AppWrapper">
+        <HeaderContainer/>
       <div className="App">
         <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
-        <HeaderContainer/>
         <NavBar/>
   <div className="body_wrapper">
      <Routes>   
@@ -80,6 +81,7 @@ return <Preloader/>
  </Routes> 
   </div> 
   </BrowserRouter>
+      </div>
       </div>
     );
   }

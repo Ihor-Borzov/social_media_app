@@ -1,18 +1,29 @@
+
+*,*:before,*:after{
+box-sizing: border-box;
+padding:0;
+margin:0;
+border:0;
+}
+
+
+
+.AppWrapper{
+  margin:10px auto; 
+   width:90%;
+}
+
+
 .App{
-
-margin:10px auto;
 display:grid;
-width:90%;
 grid-gap:10px;
-
-    grid-template-rows:60px 1fr ;
+  margin-top:65px;
+    grid-template-rows:1fr ;
     grid-template-columns:200px 1fr ;
 
     grid-template-areas:
-    "header header"
     "side_bar body"
     ;
-  
 }
 
 .body_wrapper{
@@ -21,4 +32,25 @@ grid-gap:10px;
     box-shadow:2px 3px rgb(192, 192, 192);
     background-color:#fafafa;
     border-radius: 20px;
+}
+
+
+
+
+@media (max-width: 768px){
+
+    .AppWrapper{
+        margin:2px auto 6px;
+        width:99%;
+    }
+
+
+
+.App{
+    grid-template-areas:
+"body body"
+;
+}
+
+
 }

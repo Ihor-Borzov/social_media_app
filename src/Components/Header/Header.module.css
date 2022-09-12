@@ -1,17 +1,31 @@
 .header{
+    height:50px;
+    width:90%;
     padding:10px;
-    grid-area:header;
-    box-shadow:2px 3px rgb(192, 192, 192);
-    background-color:rgb(243, 247, 55);
-    border-radius: 20px;
+    position: fixed;
+    top:5px;
+z-index:10;  
+display:flex;
+justify-content: space-between;
+align-items: center;
+
+box-shadow:2px 3px rgb(192, 192, 192);
+background-color:rgb(243, 247, 55);
+border-radius: 20px;
 }
 
 .header img{
-    height:90%;
+    width:30px;
 }
 
 .loginBlock{
     float:right;
     font-size:20px;
     color:black;
+}
+
+@media(max-width: 768px){
+    .header{
+        width:99%;
+    }
 }

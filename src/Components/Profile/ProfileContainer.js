@@ -11,14 +11,6 @@ import Profile from './Profile'
 
 class ProfileContainer extends React.Component{
 
-/* state={
-    userId:null,
-} */
-
-
-
-
-
     refreshProfile=()=>{
 let userId 
     if( !this.props.match || isNaN(this.props.match.params.userId)){
@@ -29,17 +21,7 @@ let userId
     this.props.getUserProfile(userId);
     this.props.getStatus(userId); 
     }
-console.log (this.props.match)
-    //return (<Navigate to="/login"/>)
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -59,8 +41,8 @@ componentDidUpdate=(prevProps, prevState,snapshot)=>{
 
 
     render=()=>{
-if(this.props.authorizedId === null &&  this.props.match.params.userId === "null" ||
- isNaN(this.props.match.params.userId)){return (<Navigate to="/login"/>)}
+if(this.props.authorizedId === null &&  (this.props.match.params.userId === "null" ||
+ isNaN(this.props.match.params.userId))   ){return (<Navigate to="/login"/>) }
 
 
 return(
@@ -106,29 +88,5 @@ let mapStateToProps =(state)=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
 //25361
 //25497
-
-// state = {
-//     userId : null,
-// }
-
-// refreshProfile=()=>{
-//     if( !this.props.match.params.userId || isNaN(this.props.match.params.userId))
-//     {this.setState({userId:this.props.authorizedId})}
-//     else 
-//     {this.setState({userId:this.props.match.params.userId})}
-
-//     this.props.getUserProfile(this.userId);
-//     this.props.getStatus(this.userId); 
-// }
