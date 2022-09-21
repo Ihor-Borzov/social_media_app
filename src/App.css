@@ -50,7 +50,10 @@ grid-gap:10px;
     grid-template-areas:
 "body body"
 ;
+margin-top:60px;
+display:block
 }
 
-
 }
+
+/* ############### WORKING WITH BURGER */

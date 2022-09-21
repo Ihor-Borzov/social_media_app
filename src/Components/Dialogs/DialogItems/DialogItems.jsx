@@ -1,14 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import s from './DialogItems.module.css'   
 
 function DialogItems (props){
     let myCurrentPath = "/dialogs/"+ props.id       /* before return I can use regular javascript, and only in hte return i have to use JSX */
-return(
+
+
+
+
+
+    return(
 
     <div className={s.friend}>
-     <Link to ={myCurrentPath}><div className={s.circle}><img src={props.picture} alt ="user avatar"/></div></Link>
-    <span className={s.friends_name}>{props.name}</span>
+
+<div  className={s.avatar} >
+     <NavLink to ={myCurrentPath} >
+            <img src={props.picture} className={s.picture} alt ="user avatar"/>
+     </NavLink>
+     </div>
+   
+    <div className={s.friends_name}>{props.name}</div>
+
 </div>
 )
 }

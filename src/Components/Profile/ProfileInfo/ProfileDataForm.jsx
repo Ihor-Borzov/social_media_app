@@ -10,17 +10,18 @@ import s from "./ProfileDataForm.module.css";
 export const ProfileDataForm = (props) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
+ 
+        <form onSubmit={props.handleSubmit} className={s.profileDataForm}>
 
             {props.error && <div style={{ color: 'red' }}    > {props.error}</div>}
 
-            <div> Full name: {createField("full name", "fullName", [], Input)}</div>
+            <div>{createField("Full name", "fullName", [], Input)}</div>
 
-            <div>  About me: {createField("About me", "aboutMe", [], TextArea)}  </div>
+            <div>{createField("About me", "aboutMe", [], TextArea)}</div>
 
-            <div>Looking for a job: {createField("", "lookingForAJob", [], Input, { type: "checkbox" })} </div>
+            <div className={s.lookingForAJob}>Looking for a job: {createField("", "lookingForAJob", [], Input, { type: "checkbox" })} </div>
 
-            <div> My professional skills: {createField("About me", "lookingForAJobDescription", [], TextArea)} </div>
+            <div>{createField("My professional skills", "lookingForAJobDescription", [], TextArea)} </div>
 
             <ul className={s.contacts}><b>Contacts : </b>
                 {Object.keys(props.userProfile.contacts).map((key) => {
@@ -34,9 +35,14 @@ export const ProfileDataForm = (props) => {
                 })}
             </ul>
 
-            <button>Submit</button>
+<div className={s.buttons}>
+<button className={s.submitButton}>Submit</button>  
+<div className={s.discardButton} onClick={() => { props.setEditMode(false) }} >Discard changes</div>
+</div>
+
 
         </form>
+     
     )
 }
 

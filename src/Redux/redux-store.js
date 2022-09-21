@@ -8,6 +8,7 @@ import usersReducer from "./users-reducer";
 import thunkMiddleware from "redux-thunk"
 import {reducer as fromReducer}from 'redux-form'
 import appReducer from "./app-reduces";
+import headerReducer from "./header-reducer";
 
 
 /*#4 implemented reducers to Redux */
@@ -19,6 +20,7 @@ let reducers = combineReducers({
     auth:authReducer,               /* it means that this part of code will be in the state like: an object usersPage and inside this object i will have things what i have in the initialState - so an array users. */
 form:fromReducer,
 app:appReducer,
+header : headerReducer
 })
 
 

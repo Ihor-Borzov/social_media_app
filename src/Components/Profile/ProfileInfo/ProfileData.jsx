@@ -15,18 +15,16 @@ export const SocialMediaLinksThumbnails = {
 
 function ProfileData(props) {
 
-    return (
-        <div className={s.userInfo}>
-
-            {props.isOwner && <button onClick={() => { props.setEditMode(true) }} >Edit</button>}
-
+    return ( 
+        <div>
             <div className={s.fullName} > {props.userProfile.fullName}</div>
             <div className={s.aboutMe}>  <div>{props.userProfile.aboutMe}</div>  </div>
 
-            <div>Looking for a job: {props.userProfile.lookingForAJob ? "yes" : "no"}  </div>
+            <div className={s.lookingForAJob}>Looking for a job: {props.userProfile.lookingForAJob ?
+             <span style={{color:"green"}}>yes</span> : <span>no</span>}  </div>
 
             <div className={s.JobDescription}> {props.userProfile.lookingForAJobDescription ?
-                `my professional skills ${props.userProfile.lookingForAJobDescription} ` : null}</div>
+                `my professional skills: ${props.userProfile.lookingForAJobDescription} ` : null}</div>
 
 
 
@@ -40,7 +38,10 @@ function ProfileData(props) {
                     return null
                 })}
             </ul>
+
+            {props.isOwner && <button className={s.editButton} onClick={() => { props.setEditMode(true) }} >Edit</button>}
         </div>
+        
     )
 }
 

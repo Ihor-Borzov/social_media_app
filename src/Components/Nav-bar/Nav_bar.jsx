@@ -14,7 +14,7 @@ function Nav_bar(props) {
 
 
   return (
-    <div className={s.nav_bar}>
+    <div className={props.onOffBurgerMenu? s.nav_bar : s.noBar}>
       {/* this is the way to add active className */}
       <div className={s.item}><Link to={"/profile/" + props.authorizedId}
        className={navData => navData.isActive ? s.activeLink : s.notActiveLink} >Profile</Link></div>    {/* this is the way I create the links here, and they automatically link to the links  */}
@@ -34,10 +34,11 @@ props.isAuth?  <div className={s.logOut} onClick={props.logoutThunk}> Logout </d
 </div>
       
     
-
+<div className={s.MyFriends}>
       <div className={s.BestFriends}>Best Friends</div>
       <div className={s.friends}>
         {displayFriends}
+      </div>
       </div>
     </div>
   )
@@ -52,6 +53,7 @@ let mapStoreToProps = (state) => {
     authorizedId: state.auth.id,
     isAuth: state.auth.isAuth,
         login: state.auth.login,
+        onOffBurgerMenu: state.header.hamburgerMenu
   }
 }
 

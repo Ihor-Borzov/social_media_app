@@ -1,7 +1,8 @@
 .wrapper{
-    min-width:600px;
-    max-width:70%;
+/*  min-width:500px; */
+    max-width:800px;
 }
+
 
 .ussers_container{
     height:130px;
@@ -84,6 +85,23 @@ margin-bottom: 20px;
         font-size:15px;
     }
     
+
+    
+@media (max-width: 768px){
+    .user_info{
+        flex-direction: column;
+    }    
+    
+    .name_and_status{
+    }
+    
+    
+    .country_and_city{
+    max-width: 100% !important;
+    align-items: flex-start !important;
+    }
+    
+    }
     
     
     .user_info{
@@ -91,6 +109,7 @@ margin-bottom: 20px;
     border-radius: 15px;
     padding:10px;
     display:flex;
+    flex-wrap: wrap;
     }
     
     .name_and_status{
@@ -122,14 +141,14 @@ margin-bottom: 20px;
         font-size: 17px;
         font-weight: bold;
         font-family:Verdana, Geneva, Tahoma, sans-serif;
-        max-width:35%;
+         max-width:35%;
     }
     
     .country{
-        text-align: right;
-        white-space: wrap;
-        overflow: hidden;
-         text-overflow: ellipsis;
+         text-align: right;
+         white-space: wrap; 
+         overflow: hidden; 
+          text-overflow: ellipsis;
     }
     
     .city{
@@ -159,6 +178,8 @@ margin-bottom: 20px;
         border-radius: 50%;
         box-shadow:2px 3px rgb(192, 192, 192);
         border:1px solid rgb(192, 192, 192);
+        min-width:30px;
+text-align: center;
     }
 
     .buttonNext, .buttonPrev{

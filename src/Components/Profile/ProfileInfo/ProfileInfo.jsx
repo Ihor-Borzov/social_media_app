@@ -59,7 +59,7 @@ function ProfileInfo(props) {
     return (
 
         <div className={s.aboutUser}>
-
+<div className={s.wrapper}>
 
             { props.errorFlag  && <div className={s.error}>An error occurred in data fetching</div>}
 
@@ -78,9 +78,11 @@ function ProfileInfo(props) {
 
             <div className={s.profileStatus} >  <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} />    </div>
 
-
-            {editMode ? <ProfileDataForm  {...props} initialValues={props.userProfile} onSubmit={onSubmit} /> : <ProfileData {...props} setEditMode={setEditMode} />}
-
+<div className={s.userInfo}>
+            {editMode ? <ProfileDataForm  {...props} initialValues={props.userProfile} onSubmit={onSubmit}  setEditMode={setEditMode}/> 
+            : <ProfileData {...props} setEditMode={setEditMode} />}
+</div>
+</div>
         </div>
     )
 }

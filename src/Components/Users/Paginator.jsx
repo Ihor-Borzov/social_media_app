@@ -33,7 +33,7 @@ return(
     (page)=>{return <span
          onClick={(e)=>{setCurrentPage(page)}} 
         className={currentPage===page ? style.activePage : style.notActivePage}> 
-        {isFetching && currentPage===page? <img src={preloadGif} alt="preloader" ></img> : page + " ."}
+        {isFetching && currentPage===page? <img src={preloadGif} alt="preloader" ></img> : page}
          </span>
     })
     }

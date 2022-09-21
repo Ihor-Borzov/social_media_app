@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
 import { maxChar, required } from '../../Utilities/FormValidators/validators';
@@ -22,14 +23,24 @@ function onSendMessage (data){
 props.sendMessage(data.usersText);
 }
 
+let[chatsOnOff, switchChats] = useState(true)
+
 
 
 return(
+<div>
+    <div className={s.chats}  onClick={()=>{switchChats(!chatsOnOff)}} > {chatsOnOff? "hide chats": "show chats"}</div>
+
     <div className={s.content}>
 
-        <div className={s.listOfDialogs}>
-{displayedDialogs}    
-        </div>
+
+    {chatsOnOff &&
+    <div className={s.listOfDialogs}>
+    {displayedDialogs}    
+            </div>
+    }
+
+        
 
 
         <div className={s.messenger}>
@@ -47,6 +58,8 @@ return(
  </div> 
         </div>
         
+    </div>
+
     </div>
 )
 }

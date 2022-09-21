@@ -7,10 +7,41 @@
   
 }
 
+ .noBar{
+  padding:10px;
+  grid-area:side_bar;
+  background-color:#cfeef3;
+  border-radius: 20px;
+  box-shadow:2px 3px rgb(192, 192, 192);
+} 
+
+
+
+
 @media (max-width: 768px){ 
 .nav_bar{
+  /* display:none; */
+ position:fixed;
+  top:5px;
+  right:7px;
+  grid-area: none;
+  z-index:9;
+  background-color:rgb(243, 247, 55);
+  padding-top:60px;
+}
+
+
+.noBar{
   display:none;
 }
+
+
+
+
+.MyFriends{
+  display:none;
+}
+
 }
 
 .item{
