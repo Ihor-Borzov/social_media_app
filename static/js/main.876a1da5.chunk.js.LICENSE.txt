@@ -1,0 +1,5 @@
+//! read about "Content-Type":'multipart/form-data'  and how to send a file to the server
+
+//! this is the way to call a thunk from a thunk in the same reducer
+
+//! this is the way to get state from another reducer
