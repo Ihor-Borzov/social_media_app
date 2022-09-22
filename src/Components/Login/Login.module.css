@@ -1,0 +1,86 @@
+.commonError{
+    color:red;
+    padding:5px;
+    }
+
+
+ .loginForm{  
+    padding:15px;
+font-size: 17px;
+display:flex;
+justify-content: center;
+    }
+
+    .wrapper{
+padding:30px;
+display:flex;
+flex-direction: column;
+height: fit-content;
+
+box-shadow:2px 3px rgb(93, 96, 236);
+border:1px solid rgb(192, 192, 192);
+background-color: rgba(251, 252, 250, 0.5);
+border-radius: 25px;
+    }
+
+    .loginForm  input{
+  line-height: 40px; 
+        margin-bottom: 10px;
+        border-bottom: 1px solid black;
+        font-size: 17px;
+         outline: none;
+    }
+
+    .rememberMe label{
+        font-weight: bold;
+        display:flex;
+        align-content: center;
+    }
+
+    .rememberMe span{
+        display: inline-block;
+    }
+
+
+
+.rememberMe  input{
+cursor:pointer;
+ display: inline-block;
+width:20px;
+height:20px;
+margin: 0 0 0 10px;
+align-self: center;
+    }
+
+    .rememberMe{
+        margin-bottom: 10px;
+    }
+
+
+
+    .loginButton{
+        cursor: pointer;
+        display:inline-block;
+        width:fit-content;
+        padding:5px;
+        border-radius: 25%;
+        box-shadow:2px 3px rgb(93, 96, 236);
+        border:1px solid rgb(192, 192, 192);
+        background-color: rgba(251, 252, 250, 0.5);
+        font-size: 17px;
+        color:rgb(9, 1, 1);
+        font-weight: bold;
+        position:relative;
+        width:50%;
+        align-self: center;
+    }
+
+
+    @media (max-width: 768px){
+ .loginForm{  
+height:87vh;
+    }
+
+
+
+    }

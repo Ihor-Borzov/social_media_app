@@ -46,7 +46,7 @@ return <Preloader/>
       <div className="AppWrapper">
         <HeaderContainer/>
       <div className="App">
-        <BrowserRouter>         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
+        <BrowserRouter basename ={process.env.PUBLIC_URL}  >         {/* this the way we work with routing: inside our main div wrapper we create a tag <BrowserRouter> this tag we create once for an app, and then for each variant of the path we create separate attribute <Route> all the path's togethers have to be wrapped in to attribute <Routes> */}
         <NavBar/>
   <div className="body_wrapper">
      <Routes>   
