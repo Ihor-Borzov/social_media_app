@@ -32,14 +32,14 @@ function MyPosts(props) {
 
 
 
-let maximumChar = maxChar(10) /* this is our flexible validator with closure, for now we have to invoke it this way */
+let maximumChar = maxChar(300) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 const MyPostsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>  <Field name="myPostText" component={TextArea} validate={[required, maximumChar]}
+            <div className={s.post}>  <Field name="myPostText" component={TextArea} validate={[required, maximumChar]}
              placeholder="your comment here"></Field>   </div>
-            <button>Add post</button>
+            <button className={s.addPostButton} >Add post</button>
         </form>
     )
 }

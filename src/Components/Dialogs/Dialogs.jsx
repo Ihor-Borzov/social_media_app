@@ -19,7 +19,6 @@ let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Mes
 
 
 function onSendMessage (data){
-    alert(data.usersText)
 props.sendMessage(data.usersText);
 }
 
@@ -65,7 +64,7 @@ return(
 }
 
 
-let maximumChar = maxChar(10) /* this is our flexible validator with closure, for now we have to invoke it this way */
+let maximumChar = maxChar(300) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 const DialogsForm=(props)=>{
 
