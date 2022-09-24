@@ -12,15 +12,18 @@ function MyPosts(props) {
 
     let displayedPosts = props.state.postsData.map((postObject) => <Post likes={postObject.likes} key={postObject.likes} message={postObject.message} />)
 
-    let onAddPost = (data) => {
-        props.addPost(data.myPostText);
+
+
+    let onAddPost = (data) => { 
+     props.addPost(data.myPostText);
+
     }
 
 
     return (
         <div className={s.myPosts}>
             <div>
-                <MyPostsReduxForm onSubmit={onAddPost} />
+                <MyPostsReduxForm onSubmit={onAddPost}   />
             </div>
             <div className={s.posts}>
                 {displayedPosts}
@@ -35,10 +38,13 @@ function MyPosts(props) {
 let maximumChar = maxChar(300) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
 const MyPostsForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
-            <div className={s.post}>  <Field name="myPostText" component={TextArea} validate={[required, maximumChar]}
-             placeholder="your comment here"></Field>   </div>
+            <div className={s.post}>
+                  <Field name="myPostText"  component={TextArea} validate={[required, maximumChar]}
+             placeholder="your comment here"> </Field>  
+              </div>
             <button className={s.addPostButton} >Add post</button>
         </form>
     )

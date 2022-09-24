@@ -1,3 +1,5 @@
+import {reset} from 'redux-form';
+
 const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
 
 
@@ -57,6 +59,13 @@ data
     }
 }
 
+
+export const SendMessageThunk =(data)=>{
+    return(dispatch)=>{
+        dispatch(sendUserMessageCreator(data));
+        dispatch(reset("dialogsForm"));
+    }
+}
 
 
 export default dialogsReducer;

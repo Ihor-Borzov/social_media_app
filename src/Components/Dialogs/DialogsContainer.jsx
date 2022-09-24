@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
-import { sendUserMessageCreator } from '../../Redux/dialogs-reducer';
+import { SendMessageThunk } from '../../Redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 
 
@@ -18,7 +18,7 @@ return{
 
 let mapDispatchToProps=(dispatch)=>{
     return{
-        sendMessage:(data)=>{dispatch(sendUserMessageCreator(data));},
+        sendMessage:(data)=>{dispatch(SendMessageThunk(data));},
     }
 }
 

@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
+import {reset} from 'redux-form';
 
 const ADD_NEW_POST = "ADD_NEW_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -133,6 +134,14 @@ export const setGlobalError = ()=>{
 
 
 /* thunk */
+
+export const addPostAndCleanReduxForm = (text)=>{
+    return (dispatch)=>{
+        dispatch(addNewPostCreator(text));
+dispatch(reset("NewPost"));
+        
+    }
+}
 
 
 export const showGlobalError = ()=>{
