@@ -13,6 +13,8 @@ const SET_GLOBAL_ERROR = "SET_GLOBAL_ERROR"
 
 
 
+
+
 /*#6 create an object to assign launch characteristics for the main state.  this is the way we set up our state when we first time start the app */
 let initialState = {
     postsData: [
@@ -68,9 +70,12 @@ const profileReducer = (state = initialState, action) => {
                 errorFlag:!state.errorFlag
             }
 
+
         default: return state;
     }
 }
+
+
 
 
 

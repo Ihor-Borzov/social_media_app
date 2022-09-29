@@ -30,8 +30,9 @@ function ProfileData(props) {
 
             <ul className={s.item_social}><b>Contacts : </b>
                 {Object.keys(props.userProfile.contacts).map((key) => {
-                    if (props.userProfile.contacts[key]) {   // if the property is not empty => i will render it
-                        console.log(props.userProfile.contacts[key])
+                    if (props.userProfile.contacts[key] && SocialMediaLinksThumbnails.hasOwnProperty(key)) 
+    // if the property is not empty and this property value exist in the SocialMediaLinksThumbnails object => i will render it
+                    {       
                         return (
                             <Contact key={key} contactTitle={key} contactValue={props.userProfile.contacts[key]} />)
                     }

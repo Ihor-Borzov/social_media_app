@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form"
 import { authenticationAPI } from "../api/api"
+import { removeUserProfile } from "./profile-reducer"
 
 const SET_USERS_DATA = 'SET_USERS_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'Auth/GET_CAPTCHA_URL_SUCCESS'
@@ -109,7 +110,8 @@ export const logoutThunk = () => {
         (dispatch) => {
             authenticationAPI.logout().then((response) => {
                 if (response.data.resultCode === 0) {
-                    dispatch(authenticate())   /* we call authenticate to update Header !*/
+                    dispatch(authenticate());   /* we call authenticate to update Header !*/
+                 
                 }
             })
         }

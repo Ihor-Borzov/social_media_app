@@ -64,7 +64,7 @@ return <Preloader/>
     }/>   
 
 
-    <Route exact path="/" element={<Navigate to="/profile/*" />}/>    {/* this is the way to render profile if your url is empty */}
+    <Route exact path="/" element={<Navigate to={`/profile/${this.props.authorizedId}`}      />}/>    {/* this is the way to render profile if your url is empty */}
 
     <Route path="/news/*" element={<News/>}/>  
   
@@ -105,7 +105,8 @@ let BaseAppComponent = (props)=>{
 
 export let mapStateToProps = (state)=>{
   return{
-    initialized:state.app.initialized
+    initialized:state.app.initialized,
+    authorizedId: state.auth.id,
   }
 }
 

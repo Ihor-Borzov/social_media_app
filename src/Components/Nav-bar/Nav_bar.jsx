@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Navigate, NavLink } from 'react-router-dom';
 import Friend from './Friend/Friend';
 import s from "./Nav_bar.module.css";
 import {logoutThunk} from "../../Redux/Auth"

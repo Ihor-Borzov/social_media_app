@@ -12,6 +12,7 @@ import Profile from './Profile'
 class ProfileContainer extends React.Component{
 
     refreshProfile=()=>{
+    //debugger
 let userId 
     if( !this.props.match || isNaN(this.props.match.params.userId)){
         userId = this.props.authorizedId? this.props.authorizedId: null}
