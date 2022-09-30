@@ -12,8 +12,13 @@ import s from "../Login/Login.module.css"
 
 class Login extends React.Component {
 
+    componentDidMount = () =>{
+        console.log("login")
+        console.log(this.props.isAuth)
+    }
+
     componentDidUpdate = () => {
-        //alert("updated")
+        
     }
 
     onSubmit = (data) => {

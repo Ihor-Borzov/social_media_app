@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Field } from 'redux-form';
 import { reduxForm } from 'redux-form';
@@ -22,7 +23,21 @@ function onSendMessage (data){
 props.sendMessage(data.usersText);
 }
 
-let[chatsOnOff, switchChats] = useState(true)
+let[chatsOnOff, switchChats] = useState(true);
+
+
+let updateWindowWidth = ()=>{
+    if(window.innerWidth>=768){
+        switchChats(true)
+    }
+}
+
+
+useEffect(()=>{
+    window.addEventListener('resize', updateWindowWidth);
+
+    return()=>{window.removeEventListener('resize', updateWindowWidth);}
+},[])
 
 
 

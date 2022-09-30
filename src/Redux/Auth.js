@@ -64,7 +64,8 @@ export const authenticate = () => {
                         let { id, email, login } = response.data;
                         dispatch(authorizationAC(id, email, login, true))  /* if response code ===0 it means we entered and we can send our isAuth to true */
                     }
-                    else { dispatch(authorizationAC(null, null, null, false)) }
+                    else {console.log("here is reducer set isAuth to false")
+                         dispatch(authorizationAC(null, null, null, false)) }
                 })
             )  /* end of return */
         }

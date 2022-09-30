@@ -1,5 +1,5 @@
 /* #1 we install Redux and create redux-store.js */
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import authReducer from "./Auth";
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
@@ -26,10 +26,14 @@ header : headerReducer
 
 
 /*#5 inserted reducers to store */
-let store = createStore(reducers, applyMiddleware(thunkMiddleware) );
+/* let store = createStore(reducers, applyMiddleware(thunkMiddleware) );*/
+
+/* this is the way to enable Redux DevTools */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers( applyMiddleware(thunkMiddleware)));
 
 
 export default store;
 
 
-window.store = store;
+window.__store__ = store;

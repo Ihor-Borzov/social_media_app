@@ -33,8 +33,9 @@ function Nav_bar(props) {
 <div className={s.item}>
   {props.isAuth? 
    <div className={s.logOut}  onClick={()=>{props.logoutThunk(); props.closeHamburgerMenuAC()}}>
-  <NavLink to={'/login'}>Logout</NavLink>
-  </div> 
+  {/* <NavLink to={'/login'}>Logout</NavLink> */}
+   <NavLink to={'/profile/*'}>Logout</NavLink>
+ </div> 
 
 :<div className={s.logIn} onClick={props.closeHamburgerMenuAC} >
   <NavLink to={'/login'}>Login</NavLink>
