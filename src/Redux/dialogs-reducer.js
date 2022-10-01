@@ -1,4 +1,4 @@
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
 
 const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
 
@@ -22,7 +22,7 @@ let initialState = {
         { id: 0, message: "Hi how are you?" },
     ],
 
-    userInputMessage:""
+    userInputMessage: ""
 }
 
 
@@ -35,33 +35,33 @@ let initialState = {
  your reducers should be that changed duplicated state. so connect will be able to compare those two states and if there is 
  any difference it will rerender the page where changes happened */
 
-const dialogsReducer = (state = initialState, action)=>{
+const dialogsReducer = (state = initialState, action) => {
 
-switch(action.type){
+    switch (action.type) {
 
-case SEND_USER_MESSAGE:
-    return{...state,  messagesData:[...state.messagesData, { id:0, message:action.data,}], userInputMessage:""};    /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
+        case SEND_USER_MESSAGE:
+            return { ...state, messagesData: [...state.messagesData, { id: 0, message: action.data, }], userInputMessage: "" };    /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
 
-default:return state;
-    
+        default: return state;
+
+    }
+
 }
 
-}
 
 
 
 
-
-export const sendUserMessageCreator = (data)=>{
-    return{
-type:SEND_USER_MESSAGE,
-data
+export const sendUserMessageCreator = (data) => {
+    return {
+        type: SEND_USER_MESSAGE,
+        data
     }
 }
 
 
-export const SendMessageThunk =(data)=>{
-    return(dispatch)=>{
+export const SendMessageThunk = (data) => {
+    return (dispatch) => {
         dispatch(sendUserMessageCreator(data));
         dispatch(reset("dialogsForm"));
     }

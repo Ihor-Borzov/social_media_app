@@ -10,7 +10,7 @@ import s from "./ProfileDataForm.module.css";
 export const ProfileDataForm = (props) => {
 
     return (
- 
+
         <form onSubmit={props.handleSubmit} className={s.profileDataForm}>
 
             {props.error && <div style={{ color: 'red' }}    > {props.error}</div>}
@@ -35,14 +35,14 @@ export const ProfileDataForm = (props) => {
                 })}
             </ul>
 
-<div className={s.buttons}>
-<button className={s.submitButton}>Submit</button>  
-<div className={s.discardButton} onClick={() => { props.setEditMode(false) }} >Discard changes</div>
-</div>
+            <div className={s.buttons}>
+                <button className={s.submitButton}>Submit</button>
+                <div className={s.discardButton} onClick={() => { props.setEditMode(false) }} >Discard changes</div>
+            </div>
 
 
         </form>
-     
+
     )
 }
 

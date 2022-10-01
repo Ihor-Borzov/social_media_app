@@ -1,58 +1,59 @@
-
-*,*:before,*:after{
-box-sizing: border-box;
-padding:0;
-margin:0;
-border:0;
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
 
 
-.AppWrapper{
-  margin:10px auto; 
-   width:90%;
+.AppWrapper {
+    margin: 10px auto;
+    width: 90%;
 }
 
 
-.App{
-display:grid;
-grid-gap:10px;
-  margin-top:65px;
-    grid-template-rows:1fr ;
-    grid-template-columns:200px 1fr ;
+.App {
+    display: grid;
+    grid-gap: 10px;
+    margin-top: 65px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 200px 1fr;
 
     grid-template-areas:
-    "side_bar body"
+        "side_bar body"
     ;
 }
 
-.body_wrapper{
-    padding:10px;
-    grid-area:body;
-    box-shadow:2px 3px rgb(192, 192, 192);
-    background-color:#fafafa;
+.body_wrapper {
+    padding: 10px;
+    grid-area: body;
+    box-shadow: 2px 3px rgb(192, 192, 192);
+    background-color: #fafafa;
     border-radius: 20px;
 }
 
 
 
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 
-    .AppWrapper{
-        margin:2px auto 6px;
-        width:99%;
+    .AppWrapper {
+        margin: 2px auto 6px;
+        width: 99%;
     }
 
 
 
-.App{
-    grid-template-areas:
-"body body"
-;
-margin-top:60px;
-display:block
-}
+    .App {
+        grid-template-areas:
+            "body body"
+        ;
+        margin-top: 60px;
+        display: block
+    }
 
 }
 

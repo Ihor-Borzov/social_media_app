@@ -10,10 +10,10 @@ test('renders learn react link', () => {
 });
 
 
-test ("renders without crashing",()=>{
-const div = document.createElement('div');
-ReactDOM.render(<BaseAppComponent/>, div);
-ReactDOM.unmountComponentAtNode(div);
+test("renders without crashing", () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<BaseAppComponent />, div);
+  ReactDOM.unmountComponentAtNode(div);
 })
 
 // We create the tag div and render our App inside this tag, it was important manually import ReactDOM.

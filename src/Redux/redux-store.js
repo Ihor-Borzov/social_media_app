@@ -11,7 +11,7 @@ import appReducer from "./app-reduces";
 import headerReducer from "./header-reducer";
 
 
-/*#4 implemented reducers to Redux */
+/*#4 implementing reducers to Redux */
 let reducers = combineReducers({       
     dialogsPage:dialogsReducer,
     myPostsPage:profileReducer,
@@ -36,4 +36,4 @@ const store = createStore(reducers, composeEnhancers( applyMiddleware(thunkMiddl
 export default store;
 
 
-window.__store__ = store;
+window.__store = store;

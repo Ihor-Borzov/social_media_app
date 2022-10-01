@@ -12,82 +12,76 @@ import Message from './Message/Message';
 
 
 
-function Dialogs (props){
+function Dialogs(props) {
 
-let displayedDialogs = props.navBarPage.friendData.map((dialogObject)=><DialogItems name={dialogObject.name} id={dialogObject.id} key={dialogObject.id} picture={dialogObject.picture}/>)
+    let displayedDialogs = props.navBarPage.friendData.map((dialogObject) => <DialogItems name={dialogObject.name} id={dialogObject.id} key={dialogObject.id} picture={dialogObject.picture} />)
 
-let displayedMessages = props.dialogsPage.messagesData.map((messageObject)=><Message message={messageObject.message}  id={messageObject.id} key={messageObject.id} />)    /* this is the way we create new array with  JSX markup */
-
-
-function onSendMessage (data){
-props.sendMessage(data.usersText);
-}
-
-let[chatsOnOff, switchChats] = useState(true);
+    let displayedMessages = props.dialogsPage.messagesData.map((messageObject, index) => <Message message={messageObject.message} id={messageObject.id} key={index} />)    /* this is the way we create new array with  JSX markup */
 
 
-let updateWindowWidth = ()=>{
-    if(window.innerWidth>=768){
-        switchChats(true)
+    function onSendMessage(data) {
+        props.sendMessage(data.usersText);
     }
-}
+
+    let [chatsOnOff, switchChats] = useState(true);
 
 
-useEffect(()=>{
-    window.addEventListener('resize', updateWindowWidth);
-
-    return()=>{window.removeEventListener('resize', updateWindowWidth);}
-},[])
-
-
-
-return(
-<div>
-    <div className={s.chats}  onClick={()=>{switchChats(!chatsOnOff)}} > {chatsOnOff? "hide chats": "show chats"}</div>
-
-    <div className={s.content}>
+    let updateWindowWidth = () => {
+        if (window.innerWidth >= 768) {
+            switchChats(true)
+        }
+    }
 
 
-    {chatsOnOff &&
-    <div className={s.listOfDialogs}>
-    {displayedDialogs}    
+    useEffect(() => {
+        window.addEventListener('resize', updateWindowWidth);
+
+        return () => { window.removeEventListener('resize', updateWindowWidth); }
+    }, [])
+
+
+
+    return (
+        <div>
+            <div className={s.chats} onClick={() => { switchChats(!chatsOnOff) }} > {chatsOnOff ? "hide chats" : "show chats"}</div>
+
+            <div className={s.content}>
+
+                {chatsOnOff &&
+                    <div className={s.listOfDialogs}>
+                        {displayedDialogs}
+                    </div>
+                }
+
+                <div className={s.messenger}>
+
+                    <div className={s.messageHistory}>
+                        {displayedMessages}
+                    </div>
+
+                    <div className={s.textWrapper}>
+
+                        <DialogsReduxForm onSubmit={onSendMessage} />
+
+                    </div>
+                </div>
+
             </div>
-    }
 
-        
-
-
-        <div className={s.messenger}>
-
-
-        <div className={s.messageHistory}>         
- {displayedMessages} 
- </div>
-
-
- <div className={s.textWrapper}>
-
-<DialogsReduxForm onSubmit={onSendMessage}/> 
-  
- </div> 
         </div>
-        
-    </div>
-
-    </div>
-)
+    )
 }
 
 
 let maximumChar = maxChar(300) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
-const DialogsForm=(props)=>{
+const DialogsForm = (props) => {
 
-    return(
-        <form  onSubmit={props.handleSubmit}  >
+    return (
+        <form onSubmit={props.handleSubmit}  >
 
-<Field component={Input} className={s.userInput_text}  placeholder="type the message" name="usersText"  validate={[required, maximumChar]} ></Field>   
-     <button className={s.buttonSend} >Send</button>
+            <Field component={Input} className={s.userInput_text} placeholder="type the message" name="usersText" validate={[required, maximumChar]} ></Field>
+            <button className={s.buttonSend} >Send</button>
 
         </form>
     )
@@ -96,7 +90,7 @@ const DialogsForm=(props)=>{
 
 
 
-const DialogsReduxForm = reduxForm({form:"dialogsForm"})(DialogsForm)
+const DialogsReduxForm = reduxForm({ form: "dialogsForm" })(DialogsForm)
 
 
 export default Dialogs;

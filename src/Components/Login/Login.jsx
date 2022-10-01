@@ -7,18 +7,16 @@ import { loginThunk } from "../../Redux/Auth"
 import { maxChar, required } from "../../Utilities/FormValidators/validators"
 import { createField, Input } from "../common/FormControls/FormControls"
 import s from "../Login/Login.module.css"
- 
+
 
 
 class Login extends React.Component {
 
-    componentDidMount = () =>{
-        console.log("login")
-        console.log(this.props.isAuth)
+    componentDidMount = () => {
     }
 
     componentDidUpdate = () => {
-        
+
     }
 
     onSubmit = (data) => {
@@ -29,6 +27,7 @@ class Login extends React.Component {
         return (
             <div>
                 <div>LOGIN please!</div>
+                <div>You are welcome to visit my page: 22624</div>
                 <div>If you are a guest, please use next credentials:  </div>
                 <div>Email: free@samuraijs.com</div>  {/* my credentials: jsmesh@mail.ru  jamperxy23*/}
                 <div>Password: free</div>
@@ -48,21 +47,21 @@ let LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.loginForm}>
             <div className={s.wrapper}>
-            <div><Field placeholder='email' component={Input} name="email" validate={[required, maximumChar]}  ></Field></div>
-            <div><Field placeholder='password' component={Input} name="password" validate={[required, maximumChar]}  ></Field></div>
-            <div className={s.rememberMe}>
-                <label>
-                    <span> remember me </span>
+                <div><Field placeholder='email' component={Input} name="email" validate={[required, maximumChar]}  ></Field></div>
+                <div><Field placeholder='password' component={Input} name="password" validate={[required, maximumChar]}  ></Field></div>
+                <div className={s.rememberMe}>
+                    <label>
+                        <span> remember me </span>
                         <Field type="checkbox" component="input" name="rememberMe"></Field>
-                </label>
-            </div>
-            {props.error && <div className={s.commonError}> {props.error}</div>}
-            <button className={s.loginButton}>Login</button>
+                    </label>
+                </div>
+                {props.error && <div className={s.commonError}> {props.error}</div>}
+                <button className={s.loginButton}>Login</button>
 
-            {props.captchaUrl && <div>
-                <img src={props.captchaUrl} alt="captcha" ></img>
-                {createField("symbols from image", "captcha", [required], Input)}
-            </div>}
+                {props.captchaUrl && <div>
+                    <img src={props.captchaUrl} alt="captcha" ></img>
+                    {createField("symbols from image", "captcha", [required], Input)}
+                </div>}
             </div>
         </form>
     )

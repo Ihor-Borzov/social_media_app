@@ -12,28 +12,10 @@ import ProfileStatusHooks from './ProfileStatusHooks';
 
 function ProfileInfo(props) {
 
-     let [isHovering, setIsHovering] = useState(false) 
     let [editMode, setEditMode] = useState(false)
     let imageDomElement = React.createRef()
 
 
-    let removeOnMouseOut = () => {
-        console.log("remove listener")
-        imageDomElement.current.removeEventListener('mouseout', handleMouseOut)
-    }
-
-
-    let handleMouseOut = () => {
-        setTimeout(() => {
-            console.log("mouse out")
-            setIsHovering(false)
-        }, 3000)
-
-    }
-
-     let handleMouseOver = () => {
-        setIsHovering(true);
-    } 
 
 
     let changeUsersPhoto = (e) => {
@@ -59,30 +41,30 @@ function ProfileInfo(props) {
     return (
 
         <div className={s.aboutUser}>
-<div className={s.wrapper}>
+            <div className={s.wrapper}>
 
-            { props.errorFlag  && <div className={s.error}>An error occurred in data fetching</div>}
+                {props.errorFlag && <div className={s.error}>An error occurred in data fetching</div>}
 
-            <div className={s.userImgWrapper} /* onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} */ ref={imageDomElement} >
-                {props.isFetching ? <Preloader /> 
-                : <img src={props.userProfile.photos.large != null ? props.userProfile.photos.large : blankUserPicture} alt="avatar" ></img>}
+                <div className={s.userImgWrapper} ref={imageDomElement} >
+                    {props.isFetching ? <Preloader />
+                        : <img src={props.userProfile.photos.large != null ? props.userProfile.photos.large : blankUserPicture} alt="avatar" ></img>}
 
 
-                {  /* isHovering && */  props.isOwner &&
-                    <label className={s.photoUpload}     >
-                        <input className={s.inputFile} type={"file"} onChange={(e) => { changeUsersPhoto(e) }} onClick={removeOnMouseOut}   ></input>
-                    </label>
-                }
+                    {props.isOwner &&
+                        <label className={s.photoUpload}     >
+                            <input className={s.inputFile} type={"file"} onChange={(e) => { changeUsersPhoto(e) }}   ></input>
+                        </label>
+                    }
+                </div>
+
+
+                <div className={s.profileStatus} >  <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} />    </div>
+
+                <div className={s.userInfo}>
+                    {editMode ? <ProfileDataForm  {...props} initialValues={props.userProfile} onSubmit={onSubmit} setEditMode={setEditMode} />
+                        : <ProfileData {...props} setEditMode={setEditMode} />}
+                </div>
             </div>
-
-
-            <div className={s.profileStatus} >  <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} />    </div>
-
-<div className={s.userInfo}>
-            {editMode ? <ProfileDataForm  {...props} initialValues={props.userProfile} onSubmit={onSubmit}  setEditMode={setEditMode}/> 
-            : <ProfileData {...props} setEditMode={setEditMode} />}
-</div>
-</div>
         </div>
     )
 }

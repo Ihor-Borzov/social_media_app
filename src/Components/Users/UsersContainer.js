@@ -23,7 +23,7 @@ class UsersContainerComponent extends React.Component {
 
         return (
             <>
-                 {/* {this.props.isFetching ? <Preloader /> : null}  */}
+                {/* {this.props.isFetching ? <Preloader /> : null}  */}
 
                 <Users
                     setCurrentPage={this.setCurrentPage}
@@ -36,7 +36,7 @@ class UsersContainerComponent extends React.Component {
                     unfollow={this.props.unfollow}
                     toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                     following_unfollowingIds={this.props.following_unfollowingIds}
-                    isFetching = {this.props.isFetching}
+                    isFetching={this.props.isFetching}
                 />
 
             </>

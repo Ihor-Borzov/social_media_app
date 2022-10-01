@@ -1,19 +1,19 @@
 import React from "react";
-import s from './Message.module.css' 
+import s from './Message.module.css'
 
-function Message (props){
+function Message(props) {
 
 
-    return(
+  return (
 
-  <div className={s.wrapper}>  
-{props.id===0
-  ?<div className={s.your_text}>  {props.message}  </div> 
-  :<div className={s.person_text}>  {props.message}  </div>
-  }
-</div>
+    <div className={s.wrapper}>
+      {props.id === 0
+        ? <div className={s.your_text}>  {props.message}  </div>
+        : <div className={s.person_text}>  {props.message}  </div>
+      }
+    </div>
 
-    )
+  )
 
 }
 
@@ -21,11 +21,3 @@ function Message (props){
 
 export default Message;
 
-
-
-
-/* 
-{props.id===0
-  ?<div className={s.your_text}>{props.message}</div>
-  :<div className={s.person_text}>{props.message}</div>
-  } */

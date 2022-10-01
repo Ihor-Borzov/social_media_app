@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
 
 const ADD_NEW_POST = "ADD_NEW_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -27,7 +27,7 @@ let initialState = {
     userProfile: null,
     status: "",
     isFetching: false,
-    errorFlag:false,
+    errorFlag: false,
 }
 
 
@@ -67,7 +67,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_GLOBAL_ERROR:
             return {
                 ...state,
-                errorFlag:!state.errorFlag
+                errorFlag: !state.errorFlag
             }
 
 
@@ -126,9 +126,9 @@ export const isFetchingAC = (fetch) => {
 }
 
 
-export const setGlobalError = ()=>{
-    return{
-        type:SET_GLOBAL_ERROR
+export const setGlobalError = () => {
+    return {
+        type: SET_GLOBAL_ERROR
     }
 }
 
@@ -140,21 +140,21 @@ export const setGlobalError = ()=>{
 
 /* thunk */
 
-export const addPostAndCleanReduxForm = (text)=>{
-    return (dispatch)=>{
+export const addPostAndCleanReduxForm = (text) => {
+    return (dispatch) => {
         dispatch(addNewPostCreator(text));
-dispatch(reset("NewPost"));
-        
+        dispatch(reset("NewPost"));
+
     }
 }
 
 
-export const showGlobalError = ()=>{
-    return (dispatch)=>{
+export const showGlobalError = () => {
+    return (dispatch) => {
         dispatch(setGlobalError());
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(setGlobalError())
-        },3000)
+        }, 3000)
     }
 }
 
@@ -184,13 +184,13 @@ export const getStatus = (userId) => {
 
 export const updateStatus = (status) => {
     return (
-       async (dispatch) => {
-        try{
-            let response = await profileAPI.setStatus(status)
+        async (dispatch) => {
+            try {
+                let response = await profileAPI.setStatus(status)
                 if (response.data.resultCode === 0) { dispatch(setStatus(status)) }
-        }
-         
-catch(error){alert(error)}
+            }
+
+            catch (error) { alert(error) }
         }
     )
 }

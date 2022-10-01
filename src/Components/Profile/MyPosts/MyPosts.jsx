@@ -14,8 +14,8 @@ function MyPosts(props) {
 
 
 
-    let onAddPost = (data) => { 
-     props.addPost(data.myPostText);
+    let onAddPost = (data) => {
+        props.addPost(data.myPostText);
 
     }
 
@@ -23,7 +23,7 @@ function MyPosts(props) {
     return (
         <div className={s.myPosts}>
             <div>
-                <MyPostsReduxForm onSubmit={onAddPost}   />
+                <MyPostsReduxForm onSubmit={onAddPost} />
             </div>
             <div className={s.posts}>
                 {displayedPosts}
@@ -42,9 +42,9 @@ const MyPostsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.post}>
-                  <Field name="myPostText"  component={TextArea} validate={[required, maximumChar]}
-             placeholder="your comment here"> </Field>  
-              </div>
+                <Field name="myPostText" component={TextArea} validate={[required, maximumChar]}
+                    placeholder="your comment here"> </Field>
+            </div>
             <button className={s.addPostButton} >Add post</button>
         </form>
     )

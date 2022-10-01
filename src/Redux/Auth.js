@@ -1,6 +1,5 @@
 import { stopSubmit } from "redux-form"
 import { authenticationAPI } from "../api/api"
-import { removeUserProfile } from "./profile-reducer"
 
 const SET_USERS_DATA = 'SET_USERS_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'Auth/GET_CAPTCHA_URL_SUCCESS'
@@ -26,14 +25,14 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data,
             }
-            /* falls through */  
+        /* falls through */
 
         case GET_CAPTCHA_URL_SUCCESS:
             return {
                 ...state,
                 ...action.payload
             }
-            /* falls through */
+        /* falls through */
 
         default: return state
     }
@@ -64,8 +63,7 @@ export const authenticate = () => {
                         let { id, email, login } = response.data;
                         dispatch(authorizationAC(id, email, login, true))  /* if response code ===0 it means we entered and we can send our isAuth to true */
                     }
-                    else {console.log("here is reducer set isAuth to false")
-                         dispatch(authorizationAC(null, null, null, false)) }
+                    else { dispatch(authorizationAC(null, null, null, false)) }
                 })
             )  /* end of return */
         }
@@ -112,7 +110,7 @@ export const logoutThunk = () => {
             authenticationAPI.logout().then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(authenticate());   /* we call authenticate to update Header !*/
-                 
+
                 }
             })
         }

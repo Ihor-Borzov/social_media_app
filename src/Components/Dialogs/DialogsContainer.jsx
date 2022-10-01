@@ -7,19 +7,19 @@ import Dialogs from './Dialogs';
 
 
 
-let mapStateToProps = (state)=>{
-return{
-    dialogsPage :state.dialogsPage,
-    navBarPage : state.navBarPage,
+let mapStateToProps = (state) => {
+  return {
+    dialogsPage: state.dialogsPage,
+    navBarPage: state.navBarPage,
+  }
 }
-}
 
 
 
-let mapDispatchToProps=(dispatch)=>{
-    return{
-        sendMessage:(data)=>{dispatch(SendMessageThunk(data));},
-    }
+let mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: (data) => { dispatch(SendMessageThunk(data)); },
+  }
 }
 
 
@@ -47,6 +47,6 @@ let mapDispatchToProps=(dispatch)=>{
 
 
 export default compose(
-  connect(mapStateToProps,mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   withAuthRedirect
 )(Dialogs)
