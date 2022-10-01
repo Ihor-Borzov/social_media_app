@@ -101,7 +101,8 @@ overflow: hidden;
     color:rgb(9, 1, 1);
     font-weight: bold;
     position:relative;
-    top:-10px
+    top:-10px;
+    margin-top:10px
 }
 
 .fullName{
