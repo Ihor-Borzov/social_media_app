@@ -5,6 +5,7 @@ import Friend from './Friend/Friend';
 import s from "./Nav_bar.module.css";
 import { logoutThunk } from "../../Redux/Auth"
 import { closeHamburgerMenuAC } from "../../Redux/header-reducer"
+import ihorBorzovPicture from "../../assets/images/Profile.png"
 
 
 
@@ -47,6 +48,15 @@ function Nav_bar(props) {
       <div className={s.MyFriends}>
         <div className={s.BestFriends}>Best Friends</div>
         <div className={s.friends}>
+
+        <div className={s.friend}>
+        <NavLink to={"/profile/" + 22624}>
+            <div className={s.circle}><img src={ihorBorzovPicture} alt="Friend's avatar" /></div>
+            </NavLink>
+            <span className={s.friends_name}>{"Ihor Borzov"}</span>
+        
+        </div>
+
           {displayFriends}
         </div>
       </div>

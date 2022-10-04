@@ -76,6 +76,7 @@ export const authenticate = () => {
 
 
 export const loginThunk = (data) => {
+    debugger
     return (
         (dispatch) => {
             authenticationAPI.login(data).then((response) => {

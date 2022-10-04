@@ -27,11 +27,9 @@ class Login extends React.Component {
         return (
             <div>
                 <div>LOGIN please!</div>
-                <div>You are welcome to visit my page: 22624</div>
-                <div>If you are a guest, please use next credentials:  </div>
-                <div>Email: free@samuraijs.com</div>  {/* my credentials: jsmesh@mail.ru  jamperxy23*/}
-                <div>Password: free</div>
-                {this.props.isAuth ? <Navigate to={"/profile/" + this.props.authorizedId} /> : <LoginReduxForm onSubmit={this.onSubmit} captchaUrl={this.props.captchaUrl} />}
+                <div>You are welcome to visit my page - find me in the best friends (Nav-Bar): Ihor Borzov</div>
+
+                {this.props.isAuth ? <Navigate to={"/profile/" + this.props.authorizedId} /> : <LoginReduxForm onSubmit={this.onSubmit} captchaUrl={this.props.captchaUrl} loginThunk = {this.props.loginThunk} />}
             </div>
         )
     }
@@ -56,12 +54,18 @@ let LoginForm = (props) => {
                     </label>
                 </div>
                 {props.error && <div className={s.commonError}> {props.error}</div>}
+
+                <div className={s.buttonsWrapper}>
                 <button className={s.loginButton}>Login</button>
+                <div className={s.loginButton} onClick={()=>{props.loginThunk({email:"free@samuraijs.com",password:"free"})}}>Guest Login</div>
+                </div>
 
                 {props.captchaUrl && <div>
                     <img src={props.captchaUrl} alt="captcha" ></img>
                     {createField("symbols from image", "captcha", [required], Input)}
                 </div>}
+                    
+
             </div>
         </form>
     )
@@ -82,3 +86,15 @@ const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 export const LoginConnect = connect(mapStateToProps, { loginThunk })(Login)
 
 export default LoginConnect
+
+
+
+
+
+
+
+
+
+/*Guest Email: free@samuraijs.com   Password: free
+ my credentials: jsmesh@mail.ru    jamperxy23*/
+
