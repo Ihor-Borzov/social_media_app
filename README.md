@@ -5,7 +5,7 @@
 * [Setup](#setup)
 
 
-##General info
+## General info
 It is a single-page application built on React library using the  FLux principle and divided into 3 layers:
 BLL using Redux, DAL utilizing Axios for API requests, and UIL using React. The app contains both class and functional components. The app is optimized with React.Lazy, React.memo, thunk Middleware, hooks, HOC. User authentication and authorization
 Implemented using cookies. The forms were created using the Redux Form library. Unit tests had
@@ -14,7 +14,7 @@ been conducted to identify bugs and to improve UI.
 * The app is currently hosted at:    **https://ihor-borzov.github.io/social_media_app/**
 
 
-##Technologies
+## Technologies
 Project is created with:
 * react: ^17.0.2
 * react-dom: ^17.0.2
@@ -27,7 +27,7 @@ Project is created with:
 * react-test-renderer:  ^17.0.2
     
     
-##Features:
+## Features:
 * Login Page:
 - Log in to the social media app as a guest
 - If you try to type in a wrong @mail or password more than 5 times you will get a captcha, which you will have to submit in order to continue.
@@ -45,7 +45,7 @@ Project is created with:
 - This page is a list of all users, you can subscribe to them or unsubscribe. This action is performed at the back - end.  
 
 
-##Setup
+## Setup
 To run this project, install it locally using npm:
 $ npm install
 $ npm start
