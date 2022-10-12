@@ -10,7 +10,7 @@ import Post from './Post/Post';
 
 function MyPosts(props) {
 
-    let displayedPosts = props.state.postsData.map((postObject) => <Post likes={postObject.likes} key={postObject.likes} message={postObject.message} />)
+    let displayedPosts = props.state.postsData.map((postObject) => <Post likes={postObject.likes} key={postObject.likes} message={postObject.message} />).reverse();
 
 
 

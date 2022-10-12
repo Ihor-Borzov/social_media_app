@@ -19,8 +19,8 @@ const SET_GLOBAL_ERROR = "SET_GLOBAL_ERROR"
 let initialState = {
     postsData: [
         { id: 0, likes: "10", message: "some message" },
-        { id: 1, likes: "12", message: "momolongmo" },
-        { id: 2, likes: "11", message: "some hurucasami" },
+        { id: 1, likes: "11", message: "momolongmo" },
+        { id: 2, likes: "12", message: "some hurucasami" },
     ],
 
 
