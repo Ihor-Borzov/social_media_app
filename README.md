@@ -25,6 +25,8 @@ Project is created with:
 * axios: ^0.25.0
 * reselect:  ^4.1.5
 * react-test-renderer:  ^17.0.2
+* typescript: ^4.8.4
+
     
     
 ## Features:

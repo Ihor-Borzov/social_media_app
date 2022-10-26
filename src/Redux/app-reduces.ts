@@ -2,12 +2,16 @@ import { authenticate } from "./Auth"
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS"
 
 
-let initialState = {
+type InitialStateStateType = {
+    initialized: boolean
+}
+
+let initialState:InitialStateStateType = {
     initialized: false,
 }
 
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state:InitialStateStateType = initialState, action:any):InitialStateStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return ({
@@ -22,12 +26,16 @@ const appReducer = (state = initialState, action) => {
 
 
 
-export const initializedSuccess = () => { return ({ type: INITIALIZED_SUCCESS }) }
+type initializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
+}
+
+export const initializedSuccess = ():initializedSuccessActionType => { return ({ type: INITIALIZED_SUCCESS }) }
 
 
 export const initializeApp = () => {
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             let promise = dispatch(authenticate())  /* we have to dispatch this thunk, with dispatch method! */
             promise.then(() => { dispatch(initializedSuccess()) })
         }

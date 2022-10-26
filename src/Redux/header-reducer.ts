@@ -7,8 +7,10 @@ let initialState = {
     hamburgerMenu: false
 }
 
+type InitialState = typeof initialState
 
-const headerReducer = (state = initialState, action) => {
+
+const headerReducer = (state:InitialState = initialState, action:any):InitialState => {
 
     switch (action.type) {
         case OPEN_CLOSE_HAMBURGER_MENU:
@@ -26,11 +28,22 @@ const headerReducer = (state = initialState, action) => {
 
 
 
-export const openCloseHamburgerMenuAC = () => {
+type OpenCloseHamburgerMenuAC = {
+    type : typeof OPEN_CLOSE_HAMBURGER_MENU
+}
+
+
+export const openCloseHamburgerMenuAC = ():OpenCloseHamburgerMenuAC => {
     return { type: OPEN_CLOSE_HAMBURGER_MENU }
 }
 
-export const closeHamburgerMenuAC = () => {
+
+type CloseHamburgerMenuAC = {
+    type : typeof CLOSE_HAMBURGER_MENU
+    payload:boolean
+}
+
+export const closeHamburgerMenuAC = ():CloseHamburgerMenuAC => {
     return { type: CLOSE_HAMBURGER_MENU, payload: false }
 }
 

@@ -9,27 +9,39 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 
 
+
+type Photos = {
+    small: null | string,
+    large: null | string
+}
+
+export type UserType = {
+    name: null | string,
+    id: number,
+    uniqueUrlName: null | string,
+    status: null | string,
+    followed: boolean
+    photos: Photos
+}
+
+
 let initialState = {
-    users: [
-        { id: 1, photos: { small: null, large: "https://www.illumination.com/wp-content/uploads/2019/11/DM1_Vector.png" }, followed: false, name: "Vector Sohunaishvily", status: "I am the greatest theif of the world", location: { city: "Minsk", country: "Belarus" } },
-        { id: 2, photos: { small: null, large: "https://static.wikia.nocookie.net/heroes-and-villians/images/7/7e/Gru.png" }, followed: true, name: "Felonious Gru", status: "I am a boss", location: { city: "Moscow", country: "Russia" } },
-        { id: 3, photos: { small: null, large: "https://www.black-leatherjacket.com/image/cache/data/Dr-nefario-jacket/dr-nefario-jacket-900x900.jpg" }, followed: false, name: "Dr Nefario", status: "I am engaged in the development of the interaction of nuclear particles", location: { city: "Kyiv", country: "Ucraine" } },
-        { id: 4, photos: { small: null, large: "https://static.wikia.nocookie.net/heroes-and-villians/images/4/4c/Screenshot_2016-03-21-20-42-19-1.png" }, followed: true, name: "Marlena Gru", status: "I am the mother of Felonious Gru", location: { city: "New-York", country: "United States" } },
-        { id: 5, photos: { small: null, large: "https://static.wikia.nocookie.net/despicableme/images/0/02/Margo_Posing.png" }, followed: false, name: "Margo Gru ", status: "I am a boss", location: { city: "Vinnytsia", country: "Ucraine" } },
-        { id: 6, photos: { small: null, large: "https://s3.amazonaws.com/intanibase/iad_characters/966.jpg" }, followed: true, name: "Mr. Perkins", status: "Loans, morgages and other banking services", location: { city: "Zacopane", country: "Poland" } },
-    ],
+    users: [ ] as Array<UserType>,
 
     pageSize: 5,
     portionSize: 10,
     totalUsersCount: 26,
     currentPage: 1,
     isFetching: false,
-    following_unfollowingIds: [],
+    following_unfollowingIds: [] as Array<number>,
 }
 
 
 
-const usersReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+
+const usersReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
 
@@ -103,53 +115,100 @@ const usersReducer = (state = initialState, action) => {
 
 
 
-
-
-
-export let followSuccess = (userId) => {
-    return {
-        type: FOLLOW, userId               /* when you do not specify the value of a property, but property name matches the receiving parameter name - then that property takes value of that parameter   */
-    }
+type FollowSuccessType = {
+    type: typeof FOLLOW
+    userId: number
 }
 
-export let unfollowSuccess = (userId) => {
+export let followSuccess = (userId: number): FollowSuccessType => {
     return {
-        type: UNFOLLOW, userId
-    }
-}
-
-export let setUsers = (users) => {
-    return {
-        type: SET_USERS, users
+        type: FOLLOW,
+        userId
     }
 }
 
 
+type unfollowSuccessType = {
+    type: typeof UNFOLLOW
+    userId: number
+}
 
-export let setCurrentPage = (page) => {
+export let unfollowSuccess = (userId: number): unfollowSuccessType => {
     return {
-        type: SET_CURRENT_PAGE, page
+        type: UNFOLLOW,
+        userId
     }
 }
 
 
-export let setTotalUsersCount = (newTotalUsersCount) => {
+type SetUsersType = {
+    type: typeof SET_USERS
+    users: Array<UserType>
+}
+
+export let setUsers = (users: Array<UserType>):SetUsersType => {
     return {
-        type: SET_TOTAL_USER_COUNT, newTotalUsersCount
+        type: SET_USERS,
+         users
     }
 }
 
-export let toggleIsFetching = (isFetching) => {
+
+
+type setCurrentPageType = {
+    type : typeof SET_CURRENT_PAGE
+    page:number
+}
+
+export let setCurrentPage = (page: number):setCurrentPageType => {
+    return {
+        type: SET_CURRENT_PAGE,
+         page
+    }
+}
+
+
+type setTotalUsersCountType = {
+    type: typeof SET_TOTAL_USER_COUNT
+    newTotalUsersCount: number
+}
+
+export let setTotalUsersCount = (newTotalUsersCount: number):setTotalUsersCountType => {
+    return {
+        type: SET_TOTAL_USER_COUNT,
+         newTotalUsersCount
+    }
+}
+
+
+type toggleIsFetchingType = {
+    type : typeof TOGGLE_IS_FETCHING
+    isFetching:boolean
+}
+
+export let toggleIsFetching = (isFetching: boolean):toggleIsFetchingType => {
     return (
-        { type: TOGGLE_IS_FETCHING, isFetching }
+        { type: TOGGLE_IS_FETCHING,
+             isFetching 
+            }
     )
 }
 
 
-export let toggleIsFollowingProgress = (check, id) => {
 
+type toggleIsFollowingProgressType = {
+    type : typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    check:boolean
+    id:number
+}
+
+
+export let toggleIsFollowingProgress = (check: boolean, id: number):toggleIsFollowingProgressType => {
     return (
-        { type: TOGGLE_IS_FOLLOWING_PROGRESS, check, id }
+        { type: TOGGLE_IS_FOLLOWING_PROGRESS,
+             check,
+              id 
+            }
     )
 }
 
@@ -160,9 +219,9 @@ export let toggleIsFollowingProgress = (check, id) => {
 
 
 
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
     return (
-        (dispatch) => {
+        (dispatch: any) => {
             dispatch(toggleIsFetching(true))
             usersAPI.getUsers(currentPage, pageSize)
                 .then(dataResponse => {
@@ -177,9 +236,9 @@ export const getUsers = (currentPage, pageSize) => {
 
 
 
-export const follow = (userId) => {
+export const follow = (userId: number) => {
     return (
-        (dispatch) => {
+        (dispatch: any) => {
             dispatch(toggleIsFollowingProgress(true, userId))
             usersAPI.follow(userId).then((resultCode) => {
                 if (resultCode === 0) { dispatch(followSuccess(userId)) }
@@ -191,9 +250,9 @@ export const follow = (userId) => {
 
 
 
-export const unfollow = (userId) => {
+export const unfollow = (userId: number) => {
     return (
-        (dispatch) => {
+        (dispatch: any) => {
             dispatch(toggleIsFollowingProgress(true, userId));
             usersAPI.unfollow(userId).then((resultCode) => {
                 if (resultCode === 0) { dispatch(unfollowSuccess(userId)) }
@@ -209,13 +268,3 @@ export const unfollow = (userId) => {
 
 
 export default usersReducer;
-
-
-
-
-
-
-
-
-
-

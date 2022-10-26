@@ -4,35 +4,48 @@ import { authenticationAPI } from "../api/api"
 const SET_USERS_DATA = 'SET_USERS_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'Auth/GET_CAPTCHA_URL_SUCCESS'
 
-
-
-let initialState = {
-    id: null,
-    login: null,
-    email: null,
-    password: null,
-    rememberMe: false,
-    isAuth: false,
-    captchaUrl: null,
+type InitialStateTrial = {
+    id: number|null,
+    login: string|null,
+    email: string|null,
+    password: string|null,
+    rememberMe: boolean,
+    isAuth: boolean,
+    captchaUrl: string|null,  
 }
 
 
+let initialState = {
+    id: null as number|null,
+    login: null as string|null,
+    email: null as string|null,
+    password: null as string|null,
+    rememberMe: false,
+    isAuth: false,
+    captchaUrl: null as string|null      //if null then the captcha is nor required
+}
 
-const authReducer = (state = initialState, action) => {
+export type InitialStateType  = typeof initialState
+
+const authReducer = (state:InitialStateType = initialState, action:any):InitialStateType => {
     switch (action.type) {
+       
         case SET_USERS_DATA:
-            state = {
+            return {
                 ...state,
                 ...action.data,
             }
-        /* falls through */
+        
+        
 
         case GET_CAPTCHA_URL_SUCCESS:
             return {
                 ...state,
                 ...action.payload
             }
-        /* falls through */
+
+       
+        
 
         default: return state
     }
@@ -40,12 +53,29 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-//   "falls through "  this is just the way to fix warnings about the break in switch case
 
 
+type DataType = {
+    id:number|null
+        email:string|null
+        login:string |null
+        isAuth:boolean
+    }
 
-export let authorizationAC = (id, email, login, isAuth) => { return ({ type: SET_USERS_DATA, data: { id, email, login, isAuth } }) }
-export let getCaptchaUrlSuccess = (captchaUrl) => { return ({ type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl } }) }
+type authorizationACType = {
+    type:typeof SET_USERS_DATA
+    data:DataType
+}
+export let authorizationAC = (id:number|null, email:string|null, login:string|null, isAuth:boolean):authorizationACType =>
+ { return ({ type: SET_USERS_DATA, data: { id, email, login, isAuth } }) }
+
+
+type getCaptchaUrlSuccessType = {
+    type: typeof GET_CAPTCHA_URL_SUCCESS
+    payload:{captchaUrl:string}
+}
+
+export let getCaptchaUrlSuccess = (captchaUrl:string):getCaptchaUrlSuccessType => { return ({ type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl } }) }
 
 
 
@@ -56,7 +86,7 @@ export let getCaptchaUrlSuccess = (captchaUrl) => { return ({ type: GET_CAPTCHA_
 
 export const authenticate = () => {
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             return (
                 authenticationAPI.authenticate().then((response) => {
                     if (response.resultCode === 0) {
@@ -75,10 +105,10 @@ export const authenticate = () => {
 
 
 
-export const loginThunk = (data) => {
+export const loginThunk = (data:DataType) => {
     debugger
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             authenticationAPI.login(data).then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(authenticate());      /* we call authenticate to update Header !*/
@@ -97,7 +127,7 @@ export const loginThunk = (data) => {
 
 
 export const getCaptchaUrl = () => {
-    return (async (dispatch) => {
+    return (async (dispatch:any) => {
         let response = await authenticationAPI.getCaptchaUrl();
         let captchaUrl = response.data.url;
         dispatch(getCaptchaUrlSuccess(captchaUrl))
@@ -107,7 +137,7 @@ export const getCaptchaUrl = () => {
 
 export const logoutThunk = () => {
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             authenticationAPI.logout().then((response) => {
                 if (response.data.resultCode === 0) {
                     dispatch(authenticate());   /* we call authenticate to update Header !*/

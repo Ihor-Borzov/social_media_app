@@ -11,27 +11,61 @@ const FETCHING_USER_PICTURE = "FETCHING_USER_PICTURE"
 const SET_GLOBAL_ERROR = "SET_GLOBAL_ERROR"
 
 
+type PostsDataType = {
+    id:number
+    likes:number|null
+    message:string|null
+}
+
+export type PhotosType ={
+    small: null|string,
+    large: null|string
+  }
+  
+  export type ContactsType = {
+    facebook: string,
+      website: string,
+      vk: string,
+      twitter: string,
+      instagram: string,
+      youtube: string,
+      github:string,
+      mainLink:string
+  }
 
 
+export type UserProfileType = {
+    lookingForAJob: boolean,
+      lookingForAJobDescription: string,
+      fullName:string,
+      userId: number,
+      contacts: ContactsType
+      photos:PhotosType
+    }
+
+    
 
 
-/*#6 create an object to assign launch characteristics for the main state.  this is the way we set up our state when we first time start the app */
 let initialState = {
     postsData: [
-        { id: 0, likes: "10", message: "some message" },
-        { id: 1, likes: "11", message: "momolongmo" },
-        { id: 2, likes: "12", message: "some hurucasami" },
-    ],
+        { id: 0, likes: 10, message: "some message" },
+        { id: 1, likes: 11, message: "momolongmo" },
+        { id: 2, likes: 12, message: "some hurucasami" },
+    ] as Array<PostsDataType>,
 
 
-    userProfile: null,
+    userProfile: null as UserProfileType|null,
     status: "",
     isFetching: false,
     errorFlag: false,
 }
 
 
-const profileReducer = (state = initialState, action) => {
+
+type InitialStateType = typeof initialState
+
+
+const profileReducer = (state:InitialStateType = initialState, action:any):InitialStateType => {
 
     switch (action.type) {
 
@@ -55,7 +89,7 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                userProfile: { ...state.userProfile, photos: action.photos }
+                userProfile: { ...state.userProfile, photos: action.photos } as UserProfileType
             }
 
         case FETCHING_USER_PICTURE:
@@ -77,32 +111,51 @@ const profileReducer = (state = initialState, action) => {
 
 
 
+type addNewPostCreatorType = {
+type : typeof ADD_NEW_POST
+text:string
+}
 
 
-
-
-export const addNewPostCreator = (text) => {
+export const addNewPostCreator = (text:string):addNewPostCreatorType => {
     return {
         type: ADD_NEW_POST,
         text
     }
 }
 
-export const removePost = (id) => {
+type removePostType = {
+    type : typeof REMOVE_POST
+    id:number
+    }
+
+export const removePost = (id:number):removePostType => {
     return {
         type: REMOVE_POST,
         id
     }
 }
 
-export const setUserProfile = (userProfile) => {
+type SetUserProfileType = {
+    type : typeof SET_USER_PROFILE
+    userProfile: UserProfileType
+}
+
+export const setUserProfile = (userProfile: UserProfileType):SetUserProfileType => {
     return {
         type: SET_USER_PROFILE,
         userProfile
     }
 }
 
-export const setStatus = (status) => {
+
+
+type SetStatusType ={
+    type: typeof SET_STATUS
+ status:string
+}
+
+export const setStatus = (status:string):SetStatusType => {
     return {
         type: SET_STATUS,
         status
@@ -110,7 +163,12 @@ export const setStatus = (status) => {
 }
 
 
-export const savePhotoSuccess = (photos) => {
+type SavePhotoSuccessType = {
+    type:typeof SAVE_PHOTO_SUCCESS
+    photos:PhotosType
+}
+
+export const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessType => {
     return {
         type: SAVE_PHOTO_SUCCESS,
         photos
@@ -118,7 +176,13 @@ export const savePhotoSuccess = (photos) => {
 }
 
 
-export const isFetchingAC = (fetch) => {
+
+type IsFetchingACType = {
+    type : typeof FETCHING_USER_PICTURE
+    fetch:boolean
+}
+
+export const isFetchingAC = (fetch:boolean):IsFetchingACType => {
     return {
         type: FETCHING_USER_PICTURE,
         fetch
@@ -126,7 +190,12 @@ export const isFetchingAC = (fetch) => {
 }
 
 
-export const setGlobalError = () => {
+
+type setGlobalErrorType ={
+    type : typeof SET_GLOBAL_ERROR
+}
+
+export const setGlobalError = ():setGlobalErrorType => {
     return {
         type: SET_GLOBAL_ERROR
     }
@@ -140,8 +209,8 @@ export const setGlobalError = () => {
 
 /* thunk */
 
-export const addPostAndCleanReduxForm = (text) => {
-    return (dispatch) => {
+export const addPostAndCleanReduxForm = (text:string) => {
+    return (dispatch:any) => {
         dispatch(addNewPostCreator(text));
         dispatch(reset("NewPost"));
 
@@ -150,7 +219,7 @@ export const addPostAndCleanReduxForm = (text) => {
 
 
 export const showGlobalError = () => {
-    return (dispatch) => {
+    return (dispatch:any) => {
         dispatch(setGlobalError());
         setTimeout(() => {
             dispatch(setGlobalError())
@@ -158,9 +227,9 @@ export const showGlobalError = () => {
     }
 }
 
-export const getUserProfile = (userId) => {
+export const getUserProfile = (userId:number) => {
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             dispatch(isFetchingAC(true))
             profileAPI.getUserProfile(userId).then((data) => {
                 dispatch(setUserProfile(data));
@@ -171,9 +240,9 @@ export const getUserProfile = (userId) => {
 }
 
 
-export const getStatus = (userId) => {
+export const getStatus = (userId:number) => {
     return (
-        (dispatch) => {
+        (dispatch:any) => {
             profileAPI.getStatus(userId).then((response) => {
                 dispatch(setStatus(response.data));
             })
@@ -182,9 +251,9 @@ export const getStatus = (userId) => {
 }
 
 
-export const updateStatus = (status) => {
+export const updateStatus = (status:string) => {
     return (
-        async (dispatch) => {
+        async (dispatch:any) => {
             try {
                 let response = await profileAPI.setStatus(status)
                 if (response.data.resultCode === 0) { dispatch(setStatus(status)) }
@@ -196,8 +265,8 @@ export const updateStatus = (status) => {
 }
 
 
-export const savePhoto = (file) => {
-    return (async (dispatch) => {
+export const savePhoto = (file:any) => {
+    return (async (dispatch:any) => {
         dispatch(isFetchingAC(true))
         let response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) {
@@ -210,8 +279,8 @@ export const savePhoto = (file) => {
 
 
 
-export const saveProfile = (profileData) => {
-    return (async (dispatch, getState) => {
+export const saveProfile = (profileData:UserProfileType) => {
+    return (async (dispatch:any, getState:any) => {
         let userId = getState().auth.id                                  //! this is the way to get state from another reducer
 
         let response = await profileAPI.saveProfile(profileData);
