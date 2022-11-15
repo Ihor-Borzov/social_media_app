@@ -13,9 +13,13 @@ const instance = axios.create({
 /* create an object for each component and create different methods for server requests   */
 export const usersAPI = {
 
-    getUsers: (currentPage = 1, pageSize = 5) => {
+    getUsers: (currentPage = 1, pageSize = 5, isFriend, userName) => {
         return (
-            instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            instance.get(`users?page=${currentPage}&count=${pageSize}
+            &friend=${typeof isFriend != "undefined"? isFriend:null}
+            &term=${typeof userName != "undefined"? userName:"" }
+            `)
+            
                 .then((response) => {
                     return (
                         response.data

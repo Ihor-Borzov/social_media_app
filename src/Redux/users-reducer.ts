@@ -5,6 +5,8 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
+const SET_TERM = "SET_TERM"
+const SET_IS_FRIEND = "SET_IS_FRIEND"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 
@@ -29,11 +31,13 @@ let initialState = {
     users: [ ] as Array<UserType>,
 
     pageSize: 5,
-    portionSize: 10,
+    portionSize: 5,
     totalUsersCount: 26,
     currentPage: 1,
     isFetching: false,
     following_unfollowingIds: [] as Array<number>,
+    term:"",
+    isFriend:null as null | boolean
 }
 
 
@@ -97,7 +101,6 @@ const usersReducer = (state: InitialStateType = initialState, action: any): Init
 
 
         case TOGGLE_IS_FOLLOWING_PROGRESS:
-
             return {
                 ...state,
                 following_unfollowingIds: action.check
@@ -105,6 +108,19 @@ const usersReducer = (state: InitialStateType = initialState, action: any): Init
                     : state.following_unfollowingIds.filter((ids) => { return (ids !== action.id) })  /* if fallowing is finished remove received userID.   we do not have to do destructurisation over her, because method filter will return a new array */
             }
 
+            case SET_IS_FRIEND:
+                return{
+                    ...state,
+                    isFriend:action.isFriend,
+                    currentPage:1
+                }
+
+                case SET_TERM:
+                    return{
+                        ...state,
+                        term:action.term,
+                        currentPage:1
+                    }
 
 
         default: return state;
@@ -112,6 +128,30 @@ const usersReducer = (state: InitialStateType = initialState, action: any): Init
 
 }
 
+
+
+type SetIsFriend = {
+    type:typeof SET_IS_FRIEND
+    isFriend:boolean
+}
+
+export let setIsFriendAC = (isFriend:boolean):SetIsFriend => {
+return{
+    type:SET_IS_FRIEND,
+    isFriend
+}
+}
+
+type SetTerm = {
+    type: typeof SET_TERM
+    term:string
+}
+
+export let setTermAC = (term:string):SetTerm=>{
+    return{type:SET_TERM,
+        term
+    }
+}
 
 
 
@@ -219,11 +259,11 @@ export let toggleIsFollowingProgress = (check: boolean, id: number):toggleIsFoll
 
 
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const getUsers = (currentPage: number, pageSize: number, isFriend:boolean, userName:string) => {
     return (
         (dispatch: any) => {
             dispatch(toggleIsFetching(true))
-            usersAPI.getUsers(currentPage, pageSize)
+            usersAPI.getUsers(currentPage, pageSize, isFriend, userName)
                 .then(dataResponse => {
                     dispatch(toggleIsFetching(false))
                     dispatch(setUsers(dataResponse.items))

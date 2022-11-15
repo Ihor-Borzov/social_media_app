@@ -1,5 +1,4 @@
 .wrapper{
-/*  min-width:500px; */
     max-width:800px;
 }
 
@@ -183,14 +182,103 @@ text-align: center;
     }
 
     .buttonNext, .buttonPrev{
-        width:50px;
+        width:30px;
+        height:30px;
         cursor:pointer;
-        margin:0 5px 5px 0;
-        padding:5px;
-        border-radius: 30%;
-        box-shadow:2px 3px rgb(192, 192, 192);
-        border:1px solid rgb(192, 192, 192);
+        margin:0 10px 0 10px;
+        padding:9px;
+        border-radius: 50%;
+
+        
+
+        background-color: rgba(181, 215, 247, 0.6);
+        background-image:url(https://cdn-icons-png.flaticon.com/512/1250/1250699.png?w=360) ;
+        background-size: contain;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+    }
+
+    .buttonPrev{
+        background-image: url("https://icon-library.com/images/previous-next-icon/previous-next-icon-18.jpg");
+    }
+
+    
+    .paginator{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        position:relative;
     }
     
-    
-    
+
+  .searchIsFriend{
+    display:flex;
+    flex-direction: column;
+    gap:10px
+  }  
+
+ .searchIsFriend label{
+    margin-right:10px;
+    cursor: pointer;
+    border-radius: 15%;
+    box-shadow:2px 3px rgb(192, 192, 192);
+    border:1px solid rgb(192, 192, 192);
+    padding:2px;
+    font-weight: bolder;
+    background-color: aliceblue;
+ }
+
+ .searchIsFriend input{
+    margin-left:5px;
+ }
+
+.searchTab input{
+    line-height: 25px;
+    font-size: 19px;
+    margin-bottom: 10px;
+    border:1px dashed grey;
+    border-radius: 25px;
+    padding:3px;
+}
+
+
+
+
+    .userSearchButton{
+        position:relative;
+            display: block;
+            width: 30px;
+            height:30px;
+             background-color: rgba(255, 255, 255, 0.6);
+             border-radius: 45px;
+        background-image:url(https://cdn3.iconfinder.com/data/icons/work-4/154/work-research-search-find-loop-magnifier-glass-512.png) ;
+        background-size: contain;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+     .userSearchButton:hover{
+      transform: scale(1.5);
+    } 
+
+    .searchTab{
+        position:absolute;
+        min-width:200px;
+        min-height:200px;
+        z-index: 8;
+        right:0px;
+        box-shadow:2px 3px rgb(192, 192, 192);
+        border:1px solid rgb(192, 192, 192);
+        border-radius:25px;
+        background-color: white;
+        padding:10px;
+        background-color: rgba(181, 215, 247, 0.6);
+    }
+
+
+.searchDescription{
+    background-color: aquamarine;
+    justify-self: end;
+}

@@ -14,9 +14,13 @@ import Message from './Message/Message';
 
 function Dialogs(props) {
 
-    let displayedDialogs = props.navBarPage.friendData.map((dialogObject) => <DialogItems name={dialogObject.name} id={dialogObject.id} key={dialogObject.id} picture={dialogObject.picture} />)
+    let displayedDialogs = props.navBarPage.friendData.map(
+        (dialogObject) => <DialogItems name={dialogObject.name} id={dialogObject.id} 
+        key={dialogObject.id} picture={dialogObject.picture} />)
 
-    let displayedMessages = props.dialogsPage.messagesData.map((messageObject, index) => <Message message={messageObject.message} id={messageObject.id} key={index} />)    /* this is the way we create new array with  JSX markup */
+    let displayedMessages = props.dialogsPage.messagesData.map(
+        (messageObject, index) => <Message message={messageObject.message}
+         id={messageObject.id} key={index} />)    /* this is the way we create new array with  JSX markup */
 
 
     function onSendMessage(data) {

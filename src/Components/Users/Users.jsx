@@ -22,6 +22,11 @@ let Users = (props) => {
                 pageSize={props.pageSize} setCurrentPage={props.setCurrentPage}
                 currentPage={props.currentPage}
                 isFetching={props.isFetching}
+                getUsers = {props.getUsers}
+                setIsFriendAC = {props.setIsFriendAC}
+                setTermAC = {props.setTermAC}
+                term={props.term}
+                isFriend={props.isFriend}
             />
 
 
