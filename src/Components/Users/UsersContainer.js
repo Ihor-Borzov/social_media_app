@@ -48,6 +48,7 @@ class UsersContainerComponent extends React.Component {
                     setTermAC={this.props.setTermAC}
                     term={this.props.term}
                     isFriend={this.props.isFriend}
+                    isAuth={this.props.isAuth}
                 />
 
             </>
@@ -68,7 +69,8 @@ let mapStateToProps = (state) => {
         following_unfollowingIds: getFollow_unfollowUserIds(state),
         portionSize: state.usersPage.portionSize,
         isFriend:state.usersPage.isFriend,
-        term:state.usersPage.term
+        term:state.usersPage.term,
+        isAuth:state.auth.isAuth
     }
 }
 

@@ -32,14 +32,17 @@ let UserSearchTab = (props) => {
                 <input  type="radio" name="isFriend" value="isFriend" defaultChecked={props.isFriend==null?true:false} />
                 <span>   All</span>
             </label>
-            <label  onClick={(e)=>{e.stopPropagation(); props.hideOpenSearchTab(!props.searchTab);  props.setIsFriendAC(true)}} >
+                
+         { props.isAuth &&  <label  onClick={(e)=>{e.stopPropagation(); props.hideOpenSearchTab(!props.searchTab);  props.setIsFriendAC(true)}} >
                 <input type="radio" name="isFriend" value="isFriend" defaultChecked={props.isFriend===true?true:false}/>
                 <span>   friends</span>
-            </label>
-            <label   onClick={(e)=>{e.stopPropagation(); props.hideOpenSearchTab(!props.searchTab);  props.setIsFriendAC(false);}}  >
+            </label>    }
+
+          {props.isAuth &&  <label   onClick={(e)=>{e.stopPropagation(); props.hideOpenSearchTab(!props.searchTab);  props.setIsFriendAC(false);}}  >
                 <input type="radio" name="isFriend" value="isFriend"  defaultChecked={props.isFriend===false?true:false}/>
                 <span>   Not Friends</span>
-            </label>
+            </label>   }
+
         </div>
     </div>
     )

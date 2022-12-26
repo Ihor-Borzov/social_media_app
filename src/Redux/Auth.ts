@@ -106,7 +106,6 @@ export const authenticate = () => {
 
 
 export const loginThunk = (data:DataType) => {
-    debugger
     return (
         (dispatch:any) => {
             authenticationAPI.login(data).then((response) => {

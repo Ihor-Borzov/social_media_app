@@ -57,7 +57,7 @@ margin-bottom: 20px;
         display:inline-block;
         font-size: 17px;
         font-weight: bold;
-        color:transparent;
+       min-width: 110px;
     }
     
     .usser_icon button{
@@ -67,7 +67,7 @@ margin-bottom: 20px;
         background-color:#cfeef3;
         border:none;
         position:absolute;
-        top:6px;
+        top:-20px;
         left:0;
         right:0;
         margin-left:auto;

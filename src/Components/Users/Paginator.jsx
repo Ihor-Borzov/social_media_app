@@ -6,7 +6,7 @@ import UserSearchTab from './UserSearchTab';
 
 
 let Paginator = ({ portionSize, totalUsersCount, pageSize, setCurrentPage,
-    currentPage, isFetching, getUsers, setIsFriendAC, setTermAC, term, isFriend }) => {
+    currentPage, isFetching, getUsers, setIsFriendAC, setTermAC, term, isFriend, isAuth }) => {
 
 
 
@@ -75,6 +75,7 @@ searchTab = {searchTab}
 hideOpenSearchTab = {hideOpenSearchTab}
 isFriend={isFriend}
 paginatorDiv={paginatorDiv}
+isAuth = {isAuth}
 />
 }
 

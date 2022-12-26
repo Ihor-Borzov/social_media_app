@@ -27,12 +27,14 @@ let Users = (props) => {
                 setTermAC = {props.setTermAC}
                 term={props.term}
                 isFriend={props.isFriend}
+                isAuth = {props.isAuth}
             />
 
 
             {props.users.map(u => {
                 return (<User key={u.id} user={u}
                     following_unfollowingIds={props.following_unfollowingIds} unfollow={props.unfollow} follow={props.follow}
+                    isAuth = {props.isAuth}
                 />)
             })}
 

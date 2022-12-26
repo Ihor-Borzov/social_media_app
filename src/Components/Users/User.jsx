@@ -5,11 +5,10 @@ import style from "./Users.module.css";
 
 
 
-let User = ({ user, following_unfollowingIds, unfollow, follow }) => {
+let User = ({ user, following_unfollowingIds, unfollow, follow, isAuth }) => {
 
     return (
         <div className={style.ussers_container}>
-
             <div className={style.usser_icon}>
                 <div className={style.wrapper__for_AspectRatio}>
                     <div className={style.imgAspectRatio_wrapper}>
@@ -19,7 +18,8 @@ let User = ({ user, following_unfollowingIds, unfollow, follow }) => {
                             </NavLink>
                         </div>
                     </div>
-                    <div className={style.button_wrapper}>  ....Subscribe....
+                    <div className={style.button_wrapper}> 
+                    {isAuth && <div>
                         {user.followed
                             ? <button disabled={following_unfollowingIds.some((id) => { return (id === user.id) })} onClick={() => {
                                 unfollow(user.id);
@@ -29,8 +29,9 @@ let User = ({ user, following_unfollowingIds, unfollow, follow }) => {
 
                             : <button disabled={following_unfollowingIds.some((id) => { return (id === user.id) })} onClick={() => {
                                 follow(user.id);
-                            }}>   follow  </button>
+                            }}> Follow </button>
                         }
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -31,9 +31,9 @@ let initialState = {
 
     messagesData: [
         { id: 1, message: "hi" },
-        { id: 0, message: "koorva mach ego" },
-        { id: 1, message: "Hi how are you?" },
-        { id: 0, message: "Hi how are you?" },
+        { id: 0, message: "how is it going?" },
+        { id: 1, message: "Everything is ok, how are you?" },
+        { id: 0, message: "All good" },
     ]as Array<MessageData>,
 
     userInputMessage: "" as string|null
