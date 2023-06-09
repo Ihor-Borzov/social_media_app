@@ -5,35 +5,44 @@ import style from "./Users.module.css"
 import UserSearchTab from './UserSearchTab';
 
 
-let Paginator = ({ portionSize, totalUsersCount, pageSize, setCurrentPage,
+type PropsType = {
+    portionSize: number,
+    totalUsersCount:number, 
+    pageSize: number, 
+    setCurrentPage:(page:number)=>void,
+    currentPage: number, 
+    isFetching: boolean, 
+    getUsers:(currentPage:number, pageSize:number, isFriend:boolean, term: null|string)=>void,
+    setIsFriendAC: (isFriend: null|boolean) => void, 
+    setTermAC: (term:string) => void, 
+    term: string, 
+    isFriend:null|boolean, 
+    isAuth: boolean
+}
+
+
+
+let Paginator: React.FC<PropsType> = ({ portionSize, totalUsersCount, pageSize, setCurrentPage,
     currentPage, isFetching, getUsers, setIsFriendAC, setTermAC, term, isFriend, isAuth }) => {
-
-
-
-
-
-
-
-
 
         
 
     let [searchTab, hideOpenSearchTab] = useState(false)
-    let paginatorDiv = useRef();
+    let paginatorDiv = useRef<HTMLDivElement>(null);   //this is the way to use ref
 
 
     let totalPagesCount = Math.ceil(totalUsersCount / pageSize);
     let totalPortionsCount = Math.ceil(totalPagesCount / portionSize);
-    let [portionNumber, setPortionNumber] = useState(1);
+    let [portionNumber, setPortionNumber] = useState (1);  // this is the way to specify a hook
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     let rightPortionPageNumber = portionNumber * portionSize
 
-    let pagesArray = [];
+    let pagesArray : Array<number> = [];
     for (let i = 1; i <= totalPagesCount; i++) {
         pagesArray.push(i);
     }
 
-
+console.log(portionSize)
     return (
         <div className={style.paginator} ref={paginatorDiv}>
             <div className={style.pageNumbers}>

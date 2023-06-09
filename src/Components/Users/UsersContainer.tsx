@@ -3,36 +3,90 @@ import { connect } from "react-redux";
 import { getCurrentPage, getFollow_unfollowUserIds, getIsFetching, getPageSize, getUsersCount, getUsersSuperReselector } from "../../Redux/user-selector";
 import { setTermAC, setIsFriendAC, follow, getUsers, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, toggleIsFollowingProgress, unfollow } from "../../Redux/users-reducer";
 import Users from "./Users";
+import { AppStateType } from "../../Redux/redux-store";
+
+
+
+type Photos = {
+    small: null | string,
+    large: null | string
+}
+
+export type UserType = {
+    name: null | string,
+    id: number,
+    uniqueUrlName: null | string,
+    status: null | string,
+    followed: boolean
+    photos: Photos
+}
 
 
 
 
-class UsersContainerComponent extends React.Component {
-    /* since we do not make a request from the constructor, and constructor only sends props to his parent constructor at React.Component, we may not write our constructor - it will do its work automatically   */
+type MapStatePropsType = {
+    currentPage:number,
+    pageSize:number,
+    term:string,
+    totalUsersCount:number,
+    portionSize:number,
+    users: Array<UserType>,
+    following_unfollowingIds:Array<number>,
+    isFetching:boolean,
+    isFriend:null|boolean,
+    isAuth:boolean,
+}
+
+
+type MapDispatchPropsType = {
+    getUsers:(currentPage:number, pageSize:number, isFriend:null|boolean, term: null|string)=>void,
+    follow:(userID:number)=>void,
+    unfollow:(userID:number)=>void,
+    setUsers:(users: Array<UserType>)=>void                                              
+    setCurrentPage:(page:number)=>void,
+    setTotalUsersCount:(newTotalUsersCount: number)=>void                                              
+    toggleIsFetching:(isFetching: boolean)=>void                                              
+    toggleIsFollowingProgress?:(check:boolean, id:number)=>void,
+    setIsFriendAC:(friend:null|boolean)=>void, 
+    setTermAC:(term:string)=>void,
+}
+
+
+type OwnPropsType = {
+    pageTitle:string,
+
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+
+
+
+
+
+class UsersContainerComponent extends React.Component <PropsType>{
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize, this.props.isFriend, this.props.term);
     }
  
-     componentDidUpdate(prevProps, prevState, snapshot){
-     if (this.props.term !== prevProps.term | this.props.isFriend !== prevProps.isFriend){
+     componentDidUpdate(prevProps:any, prevState:any, snapshot:any){
+     if (this.props.term !== prevProps.term || this.props.isFriend !== prevProps.isFriend){
         this.props.getUsers(this.props.currentPage, this.props.pageSize, this.props.isFriend, this.props.term);
      }
     }  
 
-    setCurrentPage = (page) => {
+    setCurrentPage = (page:number) => {
         this.props.setCurrentPage(page);
         this.props.getUsers(page, this.props.pageSize, this.props.isFriend, this.props.term);
     }
 
-    render = () => {
+    render () {
 
         return (
             <>
-                {/* {this.props.isFetching ? <Preloader /> : null}  */}
-
+            <h2>{this.props.pageTitle}</h2>
                 <Users
-                getUsers ={this.props.getUsers}
+                    getUsers ={this.props.getUsers}
                     setCurrentPage={this.setCurrentPage}
                     totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
@@ -59,7 +113,7 @@ class UsersContainerComponent extends React.Component {
 
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
         users: getUsersSuperReselector(state),
         pageSize: getPageSize(state),
@@ -76,9 +130,10 @@ let mapStateToProps = (state) => {
 
 
 
-
-export default connect(mapStateToProps, {
-    getUsers,
+//@ts-ignore
+export default connect <MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
+    mapStateToProps,
+     {getUsers,
     follow,
     unfollow,
     setUsers,
@@ -90,3 +145,7 @@ export default connect(mapStateToProps, {
     setTermAC
 }
 )(UsersContainerComponent);
+
+
+
+

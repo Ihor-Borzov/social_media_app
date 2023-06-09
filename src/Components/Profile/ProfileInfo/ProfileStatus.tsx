@@ -1,7 +1,21 @@
 import React from "react";
 
+
+type PropsType ={
+status:string,
+updateStatus:(newStatus:string)=>void
+}
+
+type StateType ={
+    editMode:boolean,
+    status:string
+}
+
+
+
+
 //PAY ATTENTION WE DO NOT RENDER PROFILESTATUS ANYMORE,- WE RENDER PROFILESTATUS WITH HOOKS!!!
-class ProfileStatus extends React.Component {
+class ProfileStatus extends React.Component <PropsType, StateType> {
 
     /* this is the way we create LocalState */
     state = {
@@ -33,14 +47,14 @@ class ProfileStatus extends React.Component {
         this.props.updateStatus(this.state.status)
     }
 
-    onStatusChange = (e) => {
+    onStatusChange = (e: React.ChangeEvent <HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value
         });
     }
-
+ 
     /* this method invokes with each rerender */
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps : PropsType, prevState :StateType) {
         if (prevProps.status !== this.props.status) { this.setState({ status: this.props.status }) }
     }
 

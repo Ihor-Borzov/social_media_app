@@ -1,16 +1,17 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Navigate } from "react-router-dom"
-import { reduxForm } from "redux-form"
+import { InjectedFormProps, reduxForm } from "redux-form"
 import { Field } from "redux-form"
 import { loginThunk } from "../../Redux/Auth"
 import { maxChar, required } from "../../Utilities/FormValidators/validators"
 import { createField, Input } from "../common/FormControls/FormControls"
 import s from "../Login/Login.module.css"
+import { AppStateType } from "../../Redux/redux-store"
 
 
 
-class Login extends React.Component {
+class Login extends React.Component <MapStatePropsType & MapDispatchPropsType> {
 
     componentDidMount = () => {
     }
@@ -19,8 +20,8 @@ class Login extends React.Component {
 
     }
 
-    onSubmit = (data) => {
-        this.props.loginThunk(data)
+    onSubmit = (data:any) => {
+        this.props.loginThunk(data)  // over here we hae all the data from the form, that data based on  the attribute "name", this way we usually submit email and password, and whenever we get captcha then we also submit captcha  
     }
 
     render = () => {
@@ -40,7 +41,13 @@ class Login extends React.Component {
 
 let maximumChar = maxChar(20) /* this is our flexible validator with closure, for now we have to invoke it this way */
 
-let LoginForm = (props) => {
+
+type LoginFormOwnProps = {
+    captchaUrl:string
+}
+
+
+let LoginForm: React.FC<InjectedFormProps<LoginFormDataType> & LoginFormOwnProps> = (props) => { //injectedFormProps are the props, we get from a container component
 
     return (
         <form onSubmit={props.handleSubmit} className={s.loginForm}>
@@ -71,9 +78,26 @@ let LoginForm = (props) => {
     )
 }
 
+type MapStatePropsType = {
+    captchaUrl:string | null,
+    isAuth:boolean,
+    authorizedId:number | null,
+}
+
+type LoginFormDataType = {
+email:string,
+password:string,
+rememberMe?:boolean,
+captchaUrl?:string | null
+}
 
 
-let mapStateToProps = (state) => {
+type MapDispatchPropsType = {
+    loginThunk:(data:LoginFormDataType)=>void
+}
+
+
+let mapStateToProps = (state:AppStateType):MapStatePropsType => {
     return ({
         isAuth: state.auth.isAuth,
         captchaUrl: state.auth.captchaUrl,

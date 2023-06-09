@@ -12,7 +12,7 @@ import headerReducer from "./header-reducer";
 
 
 /*#4 implementing reducers to Redux */
-let reducers = combineReducers({       
+let rootReducer = combineReducers({       
     dialogsPage:dialogsReducer,
     myPostsPage:profileReducer,
     navBarPage:sidebarReducer,
@@ -24,16 +24,19 @@ header : headerReducer
 })
 
 
+type RootReducerType = typeof rootReducer; 
+export type AppStateType = ReturnType<RootReducerType>   //distinguish whatever returns from this type and type it
 
-/*#5 inserted reducers to store */
-/* let store = createStore(reducers, applyMiddleware(thunkMiddleware) );*/
+/*#5 inserted rootReducer to store */
+/* let store = createStore(rootReducer, applyMiddleware(thunkMiddleware) );*/
 
 /* this is the way to enable Redux DevTools */
+//@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers( applyMiddleware(thunkMiddleware)));
+const store = createStore(rootReducer, composeEnhancers( applyMiddleware(thunkMiddleware)));
 
 
 export default store;
 
-
+//@ts-ignore       //the string which goes after @ts-ignore will be ignored by typescript
 window.__store = store;

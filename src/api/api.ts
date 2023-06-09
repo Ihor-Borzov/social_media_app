@@ -1,4 +1,6 @@
 import axios from "axios"
+import { UserProfileType } from "../Redux/profile-reducer"
+import { DataType } from "../Redux/Auth"
 
 
 /* we create an object for an instance.   the axios.create will automatically set the settings parameters in proper sequence for different server request  */
@@ -13,13 +15,13 @@ const instance = axios.create({
 /* create an object for each component and create different methods for server requests   */
 export const usersAPI = {
 
-    getUsers: (currentPage = 1, pageSize = 5, isFriend, userName) => {
+    getUsers: (currentPage = 1, pageSize = 5, isFriend: null | boolean, userName:null|string) => {
         return (
             instance.get(`users?page=${currentPage}&count=${pageSize}
             &friend=${typeof isFriend != "undefined"? isFriend:null}
             &term=${typeof userName != "undefined"? userName:"" }
             `)
-            
+        
                 .then((response) => {
                     return (
                         response.data
@@ -28,7 +30,7 @@ export const usersAPI = {
         )
     },
 
-    follow: (userId) => {
+    follow: (userId:number) => {
         return (
             instance.post(`follow/${userId}`)
                 .then((response) => {
@@ -41,7 +43,7 @@ export const usersAPI = {
 
     },
 
-    unfollow: (userId) => {
+    unfollow: (userId:number) => {
         return (
             instance.delete(`follow/${userId}`)
                 .then((response) => {
@@ -60,7 +62,7 @@ export const usersAPI = {
 
 
 export const profileAPI = {
-    getUserProfile: (userId) => {
+    getUserProfile: (userId:number|null) => {
         return (
             instance.get(`profile/ ${userId}`).then((response) => {
                 return (
@@ -70,19 +72,19 @@ export const profileAPI = {
         )
     },
 
-    getStatus: (userId) => {
+    getStatus: (userId:number) => {
         return (
             instance.get('profile/status/' + userId)
         )
     },
 
-    setStatus: (status) => {
+    setStatus: (status:string) => {
         return (instance.put('profile/status', { status }))   //remember put and post have payload you can send to server - it is an object 
     },
 
 
     //! read about "Content-Type":'multipart/form-data'  and how to send a file to the server
-    savePhoto: (photo) => {
+    savePhoto: (photo:any) => {
         const formData = new FormData();
         formData.append("image", photo)     //this is the way we create a special object, before sending the photo file to the server 
 
@@ -90,24 +92,45 @@ export const profileAPI = {
     },
 
 
-    saveProfile: (profileData) => {
+    saveProfile: (profileData:UserProfileType) => {
         return (instance.put('profile', profileData))
     }
 
-
-
-
-
-
-
 }
+
+
+export enum ResultCodesEnum {
+    Success =0,
+    Error =1,
+    CaptchaIsRequired=10
+}
+
+
+type LoginResponseType = {
+    data:{
+    userId:number,
+}
+resultCode:ResultCodesEnum,
+messages:Array<string>
+}
+
+type MeResponseType = {
+    data:{
+    id:number,
+    email:string,
+    login:string,
+}
+resultCode:ResultCodesEnum,
+messages:Array<string>
+}
+
 
 
 export const authenticationAPI = {
 
     authenticate: () => {
         return (
-            instance.get("auth/me/").then((response) => {
+            instance.get<MeResponseType>("auth/me/").then((response) => {
                 return (
                     response.data
                 )
@@ -117,9 +140,9 @@ export const authenticationAPI = {
     },
 
 
-    login: (data) => {
+    login: (data:any) => {
         return (
-            instance.post('auth/login/', data)
+            instance.post<LoginResponseType>('auth/login/', data)
         )
     },
 

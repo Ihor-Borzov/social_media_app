@@ -1,4 +1,7 @@
+import { Dispatch } from "redux"
 import { usersAPI } from "../api/api"
+import { AppStateType } from "./redux-store"
+import { ThunkAction } from "redux-thunk"
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -45,7 +48,7 @@ let initialState = {
 type InitialStateType = typeof initialState
 
 
-const usersReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
 
     switch (action.type) {
 
@@ -127,6 +130,10 @@ const usersReducer = (state: InitialStateType = initialState, action: any): Init
     }
 
 }
+
+
+
+type ActionTypes = SetIsFriend | SetTerm | FollowSuccessType | unfollowSuccessType | SetUsersType | setCurrentPageType | setTotalUsersCountType | toggleIsFetchingType | toggleIsFollowingProgressType
 
 
 
@@ -256,14 +263,15 @@ export let toggleIsFollowingProgress = (check: boolean, id: number):toggleIsFoll
 
 
 
+type GetStateType = ()=> AppStateType  // we described that GetStateType is a function which will return AppStateType
+type DispatchType = Dispatch<ActionTypes>   // we import dispatch type from Redux. Dispatch can dispatch any of those action types
+type ThunkType = ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes>    // instead of typing all of that we may just specify a type
 
-
-
-export const getUsers = (currentPage: number, pageSize: number, isFriend:boolean, userName:string) => {
+export const getUsers = (currentPage: number, pageSize: number, isFriend:null|boolean, term:null|string) => {
     return (
-        (dispatch: any) => {
+        (dispatch:DispatchType, getState:GetStateType) => {
             dispatch(toggleIsFetching(true))
-            usersAPI.getUsers(currentPage, pageSize, isFriend, userName)
+            usersAPI.getUsers(currentPage, pageSize, isFriend, term)
                 .then(dataResponse => {
                     dispatch(toggleIsFetching(false))
                     dispatch(setUsers(dataResponse.items))
@@ -275,29 +283,31 @@ export const getUsers = (currentPage: number, pageSize: number, isFriend:boolean
 
 
 
-
-export const follow = (userId: number) => {
+// to be able to type this way you have to return async function, because only async function returns Promise
+export const follow = (userId: number):ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes> => {
     return (
-        (dispatch: any) => {
+    async  (dispatch, getState) => {
             dispatch(toggleIsFollowingProgress(true, userId))
-            usersAPI.follow(userId).then((resultCode) => {
+           let resultCode = await usersAPI.follow(userId)
                 if (resultCode === 0) { dispatch(followSuccess(userId)) }
                 dispatch(toggleIsFollowingProgress(false, userId))
-            })
+            
         }
     )
 }
 
 
 
-export const unfollow = (userId: number) => {
+
+
+export const unfollow = (userId: number):ThunkType => {
     return (
-        (dispatch: any) => {
+        async (dispatch: any) => {
             dispatch(toggleIsFollowingProgress(true, userId));
-            usersAPI.unfollow(userId).then((resultCode) => {
+           let resultCode = await usersAPI.unfollow(userId)
                 if (resultCode === 0) { dispatch(unfollowSuccess(userId)) }
                 dispatch(toggleIsFollowingProgress(false, userId))
-            })
+            
         }
     )
 }

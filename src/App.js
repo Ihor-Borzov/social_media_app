@@ -11,7 +11,7 @@ import { LoginConnect } from './Components/Login/Login';
 import UsersContainer from './Components/Users/UsersContainer';
 import { initializeApp } from './Redux/app-reduces';
 import { showGlobalError } from './Redux/profile-reducer';
-import store from './Redux/redux-store';
+import store from './Redux/redux-store.ts';
 
 //import ProfileContainer from './Components/Profile/ProfileContainer';
 //import DialogsContainer from './Components/Dialogs/DialogsContainer';
@@ -26,6 +26,7 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log("here is auto: " + this.props.authorizedId)
     this.props.initializeApp();
     window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors) // handle any rejection from the server
   }
@@ -35,6 +36,12 @@ class App extends React.Component {
   }
 
   render = () => {
+    /* this is the way to prepare the app => do all the requests we need, prepare styles ...
+     and only after display and render the app. That s why we need initialized. this flag  always will eventually get true 
+     with no matter of the responses from the server. but until this flag false we will show preloader and configure the app : 
+     do all the requests, receive the data... this way the app will not jump back and fourth getting the data  from the server.
+     So initialization is the way to prepare the app to be rendered
+     */
     if (!this.props.initialized) {
       return <Preloader />
     }
@@ -66,7 +73,7 @@ class App extends React.Component {
 
                 <Route path="/settings/*" element={<Settings />} />
 
-                <Route path="/users/*" element={<UsersContainer />} />
+                <Route path="/users/*" element={<UsersContainer pageTitle = {"Samurai"} />} />
 
                 <Route path="/login/*" element={<LoginConnect />} />
 
@@ -85,11 +92,11 @@ class App extends React.Component {
 
 let BaseAppComponent = (props) => {
   return (
-    <React.StrictMode>
+    //<React.StrictMode>
       <Provider store={store}>
         <ConnectAppContainer />
       </Provider>
-    </React.StrictMode>
+    //</React.StrictMode>
   )
 }
 

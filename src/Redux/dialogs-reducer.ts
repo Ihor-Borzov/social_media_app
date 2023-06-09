@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux';
 import { reset } from 'redux-form';
 
 const SEND_USER_MESSAGE = "SEND_USER_MESSAGE"
@@ -59,15 +60,21 @@ const dialogsReducer = (state:InitialStateType = initialState, action:any):Initi
 }
 
 
+type SendUserMessageCreatorType = {
+    type: typeof SEND_USER_MESSAGE
+    data:string
+}
 
 
-
-export const sendUserMessageCreator = (data:string) => {
+export const sendUserMessageCreator = (data:string):SendUserMessageCreatorType => {
     return {
         type: SEND_USER_MESSAGE,
         data
     }
 }
+
+
+type ActionTypes = SendUserMessageCreatorType
 
 
 export const SendMessageThunk = (data:string) => {

@@ -1,18 +1,21 @@
-import { stopSubmit } from "redux-form"
-import { authenticationAPI } from "../api/api"
+//import { stopSubmit } from "redux-form"
+import { Dispatch } from "redux"
+import { ResultCodesEnum, authenticationAPI } from "../api/api"
+import { ThunkAction } from "redux-thunk"
+import { AppStateType } from "./redux-store"
 
 const SET_USERS_DATA = 'SET_USERS_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'Auth/GET_CAPTCHA_URL_SUCCESS'
 
-type InitialStateTrial = {
-    id: number|null,
-    login: string|null,
-    email: string|null,
-    password: string|null,
-    rememberMe: boolean,
-    isAuth: boolean,
-    captchaUrl: string|null,  
-}
+// type InitialStateTrial = {
+//     id: number|null,
+//     login: string|null,
+//     email: string|null,
+//     password: string|null,
+//     rememberMe: boolean,
+//     isAuth: boolean,
+//     captchaUrl: string|null,  
+// }
 
 
 let initialState = {
@@ -55,7 +58,7 @@ const authReducer = (state:InitialStateType = initialState, action:any):InitialS
 
 
 
-type DataType = {
+export type DataType = {
     id:number|null
         email:string|null
         login:string |null
@@ -79,45 +82,51 @@ export let getCaptchaUrlSuccess = (captchaUrl:string):getCaptchaUrlSuccessType =
 
 
 
-
+type ActionTypes = authorizationACType | getCaptchaUrlSuccessType
+type ThunkType = ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes>    // instead of typing all of that we may just specify a type
 
 
 /* thunk */
 
 export const authenticate = () => {
-    return (
-        (dispatch:any) => {
+    return (dispatch:Dispatch<ActionTypes>) => {
             return (
-                authenticationAPI.authenticate().then((response) => {
-                    if (response.resultCode === 0) {
+                authenticationAPI.authenticate().then((response:any) => {
+                    if (response.resultCode === ResultCodesEnum.Success) {   /* this is the way to use enum type instead of checking the numbers of success or error */
                         let { id, email, login } = response.data;
                         dispatch(authorizationAC(id, email, login, true))  /* if response code ===0 it means we entered and we can send our isAuth to true */
                     }
-                    else { dispatch(authorizationAC(null, null, null, false)) }
+                    else {dispatch(authorizationAC(null, null, null, false)) }
                 })
             )  /* end of return */
         }
-    )
+    
 }
 
 
+type LoginDataType = {
+    email:string,
+    password:string,
+    rememberMe:boolean,
+    captcha?:string
+    }
 
 
 
-
-export const loginThunk = (data:DataType) => {
+export const loginThunk = (data:LoginDataType) => {
+    console.log(data)
     return (
         (dispatch:any) => {
-            authenticationAPI.login(data).then((response) => {
-                if (response.data.resultCode === 0) {
+            authenticationAPI.login(data).then((response:any) => {
+                if (response.data.resultCode === ResultCodesEnum.Success) {
                     dispatch(authenticate());      /* we call authenticate to update Header !*/
                 }
                 else {
                     console.log(response.data.resultCode)
-                    if (response.data.resultCode === 10) {
+                    if (response.data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
                         dispatch(getCaptchaUrl())
                     }
-                    dispatch(stopSubmit("login", { _error: response.data.messages[0] }))
+                    //dispatch(stopSubmit("login", { _error: response.data.messages[0] }))
                 }
             })
         }
@@ -125,8 +134,8 @@ export const loginThunk = (data:DataType) => {
 }
 
 
-export const getCaptchaUrl = () => {
-    return (async (dispatch:any) => {
+export const getCaptchaUrl = ():ThunkType => {
+    return (async (dispatch:Dispatch<ActionTypes>) => {
         let response = await authenticationAPI.getCaptchaUrl();
         let captchaUrl = response.data.url;
         dispatch(getCaptchaUrlSuccess(captchaUrl))
@@ -137,7 +146,7 @@ export const getCaptchaUrl = () => {
 export const logoutThunk = () => {
     return (
         (dispatch:any) => {
-            authenticationAPI.logout().then((response) => {
+            authenticationAPI.logout().then((response:any) => {
                 if (response.data.resultCode === 0) {
                     dispatch(authenticate());   /* we call authenticate to update Header !*/
 

@@ -1,6 +1,9 @@
 import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
 import { reset } from 'redux-form';
+import { Dispatch } from "redux";
+import { AppStateType } from "./redux-store";
+import { ThunkAction } from "redux-thunk";
 
 const ADD_NEW_POST = "ADD_NEW_POST"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -38,7 +41,7 @@ export type UserProfileType = {
     lookingForAJob: boolean,
       lookingForAJobDescription: string,
       fullName:string,
-      userId: number,
+      userId: number|null,
       contacts: ContactsType
       photos:PhotosType
     }
@@ -203,6 +206,8 @@ export const setGlobalError = ():setGlobalErrorType => {
 
 
 
+type ActionTypes = setGlobalErrorType | IsFetchingACType | SavePhotoSuccessType | SetStatusType | SetUserProfileType | removePostType | addNewPostCreatorType
+type ThunkType = ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes>    // instead of typing all of that we may just specify a type
 
 
 
@@ -210,7 +215,7 @@ export const setGlobalError = ():setGlobalErrorType => {
 /* thunk */
 
 export const addPostAndCleanReduxForm = (text:string) => {
-    return (dispatch:any) => {
+    return (dispatch:Dispatch<ActionTypes>, getState: ()=>AppStateType) => {
         dispatch(addNewPostCreator(text));
         dispatch(reset("NewPost"));
 
@@ -218,8 +223,8 @@ export const addPostAndCleanReduxForm = (text:string) => {
 }
 
 
-export const showGlobalError = () => {
-    return (dispatch:any) => {
+export const showGlobalError = ():ThunkType => {
+    return async(dispatch:Dispatch<ActionTypes>) => {
         dispatch(setGlobalError());
         setTimeout(() => {
             dispatch(setGlobalError())
@@ -227,22 +232,21 @@ export const showGlobalError = () => {
     }
 }
 
-export const getUserProfile = (userId:number) => {
-    return (
-        (dispatch:any) => {
+export const getUserProfile = (userId:number|null):ThunkType => {
+    return async (dispatch:Dispatch<ActionTypes>) => {
             dispatch(isFetchingAC(true))
-            profileAPI.getUserProfile(userId).then((data) => {
+           let data = await profileAPI.getUserProfile(userId)
                 dispatch(setUserProfile(data));
                 dispatch(isFetchingAC(false));
-            })
+            
         }
-    )
+    
 }
 
 
 export const getStatus = (userId:number) => {
     return (
-        (dispatch:any) => {
+        (dispatch:Dispatch<ActionTypes>, getState:()=>AppStateType) => {
             profileAPI.getStatus(userId).then((response) => {
                 dispatch(setStatus(response.data));
             })
@@ -251,9 +255,9 @@ export const getStatus = (userId:number) => {
 }
 
 
-export const updateStatus = (status:string) => {
+export const updateStatus = (status:string):ThunkType => {
     return (
-        async (dispatch:any) => {
+        async (dispatch:Dispatch<ActionTypes>, getState:()=>AppStateType) => {
             try {
                 let response = await profileAPI.setStatus(status)
                 if (response.data.resultCode === 0) { dispatch(setStatus(status)) }
@@ -265,8 +269,8 @@ export const updateStatus = (status:string) => {
 }
 
 
-export const savePhoto = (file:any) => {
-    return (async (dispatch:any) => {
+export const savePhoto = (file:any):ThunkType => {
+    return (async (dispatch:Dispatch<ActionTypes>, getState:()=>AppStateType) => {
         dispatch(isFetchingAC(true))
         let response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) {
@@ -280,7 +284,7 @@ export const savePhoto = (file:any) => {
 
 
 export const saveProfile = (profileData:UserProfileType) => {
-    return (async (dispatch:any, getState:any) => {
+    return (async (dispatch:any, getState:()=>AppStateType) => {
         let userId = getState().auth.id                                  //! this is the way to get state from another reducer
 
         let response = await profileAPI.saveProfile(profileData);

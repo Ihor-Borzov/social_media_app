@@ -3,8 +3,48 @@ import Paginator from './Paginator';
 import User from './User';
 import style from "./Users.module.css";
 
+type Photos = {
+    small: null | string,
+    large: null | string
+}
 
-let Users = (props) => {
+export type UserType = {
+    name: null | string,
+    id: number,
+    uniqueUrlName: null | string,
+    status: null | string,
+    followed: boolean
+    photos: Photos
+}
+
+
+type PropsType = {
+    getUsers:(currentPage:number, pageSize:number, isFriend:boolean, term: null|string)=>void,
+    setCurrentPage:(page:number)=>void,
+    totalUsersCount:number,
+    pageSize:number,
+    portionSize:number,
+    users: Array<UserType>,
+    currentPage:number,
+    follow:(userID:number)=>void,
+    unfollow:(userID:number)=>void,
+    toggleIsFollowingProgress?:(check:boolean, id:number)=>void,
+    following_unfollowingIds:Array<number>,
+    isFetching:boolean,
+    setIsFriendAC:(friend:null|boolean)=>void, 
+    setTermAC:(term:string)=>void,
+    term:string,
+    isFriend:null|boolean,
+    isAuth:boolean
+}
+
+
+
+
+
+
+
+let Users: React.FC<PropsType> = (props) => {
     let totalPagesCount = Math.ceil(props.totalUsersCount / props.pageSize);   /* here we calculate how many pages we will need, Math.ceil() rounds to the bigger integer  */
 
     let pagesArray = [];

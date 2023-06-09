@@ -1,6 +1,7 @@
 import { createSelector } from "reselect"
+import { AppStateType } from "./redux-store";
 
-const getUsersSelect = (state) => {
+const getUsersSelect = (state:AppStateType) => {
     return (state.usersPage.users)
 }
 
@@ -16,22 +17,22 @@ export const getUsersSuperReselector = createSelector(getUsersSelect, (users) =>
 
 
 
-export const getPageSize = (state) => {
+export const getPageSize = (state:AppStateType) => {
     return (state.usersPage.pageSize)
 }
 
-export const getUsersCount = (state) => {
+export const getUsersCount = (state:AppStateType) => {
     return (state.usersPage.totalUsersCount)
 }
 
-export const getCurrentPage = (state) => {
+export const getCurrentPage = (state:AppStateType) => {
     return (state.usersPage.currentPage)
 }
 
-export const getIsFetching = (state) => {
+export const getIsFetching = (state:AppStateType) => {
     return (state.usersPage.isFetching)
 }
 
-export const getFollow_unfollowUserIds = (state) => {
+export const getFollow_unfollowUserIds = (state:AppStateType) => {
     return (state.usersPage.following_unfollowingIds)
 }
