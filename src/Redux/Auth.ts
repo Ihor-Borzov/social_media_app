@@ -107,14 +107,13 @@ export const authenticate = () => {
 type LoginDataType = {
     email:string,
     password:string,
-    rememberMe:boolean,
-    captcha?:string
+    rememberMe?:boolean | undefined,
+    captchaUrl?:string | null | undefined
     }
 
 
 
 export const loginThunk = (data:LoginDataType) => {
-    console.log(data)
     return (
         (dispatch:any) => {
             authenticationAPI.login(data).then((response:any) => {
