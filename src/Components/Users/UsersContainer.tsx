@@ -47,7 +47,7 @@ type MapDispatchPropsType = {
     setTotalUsersCount:(newTotalUsersCount: number)=>void                                              
     toggleIsFetching:(isFetching: boolean)=>void                                              
     toggleIsFollowingProgress?:(check:boolean, id:number)=>void,
-    setIsFriendAC:(friend:null|boolean)=>void, 
+    setIsFriendAC:(friend:boolean)=>void, 
     setTermAC:(term:string)=>void,
 }
 
@@ -128,24 +128,28 @@ let mapStateToProps = (state: AppStateType):MapStatePropsType => {
     }
 }
 
-
-
-//@ts-ignore
-export default connect <MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
-    mapStateToProps,
-     {getUsers,
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-    toggleIsFollowingProgress,
-    setIsFriendAC,
-    setTermAC
+let mapDispatchToProps = (dispatch:any):MapDispatchPropsType =>{
+    return{
+        getUsers: (currentPage:number, pageSize:number, isFriend:null | boolean, term:null|string ) => { dispatch(getUsers(currentPage, pageSize, isFriend, term )); },
+        follow: (userID:number) => { dispatch(follow(userID))},
+        unfollow: (userID:number) => { dispatch(unfollow(userID))},
+        setUsers: (users: Array<UserType>) => { dispatch(setUsers(users))},
+        setCurrentPage: (page:number) => { dispatch(setCurrentPage(page))},
+        setTotalUsersCount: (newTotalUsersCount: number) => { dispatch(setTotalUsersCount(newTotalUsersCount))},
+        toggleIsFetching: (isFetching: boolean) => { dispatch(toggleIsFetching(isFetching))},
+        toggleIsFollowingProgress: (check:boolean, id:number) => { dispatch(toggleIsFollowingProgress(check, id))},
+        setIsFriendAC: (friend:boolean) => { dispatch(setIsFriendAC(friend))},
+        setTermAC: (term:string) => { dispatch(setTermAC(term))}
+    }
 }
-)(UsersContainerComponent);
 
 
 
 
+
+export default connect <MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
+    mapStateToProps, mapDispatchToProps)(UsersContainerComponent);
+
+
+
+ 

@@ -31,7 +31,7 @@ type PropsType = {
     toggleIsFollowingProgress?:(check:boolean, id:number)=>void,
     following_unfollowingIds:Array<number>,
     isFetching:boolean,
-    setIsFriendAC:(friend:null|boolean)=>void, 
+    setIsFriendAC:(friend:boolean)=>void, 
     setTermAC:(term:string)=>void,
     term:string,
     isFriend:null|boolean,

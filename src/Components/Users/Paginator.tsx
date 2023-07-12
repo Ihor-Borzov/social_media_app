@@ -13,7 +13,7 @@ type PropsType = {
     currentPage: number, 
     isFetching: boolean, 
     getUsers:(currentPage:number, pageSize:number, isFriend:boolean, term: null|string)=>void,
-    setIsFriendAC: (isFriend: null|boolean) => void, 
+    setIsFriendAC: (isFriend:boolean) => void, 
     setTermAC: (term:string) => void, 
     term: string, 
     isFriend:null|boolean, 
