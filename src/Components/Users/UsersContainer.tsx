@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getCurrentPage, getFollow_unfollowUserIds, getIsFetching, getPageSize, getUsersCount, getUsersSuperReselector } from "../../Redux/user-selector";
-import { setTermAC, setIsFriendAC, follow, getUsers, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, toggleIsFollowingProgress, unfollow } from "../../Redux/users-reducer";
+import { actions, follow, getUsers, unfollow } from "../../Redux/users-reducer";
 import Users from "./Users";
 import { AppStateType } from "../../Redux/redux-store";
 
@@ -133,13 +133,13 @@ let mapDispatchToProps = (dispatch:any):MapDispatchPropsType =>{
         getUsers: (currentPage:number, pageSize:number, isFriend:null | boolean, term:null|string ) => { dispatch(getUsers(currentPage, pageSize, isFriend, term )); },
         follow: (userID:number) => { dispatch(follow(userID))},
         unfollow: (userID:number) => { dispatch(unfollow(userID))},
-        setUsers: (users: Array<UserType>) => { dispatch(setUsers(users))},
-        setCurrentPage: (page:number) => { dispatch(setCurrentPage(page))},
-        setTotalUsersCount: (newTotalUsersCount: number) => { dispatch(setTotalUsersCount(newTotalUsersCount))},
-        toggleIsFetching: (isFetching: boolean) => { dispatch(toggleIsFetching(isFetching))},
-        toggleIsFollowingProgress: (check:boolean, id:number) => { dispatch(toggleIsFollowingProgress(check, id))},
-        setIsFriendAC: (friend:boolean) => { dispatch(setIsFriendAC(friend))},
-        setTermAC: (term:string) => { dispatch(setTermAC(term))}
+        setUsers: (users: Array<UserType>) => { dispatch(actions.setUsers(users))},
+        setCurrentPage: (page:number) => { dispatch(actions.setCurrentPage(page))},
+        setTotalUsersCount: (newTotalUsersCount: number) => { dispatch(actions.setTotalUsersCount(newTotalUsersCount))},
+        toggleIsFetching: (isFetching: boolean) => { dispatch(actions.toggleIsFetching(isFetching))},
+        toggleIsFollowingProgress: (check:boolean, id:number) => { dispatch(actions.toggleIsFollowingProgress(check, id))},
+        setIsFriendAC: (friend:boolean) => { dispatch(actions.setIsFriendAC(friend))},
+        setTermAC: (term:string) => { dispatch(actions.setTermAC(term))}
     }
 }
 

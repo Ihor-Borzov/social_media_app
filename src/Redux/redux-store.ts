@@ -27,6 +27,10 @@ header : headerReducer
 type RootReducerType = typeof rootReducer; 
 export type AppStateType = ReturnType<RootReducerType>   //distinguish whatever returns from this type and type it
 
+type PropertiesTypes<T>=T extends {[key:string]:infer U}?U:never    // infer means figure out what is the type it is
+
+export type InferActionsTypes<T extends {[key:string]:(...args: any[])=>any}> = ReturnType<PropertiesTypes<T>>
+
 /*#5 inserted rootReducer to store */
 /* let store = createStore(rootReducer, applyMiddleware(thunkMiddleware) );*/
 
