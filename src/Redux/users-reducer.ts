@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { usersAPI } from "../api/api"
+import { usersAPI } from "../api/users-api"
 import { AppStateType, InferActionsTypes } from "./redux-store"
 import { ThunkAction } from "redux-thunk"
 
