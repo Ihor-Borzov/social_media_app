@@ -1,6 +1,7 @@
 //import { stopSubmit } from "redux-form"
 import { Dispatch } from "redux"
-import { ResultCodesEnum, authenticationAPI } from "../api/api"
+import {authenticationAPI } from "../api/auth-api"
+import {ResultCodesEnum } from "../api/api"
 import { ThunkAction } from "redux-thunk"
 import { AppStateType } from "./redux-store"
 

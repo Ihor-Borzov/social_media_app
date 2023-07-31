@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import { profileAPI } from "../api/api";
+import { profileAPI } from "../api/profile-api";
 import { reset } from 'redux-form';
 import { Dispatch } from "redux";
 import { AppStateType } from "./redux-store";
@@ -90,9 +90,10 @@ const profileReducer = (state:InitialStateType = initialState, action:any):Initi
             }
 
         case SAVE_PHOTO_SUCCESS:
+            //debugger
             return {
                 ...state,
-                userProfile: { ...state.userProfile, photos: action.photos } as UserProfileType
+                userProfile: { ...state.userProfile, photos: {...action.photos.photos} } as UserProfileType
             }
 
         case FETCHING_USER_PICTURE:
@@ -172,6 +173,7 @@ type SavePhotoSuccessType = {
 }
 
 export const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessType => {
+
     return {
         type: SAVE_PHOTO_SUCCESS,
         photos
@@ -275,7 +277,7 @@ export const savePhoto = (file:any):ThunkType => {
         let response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) {
             dispatch(isFetchingAC(false))
-            dispatch(savePhotoSuccess(response.data.data.photos))
+            dispatch(savePhotoSuccess(response.data.data))
         }
     }
     )
