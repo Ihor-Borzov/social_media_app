@@ -8,19 +8,34 @@ import { Input } from '../common/FormControls/FormControls';
 import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
+import { useMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 
 
 function Dialogs(props) {
+    //const dialogsData = useSelector(state=>state.navBarPage.friendData)
+    let urlData = useMatch("/dialogs/:userId");  // the way to read a url address
+    let userData
+    let displayedMessages = ''
+
+    if (urlData){
+         userData = props.dialogsData.find((element)=> element.id === Number(urlData.params.userId))
+    }
+    else{
+        urlData = ""}
+
 
     let displayedDialogs = props.navBarPage.friendData.map(
         (dialogObject) => <DialogItems name={dialogObject.name} id={dialogObject.id} 
         key={dialogObject.id} picture={dialogObject.picture} />)
 
-    let displayedMessages = props.dialogsPage.messagesData.map(
-        (messageObject, index) => <Message message={messageObject.message}
-         id={messageObject.id} key={index} />)    /* this is the way we create new array with  JSX markup */
+        if (urlData){
+             displayedMessages = props.dialogsPage.messagesData.map(
+                (messageObject, index) => <Message message={messageObject.message} userProfile={props.userProfile}
+                id={messageObject.id} key={index} thumbnail={userData.picture} />)    /* this is the way we create new array with  JSX markup */        
+        }
 
 
     function onSendMessage(data) {
@@ -37,11 +52,13 @@ function Dialogs(props) {
     }
 
 
+
     useEffect(() => {
+        props.getUserProfile(props.userId)
         window.addEventListener('resize', updateWindowWidth);
 
         return () => { window.removeEventListener('resize', updateWindowWidth); }
-    }, [])
+    })
 
 
 
@@ -59,15 +76,17 @@ function Dialogs(props) {
 
                 <div className={s.messenger}>
 
-                    <div className={s.messageHistory}>
+                    <div className={s.messageHistory} style={{textAlign:"center"}}>
+                        <span>{userData ? userData.name : "message history" }</span>
                         {displayedMessages}
                     </div>
-
+                        {urlData&&
                     <div className={s.textWrapper}>
 
                         <DialogsReduxForm onSubmit={onSendMessage} />
 
                     </div>
+}
                 </div>
 
             </div>

@@ -4,8 +4,16 @@
     font-weight: bold;
     }
 
+    .friend a{
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+    }
+
 .circle{
-    height:70%;
+    height:100px;
+    width:100px;
     border-radius: 50%;
     box-shadow:2px 3px rgb(192, 192, 192);
     border:1px solid rgb(192, 192, 192);
@@ -21,5 +29,4 @@ background-color:white;
 
 .friends_name{
     bottom:0;
-    left:20%;
 }

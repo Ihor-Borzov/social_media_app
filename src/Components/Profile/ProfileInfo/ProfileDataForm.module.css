@@ -74,3 +74,24 @@ margin-left:10px;
     position:relative;
     margin-left:90px;
 }
+
+
+
+.photoUpload{
+    display: block;
+    width: 30px;
+    height:30px;
+    position: absolute;
+    left:145px;
+    top:-5px;
+     background-color: rgba(255, 255, 255, 0.6);
+     border-radius: 45px;
+background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ic_settings_48px.svg/2048px-Ic_settings_48px.svg.png) ;
+background-size: contain;
+background-position: 0 0;
+background-repeat: no-repeat;
+cursor: pointer;
+}
+.inputFile {
+    display: none;
+}

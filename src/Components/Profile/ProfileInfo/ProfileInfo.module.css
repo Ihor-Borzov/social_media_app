@@ -1,3 +1,14 @@
+.preloaderWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloaderWrapper > div{
+max-width: 400px;
+}
+
+
 
 
 .aboutUser{
@@ -42,11 +53,10 @@ border:1px solid rgb(192, 192, 192);
     width: 30px;
     height:30px;
     position: absolute;
-    left:145px;
+    left:153px;
     top:-5px;
      background-color: rgba(255, 255, 255, 0.6);
-     border-radius: 45px;
-background-image:url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ic_settings_48px.svg/2048px-Ic_settings_48px.svg.png) ;
+background-image:url(https://cdn-icons-png.flaticon.com/512/2956/2956744.png) ;
 background-size: contain;
 background-position: 0 0;
 background-repeat: no-repeat;
@@ -58,7 +68,7 @@ cursor: pointer;
 
 
 
-.profileStatus{
+.profileStatusWrapper{
     padding-top: 30px;
      font-weight: bold;
      font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -66,7 +76,7 @@ cursor: pointer;
 overflow: hidden;
  }
 
- .profileStatus textarea{
+ .profileStatusWrapper textarea{
     line-height: 25px; 
     border-bottom: 1px solid black;
     font-size: 17px;
@@ -74,6 +84,13 @@ overflow: hidden;
      height:130px;
      width: 95%;
      overflow-y:auto;
+ }
+
+ .profileStatus{
+    padding:10px;
+    width:fit-content;
+    cursor: pointer;
+    border-radius: 15px;
  }
 
 

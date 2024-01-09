@@ -26,8 +26,8 @@ class App extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("here is auto: " + this.props.authorizedId)
     this.props.initializeApp();
+    
     window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors) // handle any rejection from the server
   }
 
@@ -43,7 +43,8 @@ class App extends React.Component {
      So initialization is the way to prepare the app to be rendered
      */
     if (!this.props.initialized) {
-      return <Preloader />
+     
+      return  <div className="initialisationPreloader"> <Preloader /> </div>
     }
 
 

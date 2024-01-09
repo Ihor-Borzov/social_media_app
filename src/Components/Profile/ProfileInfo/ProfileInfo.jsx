@@ -33,7 +33,11 @@ function ProfileInfo(props) {
 
     if (!props.userProfile) {
         return (
-            <Preloader />
+            <div className={s.preloaderWrapper}>
+                <div>
+                <Preloader />
+                </div>
+            </div>
         )
     }
 
@@ -58,7 +62,11 @@ function ProfileInfo(props) {
                 </div>
 
 
-                <div className={s.profileStatus} >  <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} />    </div>
+                <div className={s.profileStatusWrapper} >
+                    <div className={s.profileStatus}>
+                    <ProfileStatusHooks status={props.status} updateStatus={props.updateStatus} isOwner={props.isOwner} />
+                    </div>
+                    </div>
 
                 <div className={s.userInfo}>
                     {editMode ? <ProfileDataForm  {...props} initialValues={props.userProfile} onSubmit={onSubmit} setEditMode={setEditMode} />

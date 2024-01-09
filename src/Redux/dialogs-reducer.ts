@@ -17,12 +17,16 @@ type MessageData = {
     message:string
 }
 
+let messageHistory = [
+
+]
+
 
 
 
 let initialState = {
     dialogsData: [
-        { id: 1, name: "Dimych" },
+        { id: 1, name: "Dimych"},
         { id: 2, name: "Ahmed" },
         { id: 3, name: "Pahsa" },
         { id: 4, name: "Olya" },

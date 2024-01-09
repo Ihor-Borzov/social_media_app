@@ -3,6 +3,7 @@ import { Dispatch } from "redux"
 import { ResultCodesEnum, authenticationAPI } from "../api/api"
 import { ThunkAction } from "redux-thunk"
 import { AppStateType } from "./redux-store"
+import { SetUserProfileType, getUserProfile } from "./profile-reducer"
 
 const SET_USERS_DATA = 'SET_USERS_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'Auth/GET_CAPTCHA_URL_SUCCESS'
@@ -89,14 +90,17 @@ type ThunkType = ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes>
 /* thunk */
 
 export const authenticate = () => {
-    return (dispatch:Dispatch<ActionTypes>) => {
+    return (dispatch:any      /*Dispatch<ActionTypes>*/) => {
             return (
                 authenticationAPI.authenticate().then((response:any) => {
                     if (response.resultCode === ResultCodesEnum.Success) {   /* this is the way to use enum type instead of checking the numbers of success or error */
                         let { id, email, login } = response.data;
+                        //dispatch(getUserProfile(id))
+
                         dispatch(authorizationAC(id, email, login, true))  /* if response code ===0 it means we entered and we can send our isAuth to true */
                     }
-                    else {dispatch(authorizationAC(null, null, null, false)) }
+                    else {
+                        dispatch(authorizationAC(null, null, null, false)) }
                 })
             )  /* end of return */
         }

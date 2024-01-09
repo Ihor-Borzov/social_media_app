@@ -139,7 +139,7 @@ export const removePost = (id:number):removePostType => {
     }
 }
 
-type SetUserProfileType = {
+export type SetUserProfileType = {
     type : typeof SET_USER_PROFILE
     userProfile: UserProfileType
 }

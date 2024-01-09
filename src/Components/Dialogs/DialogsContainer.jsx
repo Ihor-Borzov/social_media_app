@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 import { SendMessageThunk } from '../../Redux/dialogs-reducer';
 import Dialogs from './Dialogs';
+import { getUserProfile } from '../../Redux/profile-reducer';
 
 
 
@@ -11,6 +12,10 @@ let mapStateToProps = (state) => {
   return {
     dialogsPage: state.dialogsPage,
     navBarPage: state.navBarPage,
+    userProfile: state.myPostsPage.userProfile,
+    dialogsData:state.navBarPage.friendData,
+    userId:state.auth.id,
+    //isFetchingUserData:state.myPostsPage,isFetching
   }
 }
 
@@ -19,6 +24,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (data) => { dispatch(SendMessageThunk(data)); },
+    getUserProfile : (id) =>{dispatch(getUserProfile(id))}
   }
 }
 

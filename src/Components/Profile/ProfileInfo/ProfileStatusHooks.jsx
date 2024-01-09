@@ -27,13 +27,19 @@ const ProfileStatusHooks = (props) => {
     return (
 
         <div>
+{props.isOwner?
+<>
             {!editMode &&
-                <span onDoubleClick={activateEditMode}>{props.status ? `Status : ${props.status}` : "-----"}</span>
+                <span onClick={activateEditMode}>{props.status ? `Status : ${props.status}` : "-----"}</span>
             }
 
             {editMode &&
                 <textarea autoFocus={true} value={status} onBlur={deactivateEditMode} onChange={onStatusChange}></textarea>
             }
+</>
+        :   <span>{props.status ? `Status : ${props.status}` : "-----"}</span>
+
+        }
 
         </div>
     )

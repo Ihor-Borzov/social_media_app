@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { reduxForm } from 'redux-form';
 import { createField, Input, TextArea } from '../../common/FormControls/FormControls';
 import { SocialMediaLinksThumbnails } from './ProfileData';
 import s from "./ProfileDataForm.module.css";
+import Preloader from '../../common/preloader/Preloader';
+import blankUserPicture from '../../../assets/images/user.jpg';
+
 
 
 
