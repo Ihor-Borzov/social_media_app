@@ -9,13 +9,11 @@ import DialogItems from './DialogItems/DialogItems';
 import s from './Dialogs.module.css'
 import Message from './Message/Message';
 import { useMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 
 
 
 function Dialogs(props) {
-    //const dialogsData = useSelector(state=>state.navBarPage.friendData)
     let urlData = useMatch("/dialogs/:userId");  // the way to read a url address
     let userData
     let displayedMessages = ''
@@ -54,7 +52,6 @@ function Dialogs(props) {
 
 
     useEffect(() => {
-        props.getUserProfile(props.userId)
         window.addEventListener('resize', updateWindowWidth);
 
         return () => { window.removeEventListener('resize', updateWindowWidth); }

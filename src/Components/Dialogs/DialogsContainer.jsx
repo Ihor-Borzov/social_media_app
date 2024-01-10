@@ -5,6 +5,32 @@ import { withAuthRedirect } from '../../HOC/withAuthRedirect';
 import { SendMessageThunk } from '../../Redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import { getUserProfile } from '../../Redux/profile-reducer';
+import { useEffect } from 'react';
+
+
+let counter = 0
+
+function DialogsContainer (props){
+
+useEffect(()=>{
+    props.getUserProfile(props.userId)
+},[])
+
+
+
+  return(
+    <>
+    {props.userProfile &&
+    <Dialogs {...props}/>
+    }
+    </>
+  )
+}
+
+
+
+
+
 
 
 
@@ -55,4 +81,4 @@ let mapDispatchToProps = (dispatch) => {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withAuthRedirect
-)(Dialogs)
+)(DialogsContainer)
