@@ -6,23 +6,11 @@ import { usersAPI } from "../api/api"
 
 
 
-type FriendDataType ={
-    id:number
-    name:string|null
-    picture:string|null
-}
+
 
 
 let initialState = {
 bestFriends:[] as Array <UserType>,
-
-    friendData: [
-        { id: 1, name: "Vector Sohunaishvily", picture: "https://www.illumination.com/wp-content/uploads/2019/11/DM1_Vector.png" },
-        { id: 2, name: "Felonious Gru", picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvfM7fKWDRPcd5a92m8BckpfMOcYc16KYePA&usqp=CAU" },
-        { id: 4, name: "Marlena Gru", picture: "https://static.tvtropes.org/pmwiki/pub/images/marlena_gru.jpg" },
-        { id: 5, name: "Margo Gru ", picture: "https://static.wikia.nocookie.net/despicableme/images/0/02/Margo_Posing.png" },
-        { id: 6, name: "Mr. Perkins", picture: "https://s3.amazonaws.com/intanibase/iad_characters/966.jpg" },
-    ] as Array<FriendDataType>
 }
 
 
@@ -70,12 +58,9 @@ type ThunkType = ThunkAction <Promise<void>, AppStateType, unknown, ActionTypes>
 export const getBestFriends = (currentPage: number, pageSize: number, isFriend:null|boolean, term:null|string) => {
     return (
         (dispatch:DispatchType, getState:GetStateType) => {
-            //dispatch(actions.toggleIsFetching(true))
             usersAPI.getUsers(currentPage, pageSize, isFriend, term)
                 .then(dataResponse => {
-                    //dispatch(actions.toggleIsFetching(false))
                     dispatch(actions.setBestFriendsAC(dataResponse.items))
-                    //dispatch(actions.setTotalUsersCount(dataResponse.totalCount))
                 })
         }
     )

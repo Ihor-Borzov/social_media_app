@@ -15,29 +15,37 @@ import { useMatch } from 'react-router-dom';
 
 function Dialogs(props) {
     let urlData = useMatch("/dialogs/:userId");  // the way to read a url address
-    let userData
+    let friendDialogData
     let displayedMessages = ''
 
     if (urlData){
-         userData = props.dialogsData.find((element)=> element.id === Number(urlData.params.userId))
+         friendDialogData = props.dialogsData.find((element)=> element.id === Number(urlData.params.userId))
     }
     else{
         urlData = ""}
 
 
-    let displayedDialogs = props.navBarPage.friendData.map(
+    let displayedDialogs = props.dialogsPage.friendData.map(
         (dialogObject) => <DialogItems name={dialogObject.name} id={dialogObject.id} 
         key={dialogObject.id} picture={dialogObject.picture} />)
 
         if (urlData){
-             displayedMessages = props.dialogsPage.messagesData.map(
+
+            displayedMessages = friendDialogData.messagesData.map(
                 (messageObject, index) => <Message message={messageObject.message} userProfile={props.userProfile}
-                id={messageObject.id} key={index} thumbnail={userData.picture} />)    /* this is the way we create new array with  JSX markup */        
+                id={messageObject.id} key={index} thumbnail={friendDialogData.picture} />)
+
+
+
+
+            //  displayedMessages = props.dialogsPage.messagesData.map(
+            //     (messageObject, index) => <Message message={messageObject.message} userProfile={props.userProfile}
+            //     id={messageObject.id} key={index} thumbnail={friendDialogData.picture} />)    /* this is the way we create new array with  JSX markup */        
         }
 
 
     function onSendMessage(data) {
-        props.sendMessage(data.usersText);
+        props.sendMessage(data.usersText,Number(urlData.params.userId));
     }
 
     let [chatsOnOff, switchChats] = useState(true);
@@ -74,7 +82,7 @@ function Dialogs(props) {
                 <div className={s.messenger}>
 
                     <div className={s.messageHistory} style={{textAlign:"center"}}>
-                        <span>{userData ? userData.name : "message history" }</span>
+                        <span>{friendDialogData ? friendDialogData.name : "message history" }</span>
                         {displayedMessages}
                     </div>
                         {urlData&&
@@ -91,6 +99,8 @@ function Dialogs(props) {
         </div>
     )
 }
+
+
 
 
 let maximumChar = maxChar(300) /* this is our flexible validator with closure, for now we have to invoke it this way */
@@ -114,3 +124,11 @@ const DialogsReduxForm = reduxForm({ form: "dialogsForm" })(DialogsForm)
 
 
 export default Dialogs;
+
+
+
+
+
+
+
+

@@ -39,7 +39,7 @@ let mapStateToProps = (state) => {
     dialogsPage: state.dialogsPage,
     navBarPage: state.navBarPage,
     userProfile: state.myPostsPage.userProfile,
-    dialogsData:state.navBarPage.friendData,
+    dialogsData:state.dialogsPage.friendData,
     userId:state.auth.id,
     //isFetchingUserData:state.myPostsPage,isFetching
   }
@@ -49,7 +49,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: (data) => { dispatch(SendMessageThunk(data)); },
+    sendMessage: (data, id) => { dispatch(SendMessageThunk(data, id)); },
     getUserProfile : (id) =>{dispatch(getUserProfile(id))}
   }
 }

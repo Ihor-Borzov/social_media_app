@@ -17,6 +17,13 @@ type MessageData = {
     message:string
 }
 
+type FriendDataType ={
+    id:number
+    name:string|null
+    picture:string|null
+    messagesData:Array<MessageData>|[]
+}
+
 let messageHistory = [
 
 ]
@@ -25,14 +32,50 @@ let messageHistory = [
 
 
 let initialState = {
-    dialogsData: [
-        { id: 1, name: "Dimych"},
-        { id: 2, name: "Ahmed" },
-        { id: 3, name: "Pahsa" },
-        { id: 4, name: "Olya" },
-        { id: 5, name: "Vita" },
-        { id: 6, name: "Maksym" },
-    ]as Array<DialogsData>,
+    friendData: [
+        { id: 1, name: "Vector Sohunaishvily", picture: "https://www.illumination.com/wp-content/uploads/2019/11/DM1_Vector.png",
+        messagesData: [
+            { id: 1, message: `hi, my name is Vector` },
+            { id: 0, message: "how is it going?" },
+            { id: 1, message: "Everything is ok, how are you?" },
+            { id: 0, message: "All good" },
+        ],
+    },
+
+        { id: 2, name: "Felonious Gru", picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvfM7fKWDRPcd5a92m8BckpfMOcYc16KYePA&usqp=CAU",
+         messagesData: [
+            { id: 1, message: `hi, my name is Gru` },
+            { id: 0, message: "how is it going?" },
+            { id: 1, message: "Everything is ok, how are you?" },
+            { id: 0, message: "All good" },
+        ] },
+
+        { id: 4, name: "Marlena Gru", picture: "https://static.tvtropes.org/pmwiki/pub/images/marlena_gru.jpg",
+        messagesData: [
+            { id: 1, message: `hi, my name is Marlena` },
+            { id: 0, message: "how is it going?" },
+            { id: 1, message: "Everything is ok, how are you?" },
+            { id: 0, message: "All good" },
+        ] },
+
+        { id: 5, name: "Margo Gru ", picture: "https://static.wikia.nocookie.net/despicableme/images/0/02/Margo_Posing.png",
+        messagesData: [
+            { id: 1, message: `hi, my name is Margo` },
+            { id: 0, message: "how is it going?" },
+            { id: 1, message: "Everything is ok, how are you?" },
+            { id: 0, message: "All good" },
+        ] },
+
+        { id: 6, name: "Mr. Perkins", picture: "https://s3.amazonaws.com/intanibase/iad_characters/966.jpg",
+        messagesData: [
+            { id: 1, message: `hi, my name is Mr Perkins` },
+            { id: 0, message: "how is it going?" },
+            { id: 1, message: "Everything is ok, how are you?" },
+            { id: 0, message: "All good" },
+        ] },
+    ] as Array<FriendDataType>,
+
+
 
     messagesData: [
         { id: 1, message: "hi" },
@@ -55,7 +98,17 @@ const dialogsReducer = (state:InitialStateType = initialState, action:any):Initi
     switch (action.type) {
 
         case SEND_USER_MESSAGE:
-            return { ...state, messagesData: [...state.messagesData, { id: 0, message: action.data, }], userInputMessage: "" };    /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
+            return { ...state,
+                friendData:state.friendData.map((friend)=>{
+                if(friend.id ===action.id){
+                    return {...friend, messagesData:[...friend.messagesData,{id:0,message:action.data}]}
+                }
+                else{return friend}
+                })
+
+                //messagesData: [...state.messagesData, { id: 0, message: action.data, }], userInputMessage: ""
+            
+            };    /* lesson#47.3 pay attention to use square brackets, when you creating an array  */
 
         default: return state;
 
@@ -67,13 +120,15 @@ const dialogsReducer = (state:InitialStateType = initialState, action:any):Initi
 type SendUserMessageCreatorType = {
     type: typeof SEND_USER_MESSAGE
     data:string
+    id:number
 }
 
 
-export const sendUserMessageCreator = (data:string):SendUserMessageCreatorType => {
+export const sendUserMessageCreator = (data:string, id:number):SendUserMessageCreatorType => {
     return {
         type: SEND_USER_MESSAGE,
-        data
+        data,
+        id
     }
 }
 
@@ -81,9 +136,9 @@ export const sendUserMessageCreator = (data:string):SendUserMessageCreatorType =
 type ActionTypes = SendUserMessageCreatorType
 
 
-export const SendMessageThunk = (data:string) => {
+export const SendMessageThunk = (data:string, id:number) => {
     return (dispatch:any) => {
-        dispatch(sendUserMessageCreator(data));
+        dispatch(sendUserMessageCreator(data, id));
         dispatch(reset("dialogsForm"));  //thi is the way to clear input of a form after submission
     }
 }
